@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Saudi policy alignment</title>
+  <desc id="desc">Four official Saudi public sources connect to a governed neuroimaging application.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8FBFC"/><stop offset="1" stop-color="#E8F4EF"/></linearGradient></defs>
+  <rect width="960" height="420" rx="28" fill="url(#bg)"/>
+  <circle cx="480" cy="218" r="87" fill="#10243A"/>
+  <path d="M448 223c-16-40 43-70 69-31 26 40-23 83-54 54-14-13-20-38-3-56 13-14 37-13 46 4" fill="none" stroke="#7ED6CA" stroke-width="8" stroke-linecap="round"/>
+  <text x="480" y="327" text-anchor="middle" font-family="Segoe UI,Arial" font-size="17" font-weight="750" fill="#10243A">Governed neuroimaging</text>
+  <g font-family="Segoe UI,Arial" text-anchor="middle">
+    <g transform="translate(70 68)"><rect width="250" height="86" rx="17" fill="#FFFFFF" stroke="#D4E1E7"/><text x="125" y="36" font-size="19" font-weight="750" fill="#10243A">HSTP</text><text x="125" y="61" font-size="13" fill="#617581">Access · quality · digital health</text></g>
+    <g transform="translate(640 68)"><rect width="250" height="86" rx="17" fill="#FFFFFF" stroke="#D4E1E7"/><text x="125" y="36" font-size="19" font-weight="750" fill="#10243A">NSDAI</text><text x="125" y="61" font-size="13" fill="#617581">Health priority · data &amp; AI</text></g>
+    <g transform="translate(70 270)"><rect width="250" height="86" rx="17" fill="#FFFFFF" stroke="#D4E1E7"/><text x="125" y="36" font-size="19" font-weight="750" fill="#10243A">PDPL + AI Ethics</text><text x="125" y="61" font-size="13" fill="#617581">Privacy · governance · oversight</text></g>
+    <g transform="translate(640 270)"><rect width="250" height="86" rx="17" fill="#FFFFFF" stroke="#D4E1E7"/><text x="125" y="36" font-size="19" font-weight="750" fill="#10243A">Seha Virtual Hospital</text><text x="125" y="61" font-size="13" fill="#617581">Teleradiology · sandbox · research</text></g>
+  </g>
+  <g stroke="#167C86" stroke-width="3" opacity=".8"><path d="M320 111 416 177"/><path d="M640 111 544 177"/><path d="M320 313 415 257"/><path d="M640 313 545 257"/></g>
+</svg>

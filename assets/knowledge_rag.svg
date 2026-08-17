@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">Citation-grounded evidence retrieval</title>
+  <desc id="desc">Research papers, regional studies and policy documents are retrieved into an evidence-backed answer.</desc>
+  <rect width="960" height="400" rx="28" fill="#F4F8FA"/>
+  <g transform="translate(62 64)" font-family="Segoe UI,Arial">
+    <g><rect width="190" height="238" rx="20" fill="#FFFFFF" stroke="#D5E2E8"/><path d="M38 54h112M38 83h86M38 112h112M38 141h72" stroke="#9FB0BC" stroke-width="8" stroke-linecap="round"/><rect x="38" y="178" width="74" height="27" rx="13" fill="#DFF1EE"/><text x="75" y="197" text-anchor="middle" font-size="12" font-weight="750" fill="#0B7A5C">PAPERS</text></g>
+    <g transform="translate(270 0)"><rect width="190" height="238" rx="20" fill="#FFFFFF" stroke="#D5E2E8"/><circle cx="95" cy="88" r="47" fill="none" stroke="#167C86" stroke-width="10"/><path d="m128 122 38 38" stroke="#167C86" stroke-width="11" stroke-linecap="round"/><text x="95" y="199" text-anchor="middle" font-size="14" font-weight="750" fill="#10243A">HYBRID RETRIEVAL</text></g>
+    <g transform="translate(540 0)"><rect width="260" height="238" rx="20" fill="#10243A"/><path d="M39 57h182M39 91h146M39 125h174M39 159h118" stroke="#CBE2E7" stroke-width="8" stroke-linecap="round"/><circle cx="220" cy="194" r="20" fill="#28A88B"/><path d="m211 194 6 7 13-16" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text x="38" y="209" font-size="13" font-weight="750" fill="#9FD8D0">CITED ANSWER</text></g>
+    <g fill="none" stroke="#167C86" stroke-width="4"><path d="M205 119h50"/><path d="M475 119h50"/></g>
+    <g fill="#167C86"><path d="m255 119-13-9v18Z"/><path d="m525 119-13-9v18Z"/></g>
+  </g>
+  <text x="480" y="355" text-anchor="middle" font-family="Segoe UI,Arial" font-size="17" font-weight="750" fill="#536A78">papers · anatomy · Eastern Province evidence · Saudi policy</text>
+</svg>

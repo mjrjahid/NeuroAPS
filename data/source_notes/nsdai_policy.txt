@@ -1,0 +1,25 @@
+Title: National Strategy for Data & Artificial Intelligence (NSDAI)
+Authority: Saudi Data & Artificial Intelligence Authority (SDAIA)
+Validated: 17 August 2026
+
+Official strategy page:
+https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Pages/NationalStrategyForDataAndAI.aspx
+
+Official strategy PDF:
+https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Documents/NSDAI.pdf
+
+Public background:
+https://saudipedia.com/en/national-strategy-for-data-and-ai-nsdai
+https://regulations.ai/regulations/saudi-arabia-2020-10-national-strategy-data-ai
+
+Validated public support:
+- healthcare is a priority sector;
+- data and AI are connected with improved access to health services and preventive care;
+- the strategy covers skills, policy and regulation, investment, research and innovation, and ecosystem development;
+- public targets and component descriptions are available through the strategy and Saudipedia overview.
+
+Source hierarchy:
+The SDAIA page and PDF are primary. Saudipedia is public background. Regulations.AI is a secondary plain-language index, not an official source or legal advice.
+
+Application relevance:
+The workspace maps research evidence, governance, human oversight, and future local validation to the national strategy. The current ADNI evidence is not a Saudi-population validation study.

@@ -1,0 +1,47 @@
+Title: Alzheimer's Disease Context in the Eastern Province and Dammam, Saudi Arabia
+Type: Regional epidemiological and prior-work reference (real, cited, publicly available research -- not fabricated statistics)
+Domain: Health / Regional Context (Eastern Province, Kingdom of Saudi Arabia)
+
+Purpose: This record provides the genuinely available regional context for Alzheimer's disease in Dammam and the Eastern Province, to ground this project's deployment relevance in the specific region where SDAIA-KFUPM Joint Research Center for AI is based (KFUPM, Dhahran, Eastern Province).
+
+Honest scope note stated up front: No single official "number of people affected by Alzheimer's disease in Dammam" statistic is publicly published. The figures below are the closest genuinely available, cited regional data points -- presented as such, not as a single definitive prevalence count.
+
+1. National dementia prevalence anchor (Saudi Arabia, multi-region):
+A 2015-2023 epidemiological study within the Saudi National Guard Health System (spanning Riyadh, Dammam/Eastern Province via Imam Abdulrahman Bin Faisal University-affiliated authors, and other regions) found dementia identified in 3.37% of the studied population, with Alzheimer's disease the most prevalent dementia subtype. Most cases occurred in the 70-79 age group (38.5%) and 80-89 age group (31%).
+Source: Hajjar et al., "Dementia prevalence within the Kingdom of Saudi Arabia National Guard Health System (2015-2023)," Journal of Alzheimer's Disease, March 2025.
+Public record: https://pubmed.ncbi.nlm.nih.gov/39962762/
+
+2. Dammam-city-specific elderly cognitive decline data:
+A 2022 study of 343 elderly persons in Dammam city directly assessed cognitive impairment (using the SLUMS scale: normal / mild neurocognitive disorder / dementia) and found age and gender were significantly associated with dementia diagnosis (older participants and females were more likely to have dementia in this sample).
+Source: "Association between multimorbidity and cognitive decline in the elderly population of the Eastern Province, Saudi Arabia," PMC, 2022 data, Dammam city.
+Public full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC11114873/
+
+3. Prior AI-for-AD-diagnosis work using real Dammam hospital data:
+A machine learning study used a dataset of 152 patients from King Fahad Specialist Hospital (KFSH) in Dammam to preemptively diagnose Alzheimer's disease using clinical/demographical features (not MRI), achieving 95.56% accuracy with an SVM classifier. The authors explicitly noted that "most recent publications used images to diagnose AD, which is insufficient for local hospitals with limited imaging capabilities" -- directly matching this project's own deployment-efficiency thesis, from a study conducted in the same city.
+Source: "Preemptive Diagnosis of Alzheimer's Disease in the Eastern Province of Saudi Arabia Using Computational Intelligence Techniques," PMC9427223.
+Public full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC9427223/
+
+4. Regional awareness context:
+A 2023 survey of 614 participants in the Eastern Province found 99.3% had heard of Alzheimer's disease and 96.1% associated it with memory loss, indicating strong general public awareness, alongside gaps in practical caregiving knowledge.
+Source: "Perception and attitude of the general population toward Alzheimer's disease in eastern region, Saudi Arabia," involving Imam Abdulrahman University, Dammam, co-authors.
+Public record: https://pubmed.ncbi.nlm.nih.gov/39790785/
+
+5. Saudi-specific Alzheimer’s disease perspectives and genetics:
+A 2025 peer-reviewed review summarizes current Alzheimer’s disease knowledge and genetic research in Saudi Arabia. It identifies the need for more population-specific research and molecular evidence.
+Source: Alharbi et al., "Alzheimer's disease in the Kingdom of Saudi Arabia: Current perspectives and genetic insights," Journal of Alzheimer's Disease, 2025.
+Public record: https://pubmed.ncbi.nlm.nih.gov/39994993/
+
+6. Official Saudi health-statistics gateway:
+The Ministry of Health publishes an official statistics gateway covering health indicators, facilities, workforce, performance, quality, and service statistics.
+Official link: https://www.moh.gov.sa/en/statistics/pages/dashboard.aspx
+Scope note: this portal does not provide a single definitive public Alzheimer’s prevalence count for Dammam.
+
+5. Broader regional prevalence range (Arab countries, for context):
+Prevalence of dementia in Arab countries has been estimated at 1.1-2.3% in people aged 50 and above, rising to 13.5-18.5% in people aged 80 and above -- broadly consistent with global patterns.
+
+Relevance to this project:
+- Item 3 (KFSH Dammam ML study) is the strongest evidence: AI-assisted AD diagnosis has already been piloted using real patient data from a hospital in the exact city where this project's academic base (KFUPM) is located, and that study explicitly identifies the same imaging-infrastructure limitation this project's efficiency-first design addresses.
+- Item 1 and 2 provide a genuine, cited epidemiological anchor for local demand, without overstating precision the public data does not support.
+- This regional grounding directly strengthens the "Contextualization & Regional Impact" and "Deployment & Infrastructure" AI Readiness dimensions with real citations rather than assumed local relevance.
+
+Validated: 17 August 2026.

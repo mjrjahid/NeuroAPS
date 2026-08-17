@@ -1,0 +1,1841 @@
+{
+  "schema_version": "2.0",
+  "generated_on": "2026-08-11",
+  "sample_count": 10,
+  "triple_count": 10,
+  "artifact_count": 30,
+  "data_boundary": "User-supplied local research samples; never sent to the external LLM path.",
+  "interpretation_note": "Each subject has one raw intensity MRI, one aligned discrete label mask, and one lightweight PLY. Anatomical meanings for mask and PLY label codes were not supplied and are not inferred.",
+  "subjects": [
+    {
+      "subject_id": "AD1",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD1.nii",
+        "filename": "AD1.nii",
+        "bytes": 43516256,
+        "sha256": "fffcc49d9ad8aaae5cc25d87a1939349046a21a30bfab5bf7389b83a4fa4b60f",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.2
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          93.7460022,
+          147.3730011,
+          129.6779938
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1802.092651,
+          "mean": 175.614502,
+          "standard_deviation": 222.210083,
+          "zero_fraction": 0.35904013,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 0.039944,
+            "1.0": 1.516693,
+            "5.0": 19.172954,
+            "50.0": 257.153717,
+            "95.0": 718.942108,
+            "99.0": 892.211132,
+            "99.9": 1044.082174
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD1_mask4.nii.gz",
+        "filename": "AD1_mask4.nii.gz",
+        "bytes": 341177,
+        "sha256": "9f0937f2cf0467d9458372f0ce718b815bcf9e27ada7eb9cc489ea0dbca37c56",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.2
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          93.7460022,
+          147.3730011,
+          129.6779938
+        ],
+        "label_counts": {
+          "0": 9431401,
+          "1": 5391,
+          "2": 62460,
+          "3": 547411,
+          "4": 832313
+        },
+        "nonzero_voxels": 1447575,
+        "nonzero_bounds": {
+          "minimum_index": [
+            22,
+            36,
+            22
+          ],
+          "maximum_index": [
+            178,
+            221,
+            137
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD1_mask4.ply",
+        "filename": "ADPC_BEST_AD1_mask4.ply",
+        "bytes": 669337,
+        "sha256": "b9442b0cb1a6e8b0f497255eacead8c0bf54d928cdbb585129e50b48f933ac4c",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -66.207726,
+            -29.575146,
+            -26.964085
+          ],
+          "maximum": [
+            62.759796,
+            111.779556,
+            104.666245
+          ]
+        },
+        "label_counts": {
+          "1": 1040,
+          "3": 1141,
+          "5": 3185,
+          "7": 2826
+        },
+        "branch_counts": {
+          "1": 4827,
+          "2": 3365
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.010012,
+          "mean": 0.362368,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD2",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD2.nii",
+        "filename": "AD2.nii",
+        "bytes": 43516256,
+        "sha256": "219c75cb44496ab8bb33d0dc3ff7439f5c0db18d5339da7e8e600c3b81897ba0",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.1999975
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          109.7799988,
+          156.9459991,
+          131.5800018
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 2001.231934,
+          "mean": 214.528702,
+          "standard_deviation": 298.600922,
+          "zero_fraction": 0.40929018,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 0.075162,
+            "1.0": 2.932156,
+            "5.0": 27.578531,
+            "50.0": 331.608429,
+            "95.0": 990.640244,
+            "99.0": 1247.940957,
+            "99.9": 1486.931701
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD2_mask4.nii.gz",
+        "filename": "AD2_mask4.nii.gz",
+        "bytes": 328599,
+        "sha256": "eeb280db2e2b3ea2b82442d1e3a17253a4bb3bf46506df90644f88c477a4988b",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.1999975
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          109.7799988,
+          156.9459991,
+          131.5800018
+        ],
+        "label_counts": {
+          "0": 9479950,
+          "1": 5062,
+          "2": 67875,
+          "3": 515511,
+          "4": 810578
+        },
+        "nonzero_voxels": 1399026,
+        "nonzero_bounds": {
+          "minimum_index": [
+            51,
+            41,
+            24
+          ],
+          "maximum_index": [
+            205,
+            221,
+            140
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD2_mask4.ply",
+        "filename": "ADPC_BEST_AD2_mask4.ply",
+        "bytes": 670167,
+        "sha256": "ef0cc12b927d12caa4140109d7b438f3d59b7a19e4b289a1fc0b11c0f99fa845",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -49.920952,
+            -27.413496,
+            -53.219151
+          ],
+          "maximum": [
+            74.911224,
+            116.435875,
+            77.881348
+          ]
+        },
+        "label_counts": {
+          "1": 1038,
+          "3": 1166,
+          "5": 3275,
+          "7": 2713
+        },
+        "branch_counts": {
+          "1": 4808,
+          "2": 3384
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.011581,
+          "mean": 0.373354,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD3",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD3.nii",
+        "filename": "AD3.nii",
+        "bytes": 43516256,
+        "sha256": "fbcbc9a582ff14b6bced367706c5499235874756e2727c954cf24652541051f3",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.1999981
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          102.8050003,
+          154.4089966,
+          117.6289978
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1974.633423,
+          "mean": 192.328323,
+          "standard_deviation": 278.864471,
+          "zero_fraction": 0.42564245,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 0.070245,
+            "1.0": 4.498258,
+            "5.0": 32.090177,
+            "50.0": 274.483139,
+            "95.0": 936.688702,
+            "99.0": 1208.591771,
+            "99.9": 1425.962713
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD3_mask4.nii.gz",
+        "filename": "AD3_mask4.nii.gz",
+        "bytes": 332608,
+        "sha256": "11c5bec9c4ad9c001f2687b44eb642061485ec82d053cd5564d526c0f6e80d27",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.1999981
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          102.8050003,
+          154.4089966,
+          117.6289978
+        ],
+        "label_counts": {
+          "0": 9452451,
+          "1": 4905,
+          "2": 74981,
+          "3": 519913,
+          "4": 826726
+        },
+        "nonzero_voxels": 1426525,
+        "nonzero_bounds": {
+          "minimum_index": [
+            65,
+            44,
+            25
+          ],
+          "maximum_index": [
+            220,
+            224,
+            140
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD3_mask4.ply",
+        "filename": "ADPC_BEST_AD3_mask4.ply",
+        "bytes": 674833,
+        "sha256": "1a9dacc2230b1bb6b929b2691817a3ecbb01dd970bfa2340d678eebf5c4d2336",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -55.600956,
+            -32.148895,
+            -82.341743
+          ],
+          "maximum": [
+            66.818054,
+            110.565651,
+            51.031208
+          ]
+        },
+        "label_counts": {
+          "1": 1038,
+          "3": 1169,
+          "5": 3204,
+          "7": 2781
+        },
+        "branch_counts": {
+          "1": 4821,
+          "2": 3371
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.009321,
+          "mean": 0.350931,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD4",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD4.nii",
+        "filename": "AD4.nii",
+        "bytes": 43516256,
+        "sha256": "b22ee4d5b610775e86b3e91964983a8326265251468c353e6a8dd50dccd8d28b",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.1999969
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          104.8499985,
+          158.4340057,
+          134.8939972
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1836.513794,
+          "mean": 192.165787,
+          "standard_deviation": 282.170563,
+          "zero_fraction": 0.41590532,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 0.077263,
+            "1.0": 3.729641,
+            "5.0": 26.369616,
+            "50.0": 262.702667,
+            "95.0": 927.891678,
+            "99.0": 1215.583151,
+            "99.9": 1447.515792
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD4_mask4.nii.gz",
+        "filename": "AD4_mask4.nii.gz",
+        "bytes": 329484,
+        "sha256": "d1ebf4ba95f758201664b2feb97061cb8fa1bb343a9e52ca83ce4093803d746e",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          166
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.1999969
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          104.8499985,
+          158.4340057,
+          134.8939972
+        ],
+        "label_counts": {
+          "0": 9460812,
+          "1": 4766,
+          "2": 87715,
+          "3": 516351,
+          "4": 809332
+        },
+        "nonzero_voxels": 1418164,
+        "nonzero_bounds": {
+          "minimum_index": [
+            65,
+            49,
+            24
+          ],
+          "maximum_index": [
+            221,
+            229,
+            140
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD4_mask4.ply",
+        "filename": "ADPC_BEST_AD4_mask4.ply",
+        "bytes": 672292,
+        "sha256": "b3d8381203bd94b55092d0741e17c4146773c0dc328bed6cffd362757ea0ea5a",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -58.752747,
+            -35.702461,
+            -63.932728
+          ],
+          "maximum": [
+            69.148827,
+            109.878571,
+            70.502914
+          ]
+        },
+        "label_counts": {
+          "1": 1038,
+          "3": 1216,
+          "5": 3236,
+          "7": 2702
+        },
+        "branch_counts": {
+          "1": 4810,
+          "2": 3382
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.009002,
+          "mean": 0.365856,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD5",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD5.nii",
+        "filename": "AD5.nii",
+        "bytes": 44564832,
+        "sha256": "363a9ee75b6b0acd2e4249c74d5baf0107da9b58f04f4a7dcfdf34f4dd24cd75",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9374997,
+          0.9374998,
+          1.1999985
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          -0.709776,
+          0.0027394,
+          0.7044168,
+          99.1918106,
+          134.8439331,
+          113.5653305
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1022.359253,
+          "mean": 101.24028,
+          "standard_deviation": 167.186935,
+          "zero_fraction": 0.347605,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 1.034281,
+            "1.0": 1.080854,
+            "5.0": 1.173442,
+            "50.0": 37.951176,
+            "95.0": 530.315155,
+            "99.0": 685.561053,
+            "99.9": 805.270895
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD5_mask4.nii.gz",
+        "filename": "AD5_mask4.nii.gz",
+        "bytes": 279434,
+        "sha256": "5e7aef8898f802c2c606691c3cb91344540a482645455ec313d412f3a7ff5803",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9374997,
+          0.9374998,
+          1.1999985
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          -0.709776,
+          0.0027394,
+          0.7044168,
+          99.1918106,
+          134.8439331,
+          113.5653305
+        ],
+        "label_counts": {
+          "0": 10041310,
+          "1": 4950,
+          "2": 20516,
+          "3": 448932,
+          "4": 625412
+        },
+        "nonzero_voxels": 1099810,
+        "nonzero_bounds": {
+          "minimum_index": [
+            37,
+            57,
+            34
+          ],
+          "maximum_index": [
+            179,
+            234,
+            137
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD5_mask4.ply",
+        "filename": "ADPC_BEST_AD5_mask4.ply",
+        "bytes": 673438,
+        "sha256": "15317469782be34d6816a29b1b36ce9c6e7849a4c8b48bacb344de390eaf69ca",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -56.936817,
+            -76.316574,
+            -48.551579
+          ],
+          "maximum": [
+            52.498032,
+            70.022881,
+            62.998661
+          ]
+        },
+        "label_counts": {
+          "1": 1044,
+          "3": 1098,
+          "5": 3285,
+          "7": 2765
+        },
+        "branch_counts": {
+          "1": 4810,
+          "2": 3382
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.008838,
+          "mean": 0.370364,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD6",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD6.nii",
+        "filename": "AD6.nii",
+        "bytes": 44564832,
+        "sha256": "22dbf5dd0222abe2e03385fff0ed4f1feafd41ac34d234d475fa45d63f2a0b50",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9374997,
+          0.9374998,
+          1.1999985
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          -0.709776,
+          0.0027394,
+          0.7044168,
+          99.1918106,
+          134.8439331,
+          113.5653305
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1059.89502,
+          "mean": 97.708504,
+          "standard_deviation": 160.911453,
+          "zero_fraction": 0.34880263,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 1.048183,
+            "1.0": 1.099216,
+            "5.0": 1.174221,
+            "50.0": 38.324997,
+            "95.0": 512.22016,
+            "99.0": 658.762509,
+            "99.9": 771.664727
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD6_mask4.nii.gz",
+        "filename": "AD6_mask4.nii.gz",
+        "bytes": 278825,
+        "sha256": "28a7594754191a6a52c80aa0e96a9d566c150ac8c1b823bd481239935e6b57d6",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9374997,
+          0.9374998,
+          1.1999985
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          -0.709776,
+          0.0027394,
+          0.7044168,
+          99.1918106,
+          134.8439331,
+          113.5653305
+        ],
+        "label_counts": {
+          "0": 10022430,
+          "1": 4861,
+          "2": 20433,
+          "3": 455364,
+          "4": 638032
+        },
+        "nonzero_voxels": 1118690,
+        "nonzero_bounds": {
+          "minimum_index": [
+            36,
+            58,
+            35
+          ],
+          "maximum_index": [
+            182,
+            234,
+            137
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD6_mask4.ply",
+        "filename": "ADPC_BEST_AD6_mask4.ply",
+        "bytes": 673732,
+        "sha256": "0a19c43c7e0bb4b6d51b7302ae4941c2e3a91bbcbf3ab0c2ff87ee8138ba26ab",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -59.06583,
+            -76.294044,
+            -48.827663
+          ],
+          "maximum": [
+            53.286236,
+            69.382019,
+            66.061981
+          ]
+        },
+        "label_counts": {
+          "1": 1042,
+          "3": 1090,
+          "5": 3280,
+          "7": 2780
+        },
+        "branch_counts": {
+          "1": 4813,
+          "2": 3379
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.008794,
+          "mean": 0.37262,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD7",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD7.nii",
+        "filename": "AD7.nii",
+        "bytes": 44564832,
+        "sha256": "aa674f4c722bb818d9d7e551dd44425742ea26e307778af8aa93fb46fb94acd1",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9374996,
+          0.9375002,
+          1.1999978
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          -0.696132,
+          0.0239853,
+          0.7166814,
+          115.6197586,
+          113.7508163,
+          129.7289276
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1098.987915,
+          "mean": 84.251953,
+          "standard_deviation": 148.225464,
+          "zero_fraction": 0.47384186,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 1.015671,
+            "1.0": 1.0684,
+            "5.0": 1.182975,
+            "50.0": 106.115051,
+            "95.0": 506.717728,
+            "99.0": 648.940961,
+            "99.9": 769.715588
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD7_mask4.nii.gz",
+        "filename": "AD7_mask4.nii.gz",
+        "bytes": 274350,
+        "sha256": "98c3328aba19a29235c611560016b8efeebcc7d9766099a6ec2da41bd36bcd3b",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9374996,
+          0.9375002,
+          1.1999978
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          -0.696132,
+          0.0239853,
+          0.7166814,
+          115.6197586,
+          113.7508163,
+          129.7289276
+        ],
+        "label_counts": {
+          "0": 10053046,
+          "1": 4487,
+          "2": 22218,
+          "3": 432367,
+          "4": 629002
+        },
+        "nonzero_voxels": 1088074,
+        "nonzero_bounds": {
+          "minimum_index": [
+            55,
+            49,
+            33
+          ],
+          "maximum_index": [
+            186,
+            226,
+            136
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD7_mask4.ply",
+        "filename": "ADPC_BEST_AD7_mask4.ply",
+        "bytes": 673159,
+        "sha256": "e8262d3cd7c7001bb4e39260b6ba461319949369016ae6238ce3a506c64f40ee",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -56.515724,
+            -77.866951,
+            -40.038952
+          ],
+          "maximum": [
+            57.1064,
+            68.389702,
+            64.993126
+          ]
+        },
+        "label_counts": {
+          "1": 1043,
+          "3": 1097,
+          "5": 3292,
+          "7": 2760
+        },
+        "branch_counts": {
+          "1": 4810,
+          "2": 3382
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.009588,
+          "mean": 0.372563,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD8",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD8.nii",
+        "filename": "AD8.nii",
+        "bytes": 44564832,
+        "sha256": "e16f564c1c1c064b0341eab0ca09057e088b50128d516906068f29c291562e1f",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.2000046
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          97.6470337,
+          146.7277069,
+          120.0
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1189.268311,
+          "mean": 105.300423,
+          "standard_deviation": 182.806641,
+          "zero_fraction": 0.42127461,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 0.990227,
+            "1.0": 1.025107,
+            "5.0": 1.143997,
+            "50.0": 78.554634,
+            "95.0": 593.066479,
+            "99.0": 775.109814,
+            "99.9": 907.515042
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD8_mask4.nii.gz",
+        "filename": "AD8_mask4.nii.gz",
+        "bytes": 273309,
+        "sha256": "52f111f7ced14743abf877d1b99566ccc59c8e9628c3cc9b258f30a362d7474b",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.2000046
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          97.6470337,
+          146.7277069,
+          120.0
+        ],
+        "label_counts": {
+          "0": 10055778,
+          "1": 4410,
+          "2": 26312,
+          "3": 435991,
+          "4": 618629
+        },
+        "nonzero_voxels": 1085342,
+        "nonzero_bounds": {
+          "minimum_index": [
+            42,
+            70,
+            33
+          ],
+          "maximum_index": [
+            185,
+            244,
+            135
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD8_mask4.ply",
+        "filename": "ADPC_BEST_AD8_mask4.ply",
+        "bytes": 673327,
+        "sha256": "38fbec480e2c1e2844f46791117bfd4b6cf61644fcb36c0111dd92a88d60172c",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -59.390392,
+            -73.870102,
+            -47.140182
+          ],
+          "maximum": [
+            54.161827,
+            73.665031,
+            64.886772
+          ]
+        },
+        "label_counts": {
+          "1": 1040,
+          "3": 1114,
+          "5": 3275,
+          "7": 2763
+        },
+        "branch_counts": {
+          "1": 4812,
+          "2": 3380
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.010652,
+          "mean": 0.371593,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD9",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD9.nii",
+        "filename": "AD9.nii",
+        "bytes": 44564832,
+        "sha256": "2e1c5ec575429bccb776eb692a178ae6788b1b48d4c6ce0e166c5ec301363f3c",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.2000046
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          97.6470337,
+          146.7277069,
+          120.0
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1234.321533,
+          "mean": 111.892715,
+          "standard_deviation": 192.073364,
+          "zero_fraction": 0.38471877,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 1.010878,
+            "1.0": 1.037819,
+            "5.0": 1.140641,
+            "50.0": 49.046349,
+            "95.0": 605.535068,
+            "99.0": 799.340917,
+            "99.9": 938.436509
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD9_mask4.nii.gz",
+        "filename": "AD9_mask4.nii.gz",
+        "bytes": 273337,
+        "sha256": "6f00c87d5715e588227d28288585daffa72da3647f0debe2e1ebeff9f76bbc50",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9375,
+          0.9375,
+          1.2000046
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.7071068,
+          0.0,
+          -0.7071068,
+          97.6470337,
+          146.7277069,
+          120.0
+        ],
+        "label_counts": {
+          "0": 10060889,
+          "1": 4371,
+          "2": 26346,
+          "3": 436721,
+          "4": 612793
+        },
+        "nonzero_voxels": 1080231,
+        "nonzero_bounds": {
+          "minimum_index": [
+            42,
+            70,
+            33
+          ],
+          "maximum_index": [
+            185,
+            243,
+            135
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD9_mask4.ply",
+        "filename": "ADPC_BEST_AD9_mask4.ply",
+        "bytes": 673490,
+        "sha256": "aa5bc0c31ac28055a32867246008b353f5a0db90f89679951c15a331cd6e5219",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -57.442337,
+            -74.400742,
+            -45.890823
+          ],
+          "maximum": [
+            54.598682,
+            72.386345,
+            64.807663
+          ]
+        },
+        "label_counts": {
+          "1": 1041,
+          "3": 1110,
+          "5": 3313,
+          "7": 2728
+        },
+        "branch_counts": {
+          "1": 4805,
+          "2": 3387
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.010854,
+          "mean": 0.381475,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    },
+    {
+      "subject_id": "AD10",
+      "cohort_label": "AD",
+      "triple_status": "validated",
+      "raw_mri": {
+        "relative_path": "data/samples/raw_mri/AD10.nii",
+        "filename": "AD10.nii",
+        "bytes": 44564832,
+        "sha256": "1976865875adf0224900f27ed5a17f17daa42f850aee2cac7ee244778eda353c",
+        "format": "NIfTI-1",
+        "content_kind": "raw_intensity_mri",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 16,
+        "datatype": ">f4",
+        "bitpix": 32,
+        "voxel_spacing": [
+          0.9375002,
+          0.9375,
+          1.199996
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.6936463,
+          0.0,
+          -0.7203158,
+          105.852684,
+          127.4257431,
+          108.4118423
+        ],
+        "intensity": {
+          "minimum": 0.0,
+          "maximum": 1262.214966,
+          "mean": 109.614197,
+          "standard_deviation": 183.523712,
+          "zero_fraction": 0.32985319,
+          "finite_fraction": 1.0,
+          "nonzero_percentiles": {
+            "0.1": 1.012838,
+            "1.0": 1.075253,
+            "5.0": 1.270978,
+            "50.0": 30.921368,
+            "95.0": 560.371262,
+            "99.0": 774.666568,
+            "99.9": 917.01476
+          }
+        }
+      },
+      "segmentation_mask": {
+        "relative_path": "data/samples/nifti/AD10_mask4.nii.gz",
+        "filename": "AD10_mask4.nii.gz",
+        "bytes": 276707,
+        "sha256": "938cbf77d5ac74a0cac6852842ee9894385468474cc52fc9d8b9bc50383298ff",
+        "format": "NIfTI-1 gzip",
+        "content_kind": "discrete_label_mask",
+        "shape": [
+          256,
+          256,
+          170
+        ],
+        "datatype_code": 2,
+        "datatype": "uint8",
+        "bitpix": 8,
+        "voxel_spacing": [
+          0.9375002,
+          0.9375,
+          1.199996
+        ],
+        "qform_code": 1,
+        "sform_code": 0,
+        "qform_signature": [
+          0.6936463,
+          0.0,
+          -0.7203158,
+          105.852684,
+          127.4257431,
+          108.4118423
+        ],
+        "label_counts": {
+          "0": 10036784,
+          "1": 3994,
+          "2": 34909,
+          "3": 428395,
+          "4": 637038
+        },
+        "nonzero_voxels": 1104336,
+        "nonzero_bounds": {
+          "minimum_index": [
+            41,
+            63,
+            32
+          ],
+          "maximum_index": [
+            181,
+            237,
+            135
+          ]
+        }
+      },
+      "point_cloud": {
+        "relative_path": "data/samples/point_clouds/ADPC_BEST_AD10_mask4.ply",
+        "filename": "ADPC_BEST_AD10_mask4.ply",
+        "bytes": 674839,
+        "sha256": "814759d3914005da9d6081fce13c699705f71fdf2ef8ce347b67f84974db9c13",
+        "format": "PLY ASCII 1.0",
+        "vertex_count": 8192,
+        "properties": [
+          "x",
+          "y",
+          "z",
+          "x_norm",
+          "y_norm",
+          "z_norm",
+          "red",
+          "green",
+          "blue",
+          "label",
+          "branch",
+          "reliability"
+        ],
+        "coordinate_bounds": {
+          "minimum": [
+            -54.264137,
+            -74.225945,
+            -51.67358
+          ],
+          "maximum": [
+            57.278393,
+            65.823624,
+            70.436707
+          ]
+        },
+        "label_counts": {
+          "1": 1040,
+          "3": 1132,
+          "5": 3263,
+          "7": 2757
+        },
+        "branch_counts": {
+          "1": 4813,
+          "2": 3379
+        },
+        "label_rgb": {
+          "1": [
+            220,
+            20,
+            60
+          ],
+          "3": [
+            0,
+            102,
+            255
+          ],
+          "5": [
+            34,
+            139,
+            34
+          ],
+          "7": [
+            160,
+            82,
+            45
+          ]
+        },
+        "reliability": {
+          "minimum": 0.008206,
+          "mean": 0.377461,
+          "maximum": 1.0
+        }
+      },
+      "alignment": {
+        "validated": true,
+        "shape_match": true,
+        "voxel_spacing_max_abs_difference": 0.0,
+        "qform_match": true,
+        "qform_signature_max_abs_difference": 0.0,
+        "overlay_permitted": true
+      }
+    }
+  ]
+}

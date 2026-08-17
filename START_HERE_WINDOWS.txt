@@ -1,0 +1,39 @@
+NEUROAPS CLINICAL RESEARCH WORKSPACE - WINDOWS QUICK START
+==========================================================
+
+1. Extract the entire ZIP to a normal local folder, for example:
+   C:\ADNI_GUI
+
+2. Open the extracted folder.
+
+3. Double-click:
+   start_windows.bat
+
+4. On the first run, keep the black Command Prompt window open while the
+   required Python packages are installed.
+
+5. The GUI should open automatically at:
+   http://localhost:8501
+
+The corrected launcher automatically searches for Python 3.10 through 3.13,
+including the previously identified Python 3.12 installation:
+
+   C:\Users\F M Jahiduzzaman\AppData\Local\Programs\Python\Python312\python.exe
+
+It does not require Python to be in PATH and does not depend on activation of
+the virtual environment.
+
+If Python is not installed, download the 64-bit Windows installer from:
+   https://www.python.org/downloads/windows/
+
+Enable "Add python.exe to PATH" during installation, then run
+start_windows.bat again.
+
+Keep the Command Prompt window open while using the application. Press Ctrl+C
+in that window when you want to stop the local server.
+
+RESEARCH BOUNDARY
+-----------------
+This application is for research use only and is not a clinical diagnosis.
+The deployment adapter accepts the versioned NeuroAPS-Net model,
+preprocessing configuration, and class mapping used in the experiment.

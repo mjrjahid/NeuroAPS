@@ -1,0 +1,79 @@
+Title: Saudi Public-Domain Policy, Health-Data, and Research Source Register
+Validated: 17 August 2026
+Purpose: Source register for the Policy Alignment and Evidence Library workspaces.
+
+OFFICIAL GOVERNMENT SOURCES
+
+1. Health Sector Transformation Program (HSTP)
+Authority: Saudi Vision 2030
+Official page: https://www.vision2030.gov.sa/en/explore/programs/health-sector-transformation-program
+Official report: https://www.vision2030.gov.sa/media/h0yb5d03/health-sector-transformation-report-2024.pdf
+Validated support: healthcare access, quality, service-model transformation, prevention, and digital transformation.
+Application translation: resource-efficient MRI decision support can be evaluated as a digital-health access and quality use case.
+
+2. National Strategy for Data & Artificial Intelligence (NSDAI)
+Authority: Saudi Data & Artificial Intelligence Authority (SDAIA)
+Official page: https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Pages/NationalStrategyForDataAndAI.aspx
+Official PDF: https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Documents/NSDAI.pdf
+Validated support: healthcare is a priority sector; the strategy connects data and AI with access to health services and preventive care.
+Application translation: the application links research evidence, model context, governance, and human review to national data/AI priorities.
+
+3. Seha Virtual Hospital and Innovation Empowerment Center
+Authority: Saudi Ministry of Health
+Official link: https://www.moh.gov.sa/en/ministry/projects/pages/seha-virtual-hospital.aspx
+Validated support: more than 242 supported hospitals, 48 main specialties, 68 sub-specialties, annual operational capacity above 597,000 beneficiaries, teleradiology, an innovation sandbox, and a clinical research center.
+Application translation: this is a relevant public evaluation pathway. It does not indicate partnership, regulatory approval, or completed integration.
+
+4. Sections of MOH Statistics
+Authority: Saudi Ministry of Health
+Official link: https://www.moh.gov.sa/en/statistics/pages/dashboard.aspx
+Validated support: an official gateway for health indicators, facilities, workforce, service, performance, and quality statistics.
+Scope note: the portal does not establish a single definitive public Alzheimer’s prevalence count for Dammam.
+
+5. National Data Governance Platform and PDPL services
+Authority: SDAIA
+Official link: https://dgp.sdaia.gov.sa/wps/portal/pdp/home
+Validated support: personal-data protection, governance registries, impact-assessment services, breach notification, and regulatory sandbox access.
+Application translation: de-identification, controlled processing, access management, privacy review, and auditability.
+
+6. AI Ethics Self-Assessment
+Authority: SDAIA National Data Governance Platform
+Official link: https://dgp.sdaia.gov.sa/wps/portal/pdp/services/servicesdetails/AIEthicsAssessment/
+Validated support: structured analysis of alignment with Saudi AI ethics principles.
+Application translation: documented human oversight, transparency, reliability, and pre-deployment ethical review.
+
+PUBLIC BACKGROUND
+
+7. Saudipedia NSDAI overview
+Publisher: Saudipedia / Saudi Ministry of Media
+Public link: https://saudipedia.com/en/national-strategy-for-data-and-ai-nsdai
+Use: background for NSDAI components, targets, initiatives, and priority sectors. The official SDAIA page and PDF remain the primary policy sources.
+
+8. Regulations.AI NSDAI index
+Publisher: Regulations.AI
+Public link: https://regulations.ai/regulations/saudi-arabia-2020-10-national-strategy-data-ai
+Use: secondary plain-language background only. The page states that it is not legal advice and should be verified against official text.
+
+PUBLIC RESEARCH
+
+9. Alharbi et al. (2025), Saudi Alzheimer’s perspectives and genetic insights
+Public record: https://pubmed.ncbi.nlm.nih.gov/39994993/
+
+10. Hajjar et al. (2025), dementia prevalence in the Saudi National Guard Health System
+Public record: https://pubmed.ncbi.nlm.nih.gov/39962762/
+
+11. AlHarkan et al. (2024), cognitive decline in the Eastern Province
+Public full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC11114873/
+
+12. Olatunji et al. (2022), Alzheimer’s prediction using KFSH Dammam clinical data
+Public full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC9427223/
+
+13. Alradi et al. (2024), Eastern Province Alzheimer’s awareness survey
+Public record: https://pubmed.ncbi.nlm.nih.gov/39790785/
+
+SCOPE
+
+- Government sources, public background, and public research are labelled separately. Secondary indexes are not presented as law or regulation.
+- This register supports policy and contextual alignment.
+- It is not evidence of regulatory approval, clinical validation, hospital integration, or partnership.
+- Public links should be rechecked before a formal submission or deployment review.

@@ -1,0 +1,12 @@
+NeuroAPS Clinical Research Workspace
+Release: 6.0
+Date: 17 August 2026
+
+Release focus:
+- supplied ITU Hackathon context visuals;
+- Saudi public-domain data and link register;
+- tiered official, public-background, and public-research sources;
+- updated offline evidence index;
+- preserved MRI-to-point-cloud, readiness, Y.3172, and research-assistant workspaces.
+
+Trained-model and new-dataset runtime integration is reserved for a later release.

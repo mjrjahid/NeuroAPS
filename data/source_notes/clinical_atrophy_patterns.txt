@@ -1,0 +1,26 @@
+Title: Clinical Background: Hippocampal, Ventricular, and Cortical Changes in Alzheimer's Disease
+Type: Clinical/domain background reference (established neuroimaging literature, not original to NeuroAPS-Net or Sampling Matters)
+Domain: Health / Neuroimaging / Clinical Neuroscience
+
+Purpose: This record provides established clinical background explaining WHY the three anatomical regions used by NeuroAPS-Net's Anatomical Priority Sampling (hippocampus, ventricles, cortex) are clinically meaningful for Alzheimer's disease (AD) detection. This is standard, well-established neuroimaging domain knowledge, not a novel finding of either project paper -- both papers select these regions BECAUSE this clinical pattern is already established in the literature.
+
+The Three Key Regions and Their AD-Related Change Pattern:
+
+1. Hippocampus -- SHRINKS (atrophies) in Alzheimer's disease.
+The hippocampus is one of the earliest and most consistently affected structures in AD. Progressive volume loss (atrophy) in the hippocampus is associated with the memory impairment characteristic of early AD. A thinner, smaller hippocampus on MRI is a hallmark radiological sign consistent with AD, relative to a cognitively normal (CN) brain.
+
+2. Ventricles -- ENLARGE in Alzheimer's disease.
+The lateral ventricles (fluid-filled cavities in the brain) expand as surrounding brain tissue is lost to atrophy -- this is sometimes called "ex-vacuo" ventricular enlargement. Larger ventricular volume on MRI, relative to a CN brain, is a common secondary sign of overall brain volume loss in AD.
+
+3. Cortex -- THINS in Alzheimer's disease.
+Cortical thickness (the outer layer of the brain, responsible for higher cognitive function) progressively decreases in AD, particularly in temporal and parietal regions. Cortical thinning on MRI is a widely used biomarker for tracking AD progression, relative to a CN brain.
+
+Summary table:
+- Hippocampus: Cognitively Normal (CN) = normal volume | Alzheimer's Disease (AD) = shrinks / thins
+- Ventricles: Cognitively Normal (CN) = normal size | Alzheimer's Disease (AD) = enlarges
+- Cortex: Cognitively Normal (CN) = normal thickness | Alzheimer's Disease (AD) = thins
+
+Why this matters for NeuroAPS-Net and Sampling Matters:
+Both papers' point cloud generation methods (Anatomical Priority Sampling in NeuroAPS-Net; reliability-aware sampling in Sampling Matters) explicitly allocate more sampling points to the hippocampus and ventricles specifically because these are the regions where AD-related structural change concentrates. NeuroAPS-Net's hippocampus-weighted sampling (2,867 of 8,192 points, the largest single-region allocation) is a direct, deliberate design decision reflecting this established clinical pattern -- not an arbitrary choice.
+
+Honest scope note: This record describes GENERAL, well-established clinical patterns from the broader neuroimaging literature to provide context for the project's design choices. It is not a novel clinical claim made by either paper, and it should not be read as this project's own research finding.

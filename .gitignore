@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.DS_Store
+.streamlit/secrets.toml
+data/kb_manifest.json
+data/samples/nifti/
+data/samples/point_clouds/
+data/samples/raw_mri/

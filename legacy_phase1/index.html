@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive Phase 1 prototype for exploring synthetic ADNI MRI, lightweight point-cloud, model-result, and RAG workflows.">
+  <title>NeuroLens — ADNI MRI & Point-Cloud Research GUI</title>
+  <script src="https://unpkg.com/lucide@0.468.0"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f5f7fb;
+      --foreground: #172033;
+      --card: #ffffff;
+      --card-foreground: #172033;
+      --primary: #2458d3;
+      --primary-foreground: #ffffff;
+      --secondary: #e9efff;
+      --secondary-foreground: #173b91;
+      --muted: #eef2f7;
+      --muted-foreground: #62708a;
+      --accent: #eaf1ff;
+      --accent-foreground: #173b91;
+      --border: #d9e1ec;
+      --viz-series-1: #2458d3;
+      --viz-series-2: #13a098;
+      --viz-series-3: #7c4ed8;
+      --focus: rgba(36, 88, 211, .28);
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; background: var(--background); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+      color: var(--foreground);
+      background:
+        radial-gradient(circle at 95% 0%, rgba(124, 78, 216, .08), transparent 28rem),
+        radial-gradient(circle at 0% 20%, rgba(36, 88, 211, .07), transparent 24rem),
+        var(--background);
+      font: 14px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    .card {
+      color: var(--card-foreground);
+      background: color-mix(in srgb, var(--card) 97%, transparent);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(26, 39, 67, .055);
+    }
+    .btn {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--card);
+      cursor: pointer;
+      transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
+    }
+    .btn:hover { border-color: color-mix(in srgb, var(--primary) 42%, var(--border)); background: var(--accent); }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { color: var(--primary-foreground); background: var(--primary); border-color: var(--primary); }
+    .btn-primary:hover { color: var(--primary-foreground); background: color-mix(in srgb, var(--primary) 88%, #000); }
+    .btn-ghost { background: transparent; border-color: transparent; }
+    .form-label { color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
+    .form-control, .form-select {
+      width: 100%;
+      min-height: 38px;
+      padding: 8px 10px;
+      color: var(--foreground);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      outline: none;
+    }
+    .form-control:focus, .form-select:focus, .btn:focus-visible, [role="button"]:focus-visible {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--focus);
+      outline: none;
+    }
+    .form-range { width: 100%; accent-color: var(--primary); }
+    .form-check-input { accent-color: var(--primary); }
+    .table-responsive { width: 100%; overflow-x: auto; }
+    .table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+    .table th, .table td { padding: 11px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    .table th { color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
+    .table tbody tr:last-child td { border-bottom: 0; }
+    .text-end { text-align: right !important; }
+    .text-muted { color: var(--muted-foreground); }
+    .text-small { font-size: 12px; }
+    .viz-stat { display: grid; gap: 4px; }
+    .viz-stat-value { font-size: clamp(24px, 3vw, 34px); font-weight: 650; letter-spacing: -.035em; }
+    .viz-badge {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      color: var(--secondary-foreground);
+      background: var(--secondary);
+      border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--border));
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .viz-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    [data-lucide] { width: 17px; height: 17px; stroke-width: 1.8; flex: 0 0 auto; }
+    #adniResearchGui { width: min(100%, 1500px); margin: 0 auto; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --background: #0d1422;
+        --foreground: #e6edf8;
+        --card: #131d2e;
+        --card-foreground: #e6edf8;
+        --primary: #6f98ff;
+        --primary-foreground: #07152f;
+        --secondary: #1b2c50;
+        --secondary-foreground: #cfe0ff;
+        --muted: #1b2638;
+        --muted-foreground: #9baac2;
+        --accent: #1d3157;
+        --accent-foreground: #d7e5ff;
+        --border: #2a3950;
+        --viz-series-1: #6f98ff;
+        --viz-series-2: #39c9bc;
+        --viz-series-3: #b18bff;
+        --focus: rgba(111, 152, 255, .3);
+      }
+      .card { box-shadow: 0 10px 35px rgba(0, 0, 0, .18); }
+    }
+    @media (max-width: 580px) { body { padding: 14px; } }
+  </style>
+</head>
+<body>
+<div id="adniResearchGui">
+  <style>
+    #adniResearchGui {
+      --nav-width: 188px;
+      color: var(--foreground);
+      background: transparent;
+    }
+    #adniResearchGui * { box-sizing: border-box; }
+    #adniResearchGui strong,
+    #adniResearchGui h2,
+    #adniResearchGui h3 { font-weight: 500; }
+    #adniResearchGui .app-shell { display: grid; grid-template-columns: var(--nav-width) minmax(0, 1fr); gap: 20px; align-items: start; }
+    #adniResearchGui .side-nav { display: grid; gap: 6px; align-content: start; position: sticky; top: 12px; }
+    #adniResearchGui .brand { display: flex; gap: 10px; align-items: center; padding: 4px 2px 16px; }
+    #adniResearchGui .brand-mark { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--primary); color: var(--primary-foreground); }
+    #adniResearchGui .brand-name { font-weight: 500; }
+    #adniResearchGui .nav-btn { width: 100%; justify-content: flex-start; }
+    #adniResearchGui .nav-btn[aria-pressed="true"] { background: var(--primary); color: var(--primary-foreground); }
+    #adniResearchGui .nav-separator { height: 1px; background: var(--border); margin: 10px 0; }
+    #adniResearchGui .research-note { padding: 10px 2px; color: var(--muted-foreground); }
+    #adniResearchGui .workspace { min-width: 0; display: grid; gap: 18px; }
+    #adniResearchGui .topbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; justify-content: space-between; }
+    #adniResearchGui .topbar-title { min-width: 210px; }
+    #adniResearchGui .topbar h2 { margin: 0 0 2px; }
+    #adniResearchGui .topbar-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+    #adniResearchGui .compact-field { display: grid; gap: 4px; min-width: 150px; }
+    #adniResearchGui .page { display: none; }
+    #adniResearchGui .page.is-active { display: grid; gap: 18px; }
+    #adniResearchGui .section-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+    #adniResearchGui .section-head h3 { margin: 0; }
+    #adniResearchGui .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    #adniResearchGui .metric-note { margin-top: 5px; color: var(--muted-foreground); }
+    #adniResearchGui .content-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(240px, .65fr); gap: 18px; align-items: start; }
+    #adniResearchGui .card-pad { padding: 16px; }
+    #adniResearchGui .plot-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    #adniResearchGui .plot-title strong { font-weight: 500; }
+    #adniResearchGui .legend { display: flex; flex-wrap: wrap; gap: 12px; color: var(--muted-foreground); }
+    #adniResearchGui .legend-item { display: inline-flex; align-items: center; gap: 5px; }
+    #adniResearchGui .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    #adniResearchGui .cn { background: var(--viz-series-1); }
+    #adniResearchGui .mci { background: var(--viz-series-2); }
+    #adniResearchGui .ad { background: var(--viz-series-3); }
+    #adniResearchGui .bar-list { display: grid; gap: 15px; }
+    #adniResearchGui .bar-row { display: grid; grid-template-columns: 95px minmax(0,1fr) 48px; gap: 10px; align-items: center; }
+    #adniResearchGui .bar-track { height: 9px; border-radius: 999px; background: var(--muted); overflow: hidden; }
+    #adniResearchGui .bar-fill { height: 100%; border-radius: inherit; background: var(--viz-series-1); }
+    #adniResearchGui .donut-layout { display: grid; grid-template-columns: 150px minmax(120px, 1fr); gap: 16px; align-items: center; }
+    #adniResearchGui .donut { width: 146px; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(var(--viz-series-1) 0 35%, var(--viz-series-2) 35% 72%, var(--viz-series-3) 72% 100%); display: grid; place-items: center; }
+    #adniResearchGui .donut::after { content: "1,248"; width: 82px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--card); color: var(--card-foreground); font-weight: 500; }
+    #adniResearchGui .distribution-list { display: grid; gap: 12px; }
+    #adniResearchGui .distribution-row { display: flex; justify-content: space-between; gap: 12px; }
+    #adniResearchGui .table tbody tr { cursor: pointer; }
+    #adniResearchGui .table tbody tr:hover { background: var(--accent); color: var(--accent-foreground); }
+    #adniResearchGui .table tbody tr[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); }
+    #adniResearchGui .subject-summary { display: grid; gap: 14px; }
+    #adniResearchGui .subject-identity { display: flex; gap: 12px; align-items: center; }
+    #adniResearchGui .avatar { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--secondary); color: var(--secondary-foreground); font-weight: 500; }
+    #adniResearchGui .detail-list { display: grid; gap: 10px; }
+    #adniResearchGui .detail-row { display: flex; justify-content: space-between; gap: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    #adniResearchGui .detail-row:last-child { border-bottom: 0; }
+    #adniResearchGui .confidence-track { height: 8px; border-radius: 999px; background: var(--muted); overflow: hidden; }
+    #adniResearchGui .confidence-fill { height: 100%; width: 91%; border-radius: inherit; background: var(--viz-series-3); }
+    #adniResearchGui .viewer-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    #adniResearchGui .scan-panel { display: grid; gap: 7px; }
+    #adniResearchGui .scan-label { display: flex; justify-content: space-between; color: var(--muted-foreground); }
+    #adniResearchGui .scan-canvas, #adniResearchGui .cloud-canvas { display: block; width: 100%; border-radius: 10px; background: var(--muted); }
+    #adniResearchGui .scan-canvas { aspect-ratio: 1; }
+    #adniResearchGui .viewer-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+    #adniResearchGui .range-field { flex: 1 1 180px; min-width: 150px; }
+    #adniResearchGui .cloud-layout { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 18px; align-items: start; }
+    #adniResearchGui .cloud-canvas { aspect-ratio: 16 / 9; cursor: grab; }
+    #adniResearchGui .cloud-canvas:active { cursor: grabbing; }
+    #adniResearchGui .control-stack { display: grid; gap: 16px; }
+    #adniResearchGui .toggle-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    #adniResearchGui .plot-svg { width: 100%; height: auto; display: block; }
+    #adniResearchGui .axis { stroke: var(--border); stroke-width: 1; }
+    #adniResearchGui .grid-line { stroke: var(--border); stroke-width: 1; opacity: .65; }
+    #adniResearchGui .axis-text { fill: var(--muted-foreground); font-size: 11px; }
+    #adniResearchGui .feature-point { transition: r 140ms ease; cursor: pointer; }
+    #adniResearchGui .feature-point:hover { r: 7; }
+    #adniResearchGui .feature-table { display: grid; gap: 12px; }
+    #adniResearchGui .feature-item { display: grid; grid-template-columns: 150px minmax(0, 1fr) 62px; gap: 10px; align-items: center; }
+    #adniResearchGui .kb-drop { padding: 26px 16px; text-align: center; border: 1px dashed var(--border); border-radius: 12px; display: grid; place-items: center; gap: 10px; background: var(--muted); color: var(--muted-foreground); }
+    #adniResearchGui .source-list { display: grid; gap: 10px; }
+    #adniResearchGui .source-row { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    #adniResearchGui .source-row:last-child { border-bottom: 0; }
+    #adniResearchGui .chat-layout { display: grid; grid-template-columns: minmax(0, .78fr) minmax(260px, 1.22fr); gap: 18px; align-items: start; }
+    #adniResearchGui .suggestions { display: grid; gap: 8px; }
+    #adniResearchGui .suggestions .btn { width: 100%; justify-content: flex-start; text-align: left; }
+    #adniResearchGui .conversation { display: grid; gap: 12px; }
+    #adniResearchGui .message { max-width: 88%; padding: 11px 13px; border-radius: 12px; }
+    #adniResearchGui .message.user { justify-self: end; background: var(--primary); color: var(--primary-foreground); }
+    #adniResearchGui .message.assistant { justify-self: start; background: var(--muted); color: var(--foreground); }
+    #adniResearchGui .answer-sections { display: grid; gap: 8px; margin-top: 8px; }
+    #adniResearchGui .answer-line { border-left: 2px solid var(--viz-series-1); padding-left: 9px; }
+    #adniResearchGui .chat-compose { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; margin-top: 14px; }
+    #adniResearchGui .architecture-flow { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; align-items: stretch; }
+    #adniResearchGui .flow-node { padding: 14px; background: color-mix(in srgb, var(--viz-series-1) 10%, transparent); border-radius: 10px; display: grid; gap: 6px; position: relative; }
+    #adniResearchGui .flow-node:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); color: var(--muted-foreground); }
+    #adniResearchGui .retrieval-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+    #adniResearchGui .retrieval-path { padding: 14px 0; border-top: 3px solid var(--viz-series-1); }
+    #adniResearchGui .retrieval-path:nth-child(2) { border-color: var(--viz-series-2); }
+    #adniResearchGui .retrieval-path:nth-child(3) { border-color: var(--viz-series-3); }
+    #adniResearchGui .empty-state { text-align: center; padding: 24px; color: var(--muted-foreground); }
+    #adniResearchGui .hidden { display: none !important; }
+    #adniResearchGui .status-line { min-height: 20px; color: var(--muted-foreground); }
+    @media (max-width: 900px) {
+      #adniResearchGui .app-shell { grid-template-columns: 1fr; }
+      #adniResearchGui .side-nav { position: static; display: flex; flex-wrap: wrap; }
+      #adniResearchGui .brand { flex: 1 0 100%; padding-bottom: 4px; }
+      #adniResearchGui .nav-btn { width: auto; }
+      #adniResearchGui .nav-separator, #adniResearchGui .research-note { display: none; }
+      #adniResearchGui .metric-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      #adniResearchGui .content-grid, #adniResearchGui .chat-layout { grid-template-columns: 1fr; }
+      #adniResearchGui .cloud-layout { grid-template-columns: 1fr; }
+      #adniResearchGui .control-stack { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 580px) {
+      #adniResearchGui .metric-grid, #adniResearchGui .viewer-grid, #adniResearchGui .architecture-flow, #adniResearchGui .retrieval-grid { grid-template-columns: 1fr; }
+      #adniResearchGui .flow-node:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -16px; transform: translateX(50%); }
+      #adniResearchGui .donut-layout { grid-template-columns: 1fr; justify-items: center; }
+      #adniResearchGui .distribution-list { width: 100%; }
+      #adniResearchGui .control-stack { grid-template-columns: 1fr; }
+      #adniResearchGui .feature-item { grid-template-columns: 115px minmax(0,1fr) 52px; }
+      #adniResearchGui .chat-compose { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <div class="app-shell">
+    <nav class="side-nav" aria-label="Research application sections">
+      <div class="brand">
+        <span class="brand-mark"><i data-lucide="brain" aria-hidden="true"></i></span>
+        <span><span class="brand-name">NeuroLens</span><br><span class="text-small text-muted">ADNI Research</span></span>
+      </div>
+      <button class="btn btn-ghost nav-btn" data-page="overview" aria-pressed="true"><i data-lucide="layout-dashboard" aria-hidden="true"></i> Overview</button>
+      <button class="btn btn-ghost nav-btn" data-page="subjects" aria-pressed="false"><i data-lucide="users" aria-hidden="true"></i> Subjects</button>
+      <button class="btn btn-ghost nav-btn" data-page="mri" aria-pressed="false"><i data-lucide="scan-line" aria-hidden="true"></i> MRI viewer</button>
+      <button class="btn btn-ghost nav-btn" data-page="cloud" aria-pressed="false"><i data-lucide="box" aria-hidden="true"></i> Point cloud</button>
+      <button class="btn btn-ghost nav-btn" data-page="features" aria-pressed="false"><i data-lucide="chart-scatter" aria-hidden="true"></i> Features</button>
+      <button class="btn btn-ghost nav-btn" data-page="assistant" aria-pressed="false"><i data-lucide="message-square-text" aria-hidden="true"></i> RAG assistant</button>
+      <button class="btn btn-ghost nav-btn" data-page="knowledge" aria-pressed="false"><i data-lucide="database" aria-hidden="true"></i> Knowledge base</button>
+      <button class="btn btn-ghost nav-btn" data-page="architecture" aria-pressed="false"><i data-lucide="waypoints" aria-hidden="true"></i> System design</button>
+      <div class="nav-separator"></div>
+      <div class="research-note text-small">Synthetic Phase 1 data<br>Research use only</div>
+    </nav>
+
+    <main class="workspace">
+      <div class="topbar">
+        <div class="topbar-title">
+          <h2 id="pageTitle">Experiment overview</h2>
+          <div class="text-small text-muted" id="pageSubtitle">Cohort, model performance, and data readiness</div>
+        </div>
+        <div class="topbar-controls">
+          <label class="compact-field form-label">Active subject
+            <select id="globalSubject" class="form-select" aria-label="Active subject"></select>
+          </label>
+          <span class="viz-badge">Synthetic prototype</span>
+        </div>
+      </div>
+
+      <section id="page-overview" class="page is-active" aria-labelledby="pageTitle">
+        <div class="metric-grid">
+          <div class="card card-pad viz-stat"><span class="text-muted">Subjects</span><span class="viz-stat-value">1,248</span><span class="metric-note text-small">3 diagnostic groups</span></div>
+          <div class="card card-pad viz-stat"><span class="text-muted">MRI scans</span><span class="viz-stat-value">2,816</span><span class="metric-note text-small">1–4 visits per subject</span></div>
+          <div class="card card-pad viz-stat"><span class="text-muted">Point clouds</span><span class="viz-stat-value">2,741</span><span class="metric-note text-small">97.3% paired coverage</span></div>
+          <div class="card card-pad viz-stat"><span class="text-muted">Balanced accuracy</span><span class="viz-stat-value">0.887</span><span class="metric-note text-small">Mock evaluation result</span></div>
+        </div>
+        <div class="content-grid">
+          <div class="card card-pad">
+            <div class="plot-title"><strong>Model evaluation</strong><span class="text-small text-muted">Held-out cohort · mock values</span></div>
+            <div class="bar-list" aria-label="Model evaluation metrics">
+              <div class="bar-row"><span>Accuracy</span><span class="bar-track"><span class="bar-fill" style="width:91.2%"></span></span><span class="text-end">0.912</span></div>
+              <div class="bar-row"><span>Balanced acc.</span><span class="bar-track"><span class="bar-fill" style="width:88.7%"></span></span><span class="text-end">0.887</span></div>
+              <div class="bar-row"><span>Macro F1</span><span class="bar-track"><span class="bar-fill" style="width:89.4%"></span></span><span class="text-end">0.894</span></div>
+              <div class="bar-row"><span>AUROC</span><span class="bar-track"><span class="bar-fill" style="width:94.6%"></span></span><span class="text-end">0.946</span></div>
+              <div class="bar-row"><span>AUPRC</span><span class="bar-track"><span class="bar-fill" style="width:90.3%"></span></span><span class="text-end">0.903</span></div>
+            </div>
+          </div>
+          <div class="card card-pad">
+            <div class="plot-title"><strong>Diagnosis distribution</strong><span class="text-small text-muted">n = 1,248</span></div>
+            <div class="donut-layout">
+              <div class="donut" role="img" aria-label="Diagnosis distribution: CN 437, MCI 462, AD 349"></div>
+              <div class="distribution-list">
+                <div class="distribution-row"><span class="legend-item"><span class="dot cn"></span>CN</span><strong>437</strong></div>
+                <div class="distribution-row"><span class="legend-item"><span class="dot mci"></span>MCI</span><strong>462</strong></div>
+                <div class="distribution-row"><span class="legend-item"><span class="dot ad"></span>AD</span><strong>349</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-pad">
+          <div class="section-head"><div><strong>Data readiness</strong><div class="text-small text-muted">What can be connected in Phase 2</div></div><span class="viz-badge">Awaiting real files</span></div>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead><tr><th>Source</th><th>Prototype state</th><th>Required real input</th><th>Validation on import</th></tr></thead>
+              <tbody>
+                <tr><td>MRI</td><td>Interactive synthetic slices</td><td>NIfTI or DICOM files</td><td>Format, dimensions, subject linkage</td></tr>
+                <tr><td>Point cloud</td><td>Interactive synthetic cloud</td><td>PLY, PCD, XYZ, NPZ, or CSV</td><td>Coordinates, channels, point count</td></tr>
+                <tr><td>Features</td><td>Mock subject-level features</td><td>CSV or Excel feature table</td><td>Names, units, missing values</td></tr>
+                <tr><td>Inference</td><td>Mock probabilities only</td><td>Model + preprocessing artifacts</td><td>Order, scaling, class mapping</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-subjects" class="page" aria-labelledby="pageTitle">
+        <div class="section-head">
+          <label class="compact-field form-label">Search subjects
+            <input id="subjectSearch" class="form-control" type="search" placeholder="ID or diagnosis">
+          </label>
+          <label class="compact-field form-label">Diagnosis
+            <select id="diagnosisFilter" class="form-select"><option value="all">All diagnoses</option><option>CN</option><option>MCI</option><option>AD</option></select>
+          </label>
+        </div>
+        <div class="content-grid">
+          <div class="card card-pad">
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead><tr><th>Subject</th><th>Dx</th><th>Age</th><th>Visit</th><th>Prediction</th><th class="text-end">Confidence</th></tr></thead>
+                <tbody id="subjectRows"></tbody>
+              </table>
+            </div>
+            <div id="subjectEmpty" class="empty-state hidden">No synthetic subjects match these filters.</div>
+          </div>
+          <aside class="card card-pad subject-summary" aria-label="Selected subject details">
+            <div class="subject-identity"><div class="avatar" id="subjectAvatar">04</div><div><strong id="detailId">ADNI-004</strong><div class="text-small text-muted" id="detailVisit">Month 12 · MRI + point cloud</div></div></div>
+            <span class="viz-badge" id="detailDx">AD · mock label</span>
+            <div class="detail-list">
+              <div class="detail-row"><span class="text-muted">Age / sex</span><strong id="detailDemographic">76 / F</strong></div>
+              <div class="detail-row"><span class="text-muted">Ground truth</span><strong id="detailTruth">AD</strong></div>
+              <div class="detail-row"><span class="text-muted">Model prediction</span><strong id="detailPrediction">AD</strong></div>
+              <div class="detail-row"><span class="text-muted">Hippocampal volume</span><strong id="detailHippo">2.61 cm³</strong></div>
+              <div class="detail-row"><span class="text-muted">Point count</span><strong id="detailPoints">8,192</strong></div>
+            </div>
+            <div><div class="distribution-row"><span>Mock confidence</span><strong id="detailConfidence">91%</strong></div><div class="confidence-track"><div class="confidence-fill" id="confidenceFill"></div></div></div>
+            <button class="btn btn-primary" id="openSubjectViewer"><i data-lucide="scan-line" aria-hidden="true"></i> Open MRI workspace</button>
+          </aside>
+        </div>
+      </section>
+
+      <section id="page-mri" class="page" aria-labelledby="pageTitle">
+        <div class="card card-pad">
+          <div class="section-head"><div><strong id="mriSubjectLabel">ADNI-004 · Month 12</strong><div class="text-small text-muted">Synthetic MRI preview · real NIfTI rendering connects in Phase 2</div></div><span class="viz-badge">Mock anatomy</span></div>
+          <div class="viewer-toolbar">
+            <label class="form-label range-field">Slice <span id="sliceValue">54</span> / 100<input id="sliceSlider" class="form-range" type="range" min="1" max="100" value="54"></label>
+            <label class="form-label range-field">Overlay opacity <span id="overlayValue">42</span>%<input id="overlaySlider" class="form-range" type="range" min="0" max="100" value="42"></label>
+            <button class="btn" id="crosshairButton" aria-pressed="true"><i data-lucide="crosshair" aria-hidden="true"></i> Crosshair</button>
+            <button class="btn" id="resetMri"><i data-lucide="rotate-ccw" aria-hidden="true"></i> Reset</button>
+          </div>
+        </div>
+        <div class="viewer-grid">
+          <div class="scan-panel"><div class="scan-label"><span>Axial</span><span id="axialPos">z 54</span></div><canvas class="scan-canvas" id="axialCanvas" width="420" height="420" role="img" aria-label="Synthetic axial MRI slice"></canvas></div>
+          <div class="scan-panel"><div class="scan-label"><span>Coronal</span><span id="coronalPos">y 54</span></div><canvas class="scan-canvas" id="coronalCanvas" width="420" height="420" role="img" aria-label="Synthetic coronal MRI slice"></canvas></div>
+          <div class="scan-panel"><div class="scan-label"><span>Sagittal</span><span id="sagittalPos">x 54</span></div><canvas class="scan-canvas" id="sagittalCanvas" width="420" height="420" role="img" aria-label="Synthetic sagittal MRI slice"></canvas></div>
+        </div>
+        <div class="card card-pad">
+          <div class="plot-title"><strong>Selected scan metadata</strong><span class="text-small text-muted">Synthetic demonstration</span></div>
+          <div class="table-responsive"><table class="table table-sm"><thead><tr><th>Sequence</th><th>Voxel size</th><th>Dimensions</th><th>Preprocessing</th><th>Overlay</th></tr></thead><tbody><tr><td>T1-weighted</td><td>1.0 × 1.0 × 1.0 mm</td><td>256 × 256 × 176</td><td>Registered + normalized</td><td>Mock saliency</td></tr></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="page-cloud" class="page" aria-labelledby="pageTitle">
+        <div class="card card-pad">
+          <div class="section-head"><div><strong id="cloudSubjectLabel">ADNI-004 · lightweight representation</strong><div class="text-small text-muted">Drag to rotate · scroll over the cloud to zoom</div></div><span class="viz-badge">8,192 points</span></div>
+          <div class="cloud-layout">
+            <canvas class="cloud-canvas" id="cloudCanvas" width="900" height="510" role="img" aria-label="Interactive synthetic MRI-derived point cloud"></canvas>
+            <div class="control-stack">
+              <label class="form-label">Point size <span id="pointSizeValue">2.0</span> px<input id="pointSizeSlider" class="form-range" type="range" min="1" max="5" value="2" step="0.25"></label>
+              <label class="form-label">Visible density <span id="densityValue">72</span>%<input id="densitySlider" class="form-range" type="range" min="20" max="100" value="72"></label>
+              <label class="form-label">Color by<select id="cloudColor" class="form-select"><option value="region">Region</option><option value="depth">Depth</option><option value="intensity">Intensity</option></select></label>
+              <label class="toggle-row form-check form-switch"><span class="form-check-label">Show axes</span><input id="axesToggle" class="form-check-input" type="checkbox" checked></label>
+              <button class="btn" id="resetCloud"><i data-lucide="rotate-ccw" aria-hidden="true"></i> Reset view</button>
+              <div class="text-small text-muted">Compression ratio<br><strong>24.6×</strong> vs. voxel representation</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-features" class="page" aria-labelledby="pageTitle">
+        <div class="section-head">
+          <label class="compact-field form-label">X-axis feature<select id="xFeature" class="form-select"><option value="hippo">Hippocampal volume</option><option value="cortex">Cortical thickness</option><option value="ventricle">Ventricular volume</option></select></label>
+          <label class="compact-field form-label">Compare by<select id="featureGroup" class="form-select"><option value="diagnosis">Diagnosis</option><option value="prediction">Predicted class</option></select></label>
+        </div>
+        <div class="content-grid">
+          <div class="card card-pad">
+            <div class="plot-title"><strong id="scatterTitle">Hippocampal volume vs. cognitive score</strong><div class="legend"><span class="legend-item"><span class="dot cn"></span>CN</span><span class="legend-item"><span class="dot mci"></span>MCI</span><span class="legend-item"><span class="dot ad"></span>AD</span></div></div>
+            <svg id="featureScatter" class="plot-svg" viewBox="0 0 680 340" role="img" aria-labelledby="scatterSvgTitle scatterSvgDesc"><title id="scatterSvgTitle">Feature comparison</title><desc id="scatterSvgDesc">Synthetic subjects grouped by diagnosis.</desc></svg>
+            <div id="pointDetail" class="status-line text-small">Select a point to inspect its synthetic subject values.</div>
+          </div>
+          <div class="card card-pad">
+            <div class="plot-title"><strong>Top model features</strong><span class="text-small text-muted">Mock SHAP ranking</span></div>
+            <div class="feature-table">
+              <div class="feature-item"><span>Hippocampal vol.</span><span class="bar-track"><span class="bar-fill" style="width:100%"></span></span><strong class="text-end">0.182</strong></div>
+              <div class="feature-item"><span>Entorhinal thick.</span><span class="bar-track"><span class="bar-fill" style="width:82%"></span></span><strong class="text-end">0.149</strong></div>
+              <div class="feature-item"><span>Ventricular vol.</span><span class="bar-track"><span class="bar-fill" style="width:68%"></span></span><strong class="text-end">0.124</strong></div>
+              <div class="feature-item"><span>Point density</span><span class="bar-track"><span class="bar-fill" style="width:55%"></span></span><strong class="text-end">0.101</strong></div>
+              <div class="feature-item"><span>Cortical thick.</span><span class="bar-track"><span class="bar-fill" style="width:47%"></span></span><strong class="text-end">0.086</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-assistant" class="page" aria-labelledby="pageTitle">
+        <div class="chat-layout">
+          <div>
+            <div class="plot-title"><strong>Suggested research queries</strong><span class="text-small text-muted">Uses the active synthetic subject</span></div>
+            <div class="suggestions">
+              <button class="btn suggestion">Why was this subject classified as AD?</button>
+              <button class="btn suggestion">Which features distinguish AD from CN?</button>
+              <button class="btn suggestion">Find similar MCI subjects.</button>
+              <button class="btn suggestion">Show model performance for the MCI class.</button>
+            </div>
+            <div class="card card-pad" style="margin-top:14px">
+              <strong>Retrieval scope</strong>
+              <div class="detail-list" style="margin-top:12px">
+                <div class="detail-row"><span>Structured data</span><span class="viz-badge">Active</span></div>
+                <div class="detail-row"><span>Document RAG</span><span class="viz-badge">3 demo sources</span></div>
+                <div class="detail-row"><span>Similar cases</span><span class="viz-badge">Feature vectors</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-pad">
+            <div class="section-head"><div><strong>Research assistant</strong><div class="text-small text-muted">Answers are grounded in demo records</div></div><button class="btn btn-ghost" id="clearChat">Clear</button></div>
+            <div id="conversation" class="conversation" aria-live="polite">
+              <div class="message assistant">Ask about the active subject, model results, selected features, or similar cases. Numerical outputs shown here are synthetic.</div>
+            </div>
+            <div class="chat-compose">
+              <label class="sr-only" for="chatInput">Research question</label>
+              <input id="chatInput" class="form-control" placeholder="Ask a grounded research question…">
+              <button id="sendChat" class="btn btn-primary"><i data-lucide="send" aria-hidden="true"></i> Ask</button>
+            </div>
+            <div class="viz-row" style="margin-top:8px"><label class="btn" for="chatUpload"><i data-lucide="paperclip" aria-hidden="true"></i> Attach file</label><input id="chatUpload" class="sr-only" type="file" accept=".nii,.gz,.png,.jpg,.ply,.pcd,.xyz,.csv,.npz"><span id="chatFileName" class="text-small text-muted">No file attached</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-knowledge" class="page" aria-labelledby="pageTitle">
+        <div class="content-grid">
+          <div class="card card-pad">
+            <label class="kb-drop" for="knowledgeUpload"><i data-lucide="cloud-upload" aria-hidden="true"></i><strong>Add a knowledge source</strong><span class="text-small">Excel, CSV, PDF, DOCX, TXT, JSON, or Markdown</span><input id="knowledgeUpload" class="form-control" type="file" accept=".xlsx,.xls,.csv,.pdf,.docx,.txt,.json,.md"></label>
+            <div class="viewer-toolbar" style="margin-top:14px">
+              <label class="compact-field form-label">Chunk size<input id="chunkSize" class="form-control" type="number" value="800" min="200" max="2000"></label>
+              <label class="compact-field form-label">Overlap<input id="chunkOverlap" class="form-control" type="number" value="120" min="0" max="500"></label>
+              <button id="indexSource" class="btn btn-primary">Index source</button>
+            </div>
+            <div id="indexStatus" class="status-line text-small">Choose a file to validate and index.</div>
+          </div>
+          <div class="card card-pad">
+            <div class="plot-title"><strong>Indexed sources</strong><span class="viz-badge" id="sourceCount">3 sources</span></div>
+            <div id="sourceList" class="source-list">
+              <div class="source-row"><i data-lucide="sheet" aria-hidden="true"></i><span><strong>feature_dictionary.xlsx</strong><br><span class="text-small text-muted">42 chunks · Feature metadata</span></span><span class="viz-badge">Ready</span></div>
+              <div class="source-row"><i data-lucide="file-text" aria-hidden="true"></i><span><strong>experiment_notes.pdf</strong><br><span class="text-small text-muted">86 chunks · Model v3</span></span><span class="viz-badge">Ready</span></div>
+              <div class="source-row"><i data-lucide="braces" aria-hidden="true"></i><span><strong>metrics.json</strong><br><span class="text-small text-muted">12 chunks · Evaluation</span></span><span class="viz-badge">Ready</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-architecture" class="page" aria-labelledby="pageTitle">
+        <div class="card card-pad">
+          <div class="plot-title"><strong>Application architecture</strong><span class="text-small text-muted">Target production boundaries</span></div>
+          <div class="architecture-flow" role="img" aria-label="Data sources flow through services and storage to the interactive research interface">
+            <div class="flow-node"><i data-lucide="files" aria-hidden="true"></i><strong>Research inputs</strong><span class="text-small text-muted">MRI, point clouds, features, models, documents</span></div>
+            <div class="flow-node"><i data-lucide="server-cog" aria-hidden="true"></i><strong>FastAPI services</strong><span class="text-small text-muted">Ingestion, inference, retrieval, explanation</span></div>
+            <div class="flow-node"><i data-lucide="database" aria-hidden="true"></i><strong>Data layer</strong><span class="text-small text-muted">PostgreSQL, pgvector, object storage</span></div>
+            <div class="flow-node"><i data-lucide="monitor-dot" aria-hidden="true"></i><strong>Research GUI</strong><span class="text-small text-muted">React, MRI viewer, Three.js, RAG chat</span></div>
+          </div>
+        </div>
+        <div class="retrieval-grid">
+          <div class="retrieval-path"><strong>Structured retrieval</strong><p class="text-small text-muted">Subjects, visits, features, predictions, metrics, explanations.</p></div>
+          <div class="retrieval-path"><strong>Document RAG</strong><p class="text-small text-muted">Experiment notes, data dictionaries, reports, and model documentation.</p></div>
+          <div class="retrieval-path"><strong>Similar-case retrieval</strong><p class="text-small text-muted">Compatible imaging embeddings or standardized feature vectors only.</p></div>
+        </div>
+        <div class="card card-pad">
+          <div class="plot-title"><strong>Implementation phases</strong><span class="viz-badge">Phase 1 active</span></div>
+          <div class="table-responsive"><table class="table table-sm"><thead><tr><th>Phase</th><th>Scope</th><th>Status</th></tr></thead><tbody><tr><td>1 · Prototype</td><td>Navigation, mock charts, subject explorer, MRI, point cloud, features, chatbot, KB</td><td>Implemented</td></tr><tr><td>2 · Data</td><td>Import tables, link imaging, validate schema and identifiers</td><td>Needs your files</td></tr><tr><td>3 · Model</td><td>Load model and preprocessing artifacts; reproduce saved predictions</td><td>Pending</td></tr><tr><td>4 · RAG</td><td>Hybrid retrieval, citations, retrieval inspection</td><td>Pending</td></tr><tr><td>5 · Deploy</td><td>Authentication, audit, tests, Docker, performance</td><td>Pending</td></tr></tbody></table></div>
+        </div>
+      </section>
+
+      <p class="text-small text-muted">For research use only. This output is not a clinical diagnosis. All displayed subjects, measurements, predictions, and metrics are synthetic placeholders.</p>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+      const root = document.getElementById("adniResearchGui");
+      const subjects = [
+        {id:"ADNI-004", dx:"AD", age:76, sex:"F", visit:"Month 12", pred:"AD", conf:91, hippo:2.61, points:8192, score:18},
+        {id:"ADNI-011", dx:"MCI", age:71, sex:"M", visit:"Baseline", pred:"MCI", conf:84, hippo:3.12, points:6144, score:24},
+        {id:"ADNI-018", dx:"CN", age:67, sex:"F", visit:"Month 24", pred:"CN", conf:94, hippo:3.88, points:8192, score:29},
+        {id:"ADNI-023", dx:"MCI", age:74, sex:"F", visit:"Month 6", pred:"MCI", conf:79, hippo:3.06, points:4096, score:23},
+        {id:"ADNI-031", dx:"AD", age:79, sex:"M", visit:"Baseline", pred:"AD", conf:88, hippo:2.49, points:8192, score:17},
+        {id:"ADNI-044", dx:"CN", age:65, sex:"M", visit:"Month 12", pred:"CN", conf:92, hippo:4.01, points:6144, score:30},
+        {id:"ADNI-052", dx:"MCI", age:73, sex:"M", visit:"Month 18", pred:"AD", conf:63, hippo:2.91, points:8192, score:21},
+        {id:"ADNI-067", dx:"CN", age:69, sex:"F", visit:"Baseline", pred:"CN", conf:90, hippo:3.77, points:4096, score:28}
+      ];
+      const titles = {
+        overview:["Experiment overview","Cohort, model performance, and data readiness"],
+        subjects:["Subject explorer","Filter synthetic records and inspect subject-level outputs"],
+        mri:["MRI workspace","Synchronized orthogonal slices with a mock explanation overlay"],
+        cloud:["Point-cloud workspace","Inspect the lightweight MRI-derived representation"],
+        features:["Feature analysis","Explore diagnosis groups and model-attribution summaries"],
+        assistant:["Multimodal RAG assistant","Grounded research queries across structured, document, and similar-case retrieval"],
+        knowledge:["Knowledge-base administration","Validate sources, configure chunking, and inspect indexing state"],
+        architecture:["System design","Implementation boundaries, retrieval paths, and delivery phases"]
+      };
+      let selected = subjects[0];
+      let crosshair = true;
+      let cloudRotation = {x:-0.18, y:0.35};
+      let cloudZoom = 1;
+      let cloudPoints = [];
+      let sourceTotal = 3;
+
+      function css(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
+      function showPage(name) {
+        root.querySelectorAll(".page").forEach(p => p.classList.toggle("is-active", p.id === "page-" + name));
+        root.querySelectorAll(".nav-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.page === name)));
+        document.getElementById("pageTitle").textContent = titles[name][0];
+        document.getElementById("pageSubtitle").textContent = titles[name][1];
+        if (name === "mri") drawAllSlices();
+        if (name === "cloud") drawCloud();
+        if (name === "features") drawScatter();
+      }
+
+      root.querySelectorAll(".nav-btn").forEach(button => button.addEventListener("click", () => showPage(button.dataset.page)));
+
+      const globalSubject = document.getElementById("globalSubject");
+      subjects.forEach(s => {
+        const option = document.createElement("option");
+        option.value = s.id;
+        option.textContent = s.id + " · " + s.dx;
+        globalSubject.appendChild(option);
+      });
+      function setSubject(id) {
+        selected = subjects.find(s => s.id === id) || subjects[0];
+        globalSubject.value = selected.id;
+        document.getElementById("detailId").textContent = selected.id;
+        document.getElementById("detailVisit").textContent = selected.visit + " · MRI + point cloud";
+        document.getElementById("detailDx").textContent = selected.dx + " · mock label";
+        document.getElementById("detailDemographic").textContent = selected.age + " / " + selected.sex;
+        document.getElementById("detailTruth").textContent = selected.dx;
+        document.getElementById("detailPrediction").textContent = selected.pred;
+        document.getElementById("detailHippo").textContent = selected.hippo.toFixed(2) + " cm³";
+        document.getElementById("detailPoints").textContent = selected.points.toLocaleString();
+        document.getElementById("detailConfidence").textContent = selected.conf + "%";
+        document.getElementById("confidenceFill").style.width = selected.conf + "%";
+        document.getElementById("subjectAvatar").textContent = selected.id.slice(-2);
+        document.getElementById("mriSubjectLabel").textContent = selected.id + " · " + selected.visit;
+        document.getElementById("cloudSubjectLabel").textContent = selected.id + " · lightweight representation";
+        renderSubjects();
+      }
+      globalSubject.addEventListener("change", e => setSubject(e.target.value));
+
+      function renderSubjects() {
+        const query = document.getElementById("subjectSearch").value.trim().toLowerCase();
+        const dx = document.getElementById("diagnosisFilter").value;
+        const filtered = subjects.filter(s => (dx === "all" || s.dx === dx) && (s.id.toLowerCase().includes(query) || s.dx.toLowerCase().includes(query)));
+        const body = document.getElementById("subjectRows");
+        body.textContent = "";
+        filtered.forEach(s => {
+          const tr = document.createElement("tr");
+          tr.setAttribute("aria-selected", String(s.id === selected.id));
+          [s.id,s.dx,s.age,s.visit,s.pred,s.conf + "%"].forEach((value,index) => {
+            const td = document.createElement("td");
+            td.textContent = value;
+            if (index === 5) td.className = "text-end";
+            tr.appendChild(td);
+          });
+          tr.addEventListener("click", () => setSubject(s.id));
+          body.appendChild(tr);
+        });
+        document.getElementById("subjectEmpty").classList.toggle("hidden", filtered.length !== 0);
+      }
+      document.getElementById("subjectSearch").addEventListener("input", renderSubjects);
+      document.getElementById("diagnosisFilter").addEventListener("change", renderSubjects);
+      document.getElementById("openSubjectViewer").addEventListener("click", () => showPage("mri"));
+
+      function drawSlice(canvas, orientation, slice, overlay) {
+        const ctx = canvas.getContext("2d");
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0,0,w,h);
+        ctx.fillStyle = css("--muted");
+        ctx.fillRect(0,0,w,h);
+        const factor = orientation === "sagittal" ? 0.77 : orientation === "coronal" ? 0.9 : 1;
+        const drift = (slice - 50) / 220;
+        ctx.save();
+        ctx.translate(w/2,h/2);
+        ctx.scale(factor,1);
+        const rings = [0.92,0.81,0.68,0.54];
+        const tones = ["--muted-foreground","--secondary","--accent","--card"];
+        rings.forEach((r,i) => {
+          ctx.beginPath();
+          ctx.ellipse(drift*w*0.12,0,w*0.38*r,h*0.43*r,0,0,Math.PI*2);
+          ctx.fillStyle = css(tones[i]);
+          ctx.globalAlpha = 0.18 + i*0.13;
+          ctx.fill();
+        });
+        ctx.globalAlpha = 0.52;
+        ctx.fillStyle = css("--background");
+        ctx.beginPath();
+        ctx.ellipse(-w*0.075,h*0.02,w*0.055,h*0.11,0.15,0,Math.PI*2);
+        ctx.ellipse(w*0.075,h*0.02,w*0.055,h*0.11,-0.15,0,Math.PI*2);
+        ctx.fill();
+        ctx.globalAlpha = overlay / 100 * 0.58;
+        ctx.fillStyle = css("--viz-series-3");
+        ctx.beginPath();
+        const offset = orientation === "sagittal" ? -w*0.08 : w*0.15;
+        ctx.ellipse(offset,h*0.12,w*0.09,h*0.06,-0.4,0,Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+        if (crosshair) {
+          ctx.globalAlpha = 0.7;
+          ctx.strokeStyle = css("--viz-series-1");
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(w/2,12); ctx.lineTo(w/2,h-12); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(12,h/2); ctx.lineTo(w-12,h/2); ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+      }
+      function drawAllSlices() {
+        const slice = Number(document.getElementById("sliceSlider").value);
+        const overlay = Number(document.getElementById("overlaySlider").value);
+        document.getElementById("sliceValue").textContent = slice;
+        document.getElementById("overlayValue").textContent = overlay;
+        document.getElementById("axialPos").textContent = "z " + slice;
+        document.getElementById("coronalPos").textContent = "y " + slice;
+        document.getElementById("sagittalPos").textContent = "x " + slice;
+        drawSlice(document.getElementById("axialCanvas"),"axial",slice,overlay);
+        drawSlice(document.getElementById("coronalCanvas"),"coronal",slice,overlay);
+        drawSlice(document.getElementById("sagittalCanvas"),"sagittal",slice,overlay);
+      }
+      document.getElementById("sliceSlider").addEventListener("input", drawAllSlices);
+      document.getElementById("overlaySlider").addEventListener("input", drawAllSlices);
+      document.getElementById("crosshairButton").addEventListener("click", e => { crosshair = !crosshair; e.currentTarget.setAttribute("aria-pressed", String(crosshair)); drawAllSlices(); });
+      document.getElementById("resetMri").addEventListener("click", () => { document.getElementById("sliceSlider").value=54; document.getElementById("overlaySlider").value=42; crosshair=true; document.getElementById("crosshairButton").setAttribute("aria-pressed","true"); drawAllSlices(); });
+
+      function seedCloud() {
+        cloudPoints = [];
+        for (let i=0;i<1350;i++) {
+          const phi = Math.acos(1-2*((i*0.61803398875)%1));
+          const theta = Math.PI*2*((i*0.38196601125)%1);
+          const noise = 0.78 + 0.18*Math.sin(i*1.73);
+          cloudPoints.push({x:Math.sin(phi)*Math.cos(theta)*1.08*noise,y:Math.cos(phi)*0.93*noise,z:Math.sin(phi)*Math.sin(theta)*0.82*noise,region:i%3});
+        }
+      }
+      function drawCloud() {
+        const canvas = document.getElementById("cloudCanvas");
+        const ctx = canvas.getContext("2d");
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = css("--muted"); ctx.fillRect(0,0,w,h);
+        const density = Number(document.getElementById("densitySlider").value)/100;
+        const pointSize = Number(document.getElementById("pointSizeSlider").value);
+        const colorMode = document.getElementById("cloudColor").value;
+        const cosY=Math.cos(cloudRotation.y), sinY=Math.sin(cloudRotation.y), cosX=Math.cos(cloudRotation.x), sinX=Math.sin(cloudRotation.x);
+        const projected=[];
+        cloudPoints.slice(0,Math.floor(cloudPoints.length*density)).forEach(p => {
+          const x1=p.x*cosY-p.z*sinY, z1=p.x*sinY+p.z*cosY;
+          const y1=p.y*cosX-z1*sinX, z2=p.y*sinX+z1*cosX;
+          const scale=205*cloudZoom/(2.6+z2);
+          projected.push({x:w/2+x1*scale,y:h/2+y1*scale,z:z2,region:p.region});
+        });
+        projected.sort((a,b)=>a.z-b.z);
+        const colors=[css("--viz-series-1"),css("--viz-series-2"),css("--viz-series-3")];
+        projected.forEach(p => {
+          if (colorMode === "depth") ctx.fillStyle = p.z>0 ? colors[0] : colors[2];
+          else if (colorMode === "intensity") ctx.fillStyle = p.y<h/2 ? colors[1] : colors[0];
+          else ctx.fillStyle=colors[p.region];
+          ctx.globalAlpha=0.72;
+          ctx.beginPath(); ctx.arc(p.x,p.y,pointSize,0,Math.PI*2); ctx.fill();
+        });
+        if (document.getElementById("axesToggle").checked) {
+          ctx.globalAlpha=0.75; ctx.lineWidth=2; const ox=56,oy=h-46;
+          [[colors[0],58,0,"x"],[colors[1],0,-58,"y"],[colors[2],-34,30,"z"]].forEach(a=>{ctx.strokeStyle=a[0];ctx.fillStyle=a[0];ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+a[1],oy+a[2]);ctx.stroke();ctx.fillText(a[3],ox+a[1]+5,oy+a[2]);});
+        }
+        ctx.globalAlpha=1;
+      }
+      const cloudCanvas=document.getElementById("cloudCanvas");
+      let dragging=false,lastX=0,lastY=0;
+      cloudCanvas.addEventListener("pointerdown",e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;cloudCanvas.setPointerCapture(e.pointerId);});
+      cloudCanvas.addEventListener("pointermove",e=>{if(!dragging)return;cloudRotation.y+=(e.clientX-lastX)*0.008;cloudRotation.x+=(e.clientY-lastY)*0.008;lastX=e.clientX;lastY=e.clientY;drawCloud();});
+      cloudCanvas.addEventListener("pointerup",()=>{dragging=false;});
+      cloudCanvas.addEventListener("wheel",e=>{e.preventDefault();cloudZoom=Math.max(.65,Math.min(1.6,cloudZoom+(e.deltaY<0?.08:-.08)));drawCloud();},{passive:false});
+      document.getElementById("pointSizeSlider").addEventListener("input",e=>{document.getElementById("pointSizeValue").textContent=Number(e.target.value).toFixed(1);drawCloud();});
+      document.getElementById("densitySlider").addEventListener("input",e=>{document.getElementById("densityValue").textContent=e.target.value;drawCloud();});
+      document.getElementById("cloudColor").addEventListener("change",drawCloud);
+      document.getElementById("axesToggle").addEventListener("change",drawCloud);
+      document.getElementById("resetCloud").addEventListener("click",()=>{cloudRotation={x:-.18,y:.35};cloudZoom=1;drawCloud();});
+
+      function drawScatter() {
+        const svg=document.getElementById("featureScatter");
+        while(svg.childNodes.length>2) svg.removeChild(svg.lastChild);
+        const ns="http://www.w3.org/2000/svg", left=54,right=650,top=20,bottom=300;
+        const xMode=document.getElementById("xFeature").value;
+        const configs={hippo:{title:"Hippocampal volume vs. cognitive score",unit:"cm³",min:2.2,max:4.2,get:s=>s.hippo},cortex:{title:"Cortical thickness vs. cognitive score",unit:"mm",min:1.8,max:3,get:s=>1.84+(s.hippo-2.2)*.55},ventricle:{title:"Ventricular volume vs. cognitive score",unit:"cm³",min:22,max:58,get:s=>61-s.hippo*9}};
+        const cfg=configs[xMode];
+        document.getElementById("scatterTitle").textContent=cfg.title;
+        function node(tag,attrs,text){const n=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));if(text)n.textContent=text;svg.appendChild(n);return n;}
+        for(let i=0;i<=4;i++){const y=top+(bottom-top)*i/4;node("line",{x1:left,y1:y,x2:right,y2:y,class:"grid-line"});node("text",{x:left-10,y:y+4,"text-anchor":"end",class:"axis-text"},String(30-i*4));}
+        node("line",{x1:left,y1:bottom,x2:right,y2:bottom,class:"axis"});node("line",{x1:left,y1:top,x2:left,y2:bottom,class:"axis"});
+        for(let i=0;i<=4;i++){const x=left+(right-left)*i/4;const val=cfg.min+(cfg.max-cfg.min)*i/4;node("text",{x:x,y:bottom+20,"text-anchor":"middle",class:"axis-text"},val.toFixed(xMode==="ventricle"?0:1));}
+        node("text",{x:(left+right)/2,y:335,"text-anchor":"middle",class:"axis-text"},cfg.title.split(" vs.")[0]+" ("+cfg.unit+")");
+        node("text",{x:15,y:(top+bottom)/2,transform:"rotate(-90 15 "+((top+bottom)/2)+")","text-anchor":"middle",class:"axis-text"},"Cognitive score");
+        const colors={CN:"var(--viz-series-1)",MCI:"var(--viz-series-2)",AD:"var(--viz-series-3)"};
+        subjects.forEach((s,i)=>{const value=cfg.get(s);const x=left+(value-cfg.min)/(cfg.max-cfg.min)*(right-left);const y=bottom-(s.score-14)/18*(bottom-top);const c=node("circle",{cx:x,cy:y,r:5,fill:colors[s.dx],class:"feature-point",role:"button","aria-label":s.id+", "+s.dx+", "+value.toFixed(2)+" "+cfg.unit});c.addEventListener("click",()=>{document.getElementById("pointDetail").textContent=s.id+" · "+s.dx+" · "+value.toFixed(2)+" "+cfg.unit+" · cognitive score "+s.score;setSubject(s.id);});});
+      }
+      document.getElementById("xFeature").addEventListener("change",drawScatter);
+      document.getElementById("featureGroup").addEventListener("change",drawScatter);
+
+      function answerQuery(question) {
+        const lower=question.toLowerCase();
+        let fact, prediction, explanation, similar, limitation;
+        if(lower.includes("performance") || lower.includes("mci class")) {
+          fact="The synthetic MCI evaluation subset contains 462 records."; prediction="Mock MCI class F1: 0.862; sensitivity: 0.841; specificity: 0.918."; explanation="This result is read from the demonstration evaluation record, not calculated by the LLM."; similar="No subject-level similarity search was needed."; limitation="Replace the demo metrics JSON with your saved experiment results before research use.";
+        } else if(lower.includes("similar")) {
+          fact="Active subject: "+selected.id+" ("+selected.dx+"), hippocampal volume "+selected.hippo.toFixed(2)+" cm³."; prediction="Current mock prediction: "+selected.pred+" at "+selected.conf+"% confidence."; explanation="Similarity uses standardized feature vectors in this prototype."; similar="Closest demo cases: ADNI-023 (0.91) and ADNI-052 (0.87)."; limitation="These are not raw-image semantic matches; a compatible imaging encoder has not been connected.";
+        } else if(lower.includes("distinguish") || lower.includes("feature")) {
+          fact="The mock feature table ranks hippocampal volume, entorhinal thickness, and ventricular volume highest."; prediction="No new prediction was requested."; explanation="The displayed ranking represents placeholder mean absolute SHAP values."; similar="Group scatter plots can be inspected on the Feature analysis page."; limitation="Do not interpret synthetic importance values as clinical or causal evidence.";
+        } else {
+          fact="Active subject: "+selected.id+", ground truth "+selected.dx+", "+selected.visit+"."; prediction="Mock prediction: "+selected.pred+" with "+selected.conf+"% confidence."; explanation="The leading placeholder features are hippocampal volume ("+selected.hippo.toFixed(2)+" cm³) and cortical thickness."; similar="Feature-vector retrieval identifies ADNI-031 as the closest demonstration case."; limitation="The model, preprocessing pipeline, MRI encoder, and real source documents are not connected yet.";
+        }
+        return {fact,prediction,explanation,similar,limitation};
+      }
+      function submitChat(textValue) {
+        const text=textValue.trim(); if(!text)return;
+        const conversation=document.getElementById("conversation");
+        const user=document.createElement("div");user.className="message user";user.textContent=text;conversation.appendChild(user);
+        const a=answerQuery(text);const reply=document.createElement("div");reply.className="message assistant";
+        const intro=document.createElement("strong");intro.textContent="Grounded demo response";reply.appendChild(intro);
+        const sections=document.createElement("div");sections.className="answer-sections";
+        [["Database fact",a.fact],["Model output",a.prediction],["Feature explanation",a.explanation],["Similar cases",a.similar],["Limitation",a.limitation],["Sources","[S1] Synthetic subject table · [S2] Demo metrics · [S3] Feature dictionary"]].forEach(pair=>{const line=document.createElement("div");line.className="answer-line";const label=document.createElement("strong");label.textContent=pair[0]+": ";line.appendChild(label);line.appendChild(document.createTextNode(pair[1]));sections.appendChild(line);});
+        reply.appendChild(sections);conversation.appendChild(reply);document.getElementById("chatInput").value="";
+      }
+      document.getElementById("sendChat").addEventListener("click",()=>submitChat(document.getElementById("chatInput").value));
+      document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")submitChat(e.currentTarget.value);});
+      root.querySelectorAll(".suggestion").forEach(b=>b.addEventListener("click",()=>submitChat(b.textContent)));
+      document.getElementById("clearChat").addEventListener("click",()=>{document.getElementById("conversation").innerHTML='<div class="message assistant">Ask about the active subject, model results, selected features, or similar cases. Numerical outputs shown here are synthetic.</div>';});
+      document.getElementById("chatUpload").addEventListener("change",e=>{document.getElementById("chatFileName").textContent=e.target.files.length?e.target.files[0].name:"No file attached";});
+
+      const knowledgeUpload=document.getElementById("knowledgeUpload");
+      knowledgeUpload.addEventListener("change",e=>{document.getElementById("indexStatus").textContent=e.target.files.length?"Ready to validate "+e.target.files[0].name+".":"Choose a file to validate and index.";});
+      document.getElementById("indexSource").addEventListener("click",()=>{
+        if(!knowledgeUpload.files.length){document.getElementById("indexStatus").textContent="Select a supported source file before indexing.";return;}
+        const file=knowledgeUpload.files[0];const allowed=/\.(xlsx|xls|csv|pdf|docx|txt|json|md)$/i;
+        if(!allowed.test(file.name)){document.getElementById("indexStatus").textContent="Unsupported file type. Choose Excel, CSV, PDF, DOCX, TXT, JSON, or Markdown.";return;}
+        document.getElementById("indexStatus").textContent="Validated and indexed locally for this prototype: "+file.name;
+        const row=document.createElement("div");row.className="source-row";row.innerHTML='<i data-lucide="file-check" aria-hidden="true"></i><span><strong></strong><br><span class="text-small text-muted">Demo chunks · Newly indexed</span></span><span class="viz-badge">Ready</span>';row.querySelector("strong").textContent=file.name;document.getElementById("sourceList").prepend(row);sourceTotal+=1;document.getElementById("sourceCount").textContent=sourceTotal+" sources";if(window.lucide)window.lucide.createIcons({attrs:{width:16,height:16}});
+      });
+
+      seedCloud();
+      setSubject(subjects[0].id);
+      drawAllSlices();
+      drawScatter();
+    })();
+  </script>
+</div>
+</body>
+</html>

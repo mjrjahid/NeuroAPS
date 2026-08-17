@@ -1,0 +1,269 @@
+[
+  {
+    "id": "clinical_atrophy_patterns",
+    "title": "Clinical Background: Hippocampal, Ventricular, and Cortical Changes in Alzheimer's Disease",
+    "type": "clinical_background",
+    "status": "Established neuroimaging literature (not original to project papers)",
+    "domain": "Health / Neuroimaging / Clinical Neuroscience",
+    "country_scope": "General (clinical background, not KSA-specific)",
+    "factors": [
+      "Research"
+    ],
+    "dimensions": [
+      "Granular Priorities"
+    ],
+    "key_metrics": {
+      "hippocampus": "shrinks in AD",
+      "ventricles": "enlarge in AD",
+      "cortex": "thins in AD"
+    },
+    "images": [
+      "cn_vs_ad_schematic.png"
+    ],
+    "reference_link": null,
+    "source_file": "clinical_atrophy_patterns.txt",
+    "full_text": "Title: Clinical Background: Hippocampal, Ventricular, and Cortical Changes in Alzheimer's Disease\nType: Clinical/domain background reference (established neuroimaging literature, not original to NeuroAPS-Net or Sampling Matters)\nDomain: Health / Neuroimaging / Clinical Neuroscience\n\nPurpose: This record provides established clinical background explaining WHY the three anatomical regions used by NeuroAPS-Net's Anatomical Priority Sampling (hippocampus, ventricles, cortex) are clinically meaningful for Alzheimer's disease (AD) detection. This is standard, well-established neuroimaging domain knowledge, not a novel finding of either project paper -- both papers select these regions BECAUSE this clinical pattern is already established in the literature.\n\nThe Three Key Regions and Their AD-Related Change Pattern:\n\n1. Hippocampus -- SHRINKS (atrophies) in Alzheimer's disease.\nThe hippocampus is one of the earliest and most consistently affected structures in AD. Progressive volume loss (atrophy) in the hippocampus is associated with the memory impairment characteristic of early AD. A thinner, smaller hippocampus on MRI is a hallmark radiological sign consistent with AD, relative to a cognitively normal (CN) brain.\n\n2. Ventricles -- ENLARGE in Alzheimer's disease.\nThe lateral ventricles (fluid-filled cavities in the brain) expand as surrounding brain tissue is lost to atrophy -- this is sometimes called \"ex-vacuo\" ventricular enlargement. Larger ventricular volume on MRI, relative to a CN brain, is a common secondary sign of overall brain volume loss in AD.\n\n3. Cortex -- THINS in Alzheimer's disease.\nCortical thickness (the outer layer of the brain, responsible for higher cognitive function) progressively decreases in AD, particularly in temporal and parietal regions. Cortical thinning on MRI is a widely used biomarker for tracking AD progression, relative to a CN brain.\n\nSummary table:\n- Hippocampus: Cognitively Normal (CN) = normal volume | Alzheimer's Disease (AD) = shrinks / thins\n- Ventricles: Cognitively Normal (CN) = normal size | Alzheimer's Disease (AD) = enlarges\n- Cortex: Cognitively Normal (CN) = normal thickness | Alzheimer's Disease (AD) = thins\n\nWhy this matters for NeuroAPS-Net and Sampling Matters:\nBoth papers' point cloud generation methods (Anatomical Priority Sampling in NeuroAPS-Net; reliability-aware sampling in Sampling Matters) explicitly allocate more sampling points to the hippocampus and ventricles specifically because these are the regions where AD-related structural change concentrates. NeuroAPS-Net's hippocampus-weighted sampling (2,867 of 8,192 points, the largest single-region allocation) is a direct, deliberate design decision reflecting this established clinical pattern -- not an arbitrary choice.\n\nHonest scope note: This record describes GENERAL, well-established clinical patterns from the broader neuroimaging literature to provide context for the project's design choices. It is not a novel clinical claim made by either paper, and it should not be read as this project's own research finding.\n",
+    "summary": "Title: Clinical Background: Hippocampal, Ventricular, and Cortical Changes in Alzheimer's Disease\nType: Clinical/domain background reference (established neuroimaging literature, not original to NeuroAPS-Net or Sampling Matters)\nDomain: Health / Neuroimaging / Clinical Neuroscience"
+  },
+  {
+    "id": "eastern_province_context",
+    "title": "Alzheimer's Disease Context in the Eastern Province and Dammam, Saudi Arabia",
+    "type": "regional_context",
+    "status": "Real, cited regional research (not fabricated statistics)",
+    "domain": "Health / Regional Epidemiology",
+    "country_scope": "Eastern Province, Kingdom of Saudi Arabia (Dammam)",
+    "factors": [
+      "Open Data",
+      "Research"
+    ],
+    "dimensions": [
+      "Contextualization & Regional Impact",
+      "Deployment Support"
+    ],
+    "key_metrics": {
+      "national_dementia_prevalence": "3.37% (NGHS 2015-2023)",
+      "dammam_ml_study_patients": "152 (KFSH Dammam)",
+      "dammam_ml_study_accuracy": "95.56% (SVM, clinical features)"
+    },
+    "images": [],
+    "reference_link": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9427223/",
+    "source_file": "eastern_province_context.txt",
+    "full_text": "Title: Alzheimer's Disease Context in the Eastern Province and Dammam, Saudi Arabia\nType: Regional epidemiological and prior-work reference (real, cited, publicly available research -- not fabricated statistics)\nDomain: Health / Regional Context (Eastern Province, Kingdom of Saudi Arabia)\n\nPurpose: This record provides the genuinely available regional context for Alzheimer's disease in Dammam and the Eastern Province, to ground this project's deployment relevance in the specific region where SDAIA-KFUPM Joint Research Center for AI is based (KFUPM, Dhahran, Eastern Province).\n\nHonest scope note stated up front: No single official \"number of people affected by Alzheimer's disease in Dammam\" statistic is publicly published. The figures below are the closest genuinely available, cited regional data points -- presented as such, not as a single definitive prevalence count.\n\n1. National dementia prevalence anchor (Saudi Arabia, multi-region):\nA 2015-2023 epidemiological study within the Saudi National Guard Health System (spanning Riyadh, Dammam/Eastern Province via Imam Abdulrahman Bin Faisal University-affiliated authors, and other regions) found dementia identified in 3.37% of the studied population, with Alzheimer's disease the most prevalent dementia subtype. Most cases occurred in the 70-79 age group (38.5%) and 80-89 age group (31%).\nSource: Hajjar et al., \"Dementia prevalence within the Kingdom of Saudi Arabia National Guard Health System (2015-2023),\" Journal of Alzheimer's Disease, March 2025.\n\n2. Dammam-city-specific elderly cognitive decline data:\nA 2022 study of 343 elderly persons in Dammam city directly assessed cognitive impairment (using the SLUMS scale: normal / mild neurocognitive disorder / dementia) and found age and gender were significantly associated with dementia diagnosis (older participants and females were more likely to have dementia in this sample).\nSource: \"Association between multimorbidity and cognitive decline in the elderly population of the Eastern Province, Saudi Arabia,\" PMC, 2022 data, Dammam city.\n\n3. Prior AI-for-AD-diagnosis work using real Dammam hospital data:\nA machine learning study used a dataset of 152 patients from King Fahad Specialist Hospital (KFSH) in Dammam to preemptively diagnose Alzheimer's disease using clinical/demographical features (not MRI), achieving 95.56% accuracy with an SVM classifier. The authors explicitly noted that \"most recent publications used images to diagnose AD, which is insufficient for local hospitals with limited imaging capabilities\" -- directly matching this project's own deployment-efficiency thesis, from a study conducted in the same city.\nSource: \"Preemptive Diagnosis of Alzheimer's Disease in the Eastern Province of Saudi Arabia Using Computational Intelligence Techniques,\" PMC9427223.\n\n4. Regional awareness context:\nA 2023 survey of 614 participants in the Eastern Province found 99.3% had heard of Alzheimer's disease and 96.1% associated it with memory loss, indicating strong general public awareness, alongside gaps in practical caregiving knowledge.\nSource: \"Perception and attitude of the general population toward Alzheimer's disease in eastern region, Saudi Arabia,\" involving Imam Abdulrahman University, Dammam, co-authors.\n\n5. Broader regional prevalence range (Arab countries, for context):\nPrevalence of dementia in Arab countries has been estimated at 1.1-2.3% in people aged 50 and above, rising to 13.5-18.5% in people aged 80 and above -- broadly consistent with global patterns.\n\nRelevance to this project:\n- Item 3 (KFSH Dammam ML study) is the strongest evidence: AI-assisted AD diagnosis has already been piloted using real patient data from a hospital in the exact city where this project's academic base (KFUPM) is located, and that study explicitly identifies the same imaging-infrastructure limitation this project's efficiency-first design addresses.\n- Item 1 and 2 provide a genuine, cited epidemiological anchor for local demand, without overstating precision the public data does not support.\n- This regional grounding directly strengthens the \"Contextualization & Regional Impact\" and \"Deployment & Infrastructure\" AI Readiness dimensions with real citations rather than assumed local relevance.\n\nPublic-source update validated 17 August 2026: the 2025 Saudi Alzheimer’s review provides population-specific genetic context; the Saudi National Guard study provides multi-region dementia evidence; the Dammam and Eastern Province studies are retained as local public research. The MOH statistics portal is an official health-data gateway, but it does not publish a single definitive Dammam Alzheimer’s prevalence count.",
+    "summary": "Title: Alzheimer's Disease Context in the Eastern Province and Dammam, Saudi Arabia\nType: Regional epidemiological and prior-work reference (real, cited, publicly available research -- not fabricated statistics)\nDomain: Health / Regional Context (Eastern Province, Kingdom of Saudi Arabia)",
+    "public_links": [
+      {
+        "label": "Saudi AD perspectives and genetics (2025)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39994993/",
+        "category": "Public research"
+      },
+      {
+        "label": "Saudi National Guard dementia prevalence study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39962762/",
+        "category": "Public research"
+      },
+      {
+        "label": "Eastern Province cognitive-decline study",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11114873/",
+        "category": "Public research"
+      },
+      {
+        "label": "KFSH Dammam Alzheimer’s prediction study",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9427223/",
+        "category": "Public research"
+      },
+      {
+        "label": "Saudi MOH statistics",
+        "url": "https://www.moh.gov.sa/en/statistics/pages/dashboard.aspx",
+        "category": "Official government"
+      }
+    ]
+  },
+  {
+    "id": "hstp",
+    "title": "Health Sector Transformation Program (HSTP)",
+    "type": "policy_document",
+    "status": "Publicly published Vision 2030 program, launched 2021",
+    "domain": "Healthcare",
+    "country_scope": "Kingdom of Saudi Arabia",
+    "factors": [
+      "Deployment Support",
+      "Standards"
+    ],
+    "dimensions": [
+      "AI & Policies",
+      "Digital Infrastructure",
+      "Human Interface"
+    ],
+    "key_metrics": {
+      "policy_type": "Vertical (healthcare-specific)",
+      "issuing_authority": "Ministry of Health / Vision 2030"
+    },
+    "images": [],
+    "reference_link": "https://www.vision2030.gov.sa/en/explore/programs/health-sector-transformation-program",
+    "source_file": "hstp_policy.txt",
+    "full_text": "Title: Health Sector Transformation Program (HSTP)\nIssuing Authority: Ministry of Health (MOH), Kingdom of Saudi Arabia, under Saudi Vision 2030 (Vision Realization Program)\nStatus: Publicly published official Vision 2030 program. Launched 2021.\nReference link: https://www.vision2030.gov.sa/en/explore/programs/health-sector-transformation-program\nDocument type: National health-sector policy program (Knowledge Base contribution reference, healthcare-domain specific and KSA-specific)\nDomain: Healthcare\n\nPurpose (official public description): \"Improves healthcare access and quality by enhancing primary care, hospital services, emergency response, and digital transformation.\" The program facilitates access to health services and enhances their quality by developing and improving hospitals, healthcare centers and ambulatory services, promoting digital transformation of healthcare, focusing on prevention before treatment, and maintaining human health inside and outside the hospital.\n\nStrategic logic: shift Saudi Arabia's healthcare model from a treatment/curative, hospital-based orientation toward prevention, early intervention, and community-based primary care, in response to a growing and aging population (population projected to exceed 40 million by 2030).\n\nCore principle: value-based care -- linking payment for healthcare services directly to performance on cost, quality, and patient experience, rather than volume of services delivered.\n\nKey stated objectives (three pillars, referenced across multiple public sources):\n1. Ease of access to health services -- improving geographic and timely access to care\n2. Improve quality and efficiency of healthcare services -- enabling patient-centric, financially sustainable care delivery\n3. Promote prevention of health risks -- reducing burden of non-communicable and chronic diseases through value-based, preventive care models\n\nDigital transformation is explicitly named as a core enabling pillar of HSTP, alongside primary care expansion, hospital/ambulatory service improvement, and emergency response.\n\nPublic digital health initiatives associated with Saudi Vision 2030 healthcare transformation (publicly announced, not confidential):\n- Seha Virtual Hospital: recognized by Guinness World Records as the world's largest telemedicine network; conducted approximately 480,000 consultations in 2023 alone, including AI-based diagnostics and robotic surgery support (publicly reported by Saudi Press Agency)\n- Sehhaty app: patient engagement and remote medical services\n- Mawid: appointment scheduling system\n- Tabaud: contact-tracing app (notably used during COVID-19 response)\n\nRelevance to AI Readiness factor mapping:\n- Deployment Capability & Infrastructure: HSTP explicitly prioritizes digital transformation and telemedicine infrastructure at national scale, providing the healthcare-sector infrastructure context that any deployed AI diagnostic tool (such as NeuroAPS-Net) would need to integrate with\n- AI Policy dimension (v2.0 report): HSTP represents a vertical-specific (healthcare) policy complementing the horizontal NSDAI AI policy, illustrating the \"vertical-specific policies that apply to only a single domain\" category described in the ITU AI Readiness v2.0 report's AI & Policies dimension\n\nHonest gap to acknowledge: HSTP's public materials describe healthcare digital transformation and telemedicine infrastructure broadly, but do not yet contain AI-specific diagnostic tool regulatory pathways or clinical validation requirements for neuroimaging-based AI classifiers specifically. No confirmed SFDA (Saudi Food and Drug Authority) clinical validation pathway for a tool like NeuroAPS-Net currently exists in public HSTP materials -- this is a genuine regulatory gap that should be stated as future work rather than assumed to be resolved.\n\nPublic-source update validated 17 August 2026: the official HSTP program page and the Health Sector Transformation Report 2024 are registered as the primary public sources for healthcare access, quality, service transformation, and digital-health evidence.",
+    "summary": "Title: Health Sector Transformation Program (HSTP)\nIssuing Authority: Ministry of Health (MOH), Kingdom of Saudi Arabia, under Saudi Vision 2030 (Vision Realization Program)\nStatus: Publicly published official Vision 2030 program. Launched 2021.\nReference link: https://www.vision2030.gov.sa/en/explore/programs/health-sector-transformation-program\nDocument type: National health-sector policy program (Knowledge Base contribution reference, healthcare-domain specific and KSA-specific)\nDomain: Healt",
+    "public_links": [
+      {
+        "label": "HSTP official program page",
+        "url": "https://www.vision2030.gov.sa/en/explore/programs/health-sector-transformation-program",
+        "category": "Official government"
+      },
+      {
+        "label": "HSTP Report 2024 (PDF)",
+        "url": "https://www.vision2030.gov.sa/media/h0yb5d03/health-sector-transformation-report-2024.pdf",
+        "category": "Official government"
+      }
+    ]
+  },
+  {
+    "id": "neuroaps_net",
+    "title": "NeuroAPS-Net: Neuro-Anatomically Aware Point Cloud Representation for Efficient Alzheimer's Disease Classification",
+    "type": "research_paper",
+    "status": "Published & presented, IJCNN/WCCI 2026 (in proceedings)",
+    "domain": "Health / Neuroimaging",
+    "country_scope": "International (ADNI dataset) / KSA-affiliated authorship",
+    "factors": [
+      "Open Data",
+      "Research",
+      "Deployment Support"
+    ],
+    "dimensions": [
+      "Data/Model Marketplace",
+      "Level of Integration in Workflows",
+      "Collaboration with AI",
+      "Digital Infrastructure"
+    ],
+    "key_metrics": {
+      "accuracy": "84.85%",
+      "inference_latency_ms": 1.48,
+      "peak_gpu_memory_mb": 234.6,
+      "hardware": "Single NVIDIA RTX 3060 GPU (12GB VRAM)",
+      "dataset": "ADNI-2DPC (1,000 subjects: 500 AD / 500 CN)"
+    },
+    "images": [
+      "fig1_pipeline.png",
+      "mri_to_pointcloud.png"
+    ],
+    "reference_link": "https://arxiv.org/abs/2604.22883",
+    "source_file": "neuroaps_net.txt",
+    "full_text": "Title: NeuroAPS-Net: Neuro-Anatomically Aware Point Cloud Representation for Efficient Alzheimer's Disease Classification\nAuthors: Towhidul Islam, Mufti Mahmud\nAffiliation: ICS Department, King Fahd University of Petroleum & Minerals (KFUPM), Dhahran, Saudi Arabia; SDAIA-KFUPM Joint Research Center for AI; IRC for Bio Systems and Machines, KFUPM\nStatus: PUBLISHED and PRESENTED at IJCNN/WCCI 2026 (in proceedings). Publicly citable.\nDomain: Health / Neuroimaging / Alzheimer's Disease Classification\nITU AI Readiness Factor relevance: Deployment capability & infrastructure (primary), Access to Research, Open Data\n\nAbstract:\nAlzheimer's disease (AD) is a progressive neurodegenerative disorder and a major cause of dementia. Structural MRI is widely used to analyse AD-related brain atrophy; however, most deep learning methods rely on computationally expensive 3D convolutional neural networks (CNNs), limiting deployment in resource-constrained settings. This work introduces two main contributions. First, a pipeline that converts T1-weighted MRI into anatomically informed 2D point clouds using Anatomical Priority Sampling (APS), producing ADNI-2DPC, the first neuroanatomically labelled MRI-derived point cloud dataset. Second, NeuroAPS-Net, a lightweight geometric deep learning model that incorporates anatomical priors via region-aware feature encoding and ROI token aggregation. Experiments on ADNI-2DPC demonstrate that NeuroAPS-Net achieves competitive classification accuracy while significantly reducing inference latency and GPU memory compared to state-of-the-art point cloud methods.\n\nKey Deployment Efficiency Numbers (this is the primary evidence for AI Readiness \"Deployment Capability & Infrastructure\" factor):\n- NeuroAPS-Net achieves 84.85% accuracy at 8192 points on ADNI-2DPC\n- Inference latency: 1.48 ms (lowest among all compared models)\n- Peak GPU memory: 234.6 MB (lowest among all compared models)\n- Hardware used: single NVIDIA RTX 3060 GPU (12 GB VRAM), AMD Ryzen 1600 CPU, 16 GB RAM -- consumer-grade, not data-center-scale hardware\n\nComparison against baselines (accuracy / latency ms / GPU MB at 8192 points):\n- PointNet: 83.33% / 2.17 ms / 543.0 MB\n- PointNet++: 83.33% / 91.27 ms / 543.42 MB\n- DGCNN: 81.82% / 135.72 ms / 6237.9 MB\n- PointCNN: 80.30% / 119.56 ms / 800.74 MB\n- PointTransformer: 80.30% / 91.44 ms / 536.64 MB\n- PointCLIP: 68.18% / 14.06 ms / 899.99 MB\n- PointCLIP V2: 75.76% / 14.22 ms / 902.04 MB\n- CurveNet: 74.24% / 3.74 ms / 6172.58 MB\n- SimpleView: 74.24% / 1.54 ms / 1287.37 MB\n- NeuroAPS-Net (proposed): 84.85% / 1.48 ms / 234.6 MB\n\nThis demonstrates that NeuroAPS-Net achieves the highest accuracy while using over an order of magnitude less GPU memory and latency than several competing point cloud architectures (e.g. DGCNN requires 6.2 GB and 135ms for lower accuracy). This directly supports feasibility of deployment in resource-constrained clinical settings such as smaller hospitals or rural clinics without access to data-center-grade compute.\n\nDataset (ADNI-2DPC):\n- Source: Alzheimer's Disease Neuroimaging Initiative (ADNI), a T1-weighted MRI research dataset (Availability of Open Data factor)\n- 1000 subjects: 500 Alzheimer's Disease (AD), 500 Cognitively Normal (CN)\n- Subject-level 80:20 train-test split, preserving class balance\n- Each MRI scan converted into anatomically informed 2D point cloud via Anatomical Priority Sampling (APS)\n- Four labelled anatomical regions per point cloud: hippocampus, ventricles, brain surface, interior\n- At N=8192 points: 2867 hippocampal, 2048 ventricular, 1638 cortical, 1639 interior points per scan\n\nMethodology / ITU-T Y.3172 Pipeline Mapping:\n- SRC (Source): Raw ADNI T1-weighted MRI scans\n- Collector: Ingestion pipeline for MRI scans and metadata (age, diagnosis, scan protocol)\n- Preprocessor: RobustFOV (cropping), FAST (bias correction), BET + mask refinement (brain extraction), RAS+ reorientation, central axial slice selection, intensity normalization to [0,1], Anatomical Priority Sampling (APS) point cloud generation\n- Model: NeuroAPS-Net -- point-wise MLP feature encoding (64->128->256, ReLU), ROI tokenization via region-wise max pooling, ROI-aware feature fusion via lightweight attention mechanism, fully connected classification head\n- Policy: Confidence thresholds for flagging cases for clinician/radiologist review\n- Distributor: Routes predictions to clinician dashboard or knowledge base\n- Sink: Clinician / radiologist / public health screening workflow\n\nAblation study (effect of sampling strategy and ROI-awareness, at 8192 points):\n- Uniform Sampling + ROI-aware: 78.79% accuracy\n- Uniform Sampling (no ROI prior): 80.30% accuracy\n- Random Sampling + ROI-aware: 81.82% accuracy\n- Random Sampling (no ROI prior): 81.82% accuracy\n- NeuroAPS-Net (APS-guided, proposed): 84.85% accuracy -- outperforms all alternatives by ~3 percentage points minimum\n\nEffect of point density (NeuroAPS-Net only):\n- 2048 points: 83.33% accuracy, 0.87 ms latency, 128.3 MB GPU\n- 4096 points: 83.33% accuracy, 1.21 ms latency, 163.7 MB GPU\n- 8192 points: 84.85% accuracy, 1.48 ms latency, 234.6 MB GPU\nLatency scales near-linearly with point count, confirming predictable compute cost for infrastructure planning.\n\nLimitations acknowledged by authors:\n- Experiments conducted on ADNI, a non-Saudi/international cohort -- broader generalisation to other MRI cohorts (including Saudi-specific populations) remains future work\n- Uses 2D axial slices rather than full 3D volumetric point clouds, trading some volumetric context for computational efficiency\n- Results reported from single-run experiments; future work includes multi-run statistical evaluation\n\nConclusion: NeuroAPS-Net provides a practical, deployable alternative for neuroimaging-based Alzheimer's disease classification in resource-constrained clinical settings, achieving competitive accuracy while significantly reducing inference latency and GPU memory usage compared to voxel-based CNNs and other point cloud methods.\n",
+    "summary": "Title: NeuroAPS-Net: Neuro-Anatomically Aware Point Cloud Representation for Efficient Alzheimer's Disease Classification\nAuthors: Towhidul Islam, Mufti Mahmud\nAffiliation: ICS Department, King Fahd University of Petroleum & Minerals (KFUPM), Dhahran, Saudi Arabia; SDAIA-KFUPM Joint Research Center for AI; IRC for Bio Systems and Machines, KFUPM\nStatus: PUBLISHED and PRESENTED at IJCNN/WCCI 2026 (in proceedings). Publicly citable.\nDomain: Health / Neuroimaging / Alzheimer's Disease Classificatio"
+  },
+  {
+    "id": "nsdai",
+    "title": "National Strategy for Data & Artificial Intelligence (NSDAI / ASPIRE)",
+    "type": "policy_document",
+    "status": "Government strategy, approved by royal decree 17 July 2020",
+    "domain": "Cross-sector (Healthcare is a named first-phase priority)",
+    "country_scope": "Kingdom of Saudi Arabia",
+    "factors": [
+      "Standards",
+      "Research"
+    ],
+    "dimensions": [
+      "AI & Policies",
+      "Strategy Alignment",
+      "Contextualization & Regional Impact"
+    ],
+    "key_metrics": {
+      "policy_type": "Horizontal (applies across multiple sectors)",
+      "issuing_authority": "SDAIA"
+    },
+    "images": [],
+    "reference_link": "https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Pages/NationalStrategyForDataAndAI.aspx",
+    "source_file": "nsdai_policy.txt",
+    "full_text": "Title: National Strategy for Data & Artificial Intelligence (NSDAI), also known as \"ASPIRE\"\nIssuing Authority: Saudi Data & Artificial Intelligence Authority (SDAIA)\nCountry: Kingdom of Saudi Arabia\nStatus: Approved by royal decree of the Custodian of the Two Holy Mosques King Salman bin Abdulaziz Al Saud on 17 July 2020; announced publicly at the Global AI Summit in Riyadh on 21 October 2020. Publicly available, openly published national policy.\nReference link: https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Pages/NationalStrategyForDataAndAI.aspx\nDocument type: National AI-related policy paper (Knowledge Base contribution reference)\nDomain: General / Cross-sector, with Healthcare as one of five priority sectors\n\nPurpose: SDAIA was established to drive the national agenda for Data & AI to elevate the Kingdom as a global leader in the elite league of data-driven economies. The National Strategy for Data & AI (NSDAI) sets a national roadmap positioning Saudi Arabia as a global hub for data and AI by 2030, aligned with Saudi Vision 2030.\n\nKey strategic pillars: Ambition, Skills, Policy & Regulation, Investment, Research & Innovation, and Ecosystem.\n\nPriority sectors (first phase, six initiatives): Education, Healthcare, Energy, Mobility, and Government -- selected based on budget/GDP alignment with Saudi Vision 2030 and thought leadership in AI.\n\nHealthcare sector goal (explicitly stated in strategy): to harmonize data and AI within healthcare systems in order to improve access to health services and preventive care, meeting rising demand for medical services.\n\nInstitutional structure under SDAIA:\n- National Center for Artificial Intelligence (NCAI): mission is orchestrating AI research and development, providing AI strategic advisory to government, and promoting AI education/awareness. NCAI aims to raise national AI maturity by CO-CREATING a portfolio of AI use cases along priority sectors (including health) WITH relevant stakeholders (e.g. academic partners such as the SDAIA-KFUPM Joint Research Center for AI), driving AI use case development in collaboration with AI partners, and supporting AI research and publications.\n- National Data Management Office (NDMO): data governance and regulation\n- National Information Center (NIC): government cloud (Deem), Esteshraf platform for foresight/data availability\n\nCompliance requirements relevant to any AI system developed in KSA:\n- Entities developing/deploying AI systems must publish model descriptions, maintain audit logs, and follow SDAIA ethical guidelines\n- Datasets must be classified and registered on the National Data Governance Platform\n- Personal Data Protection Law (PDPL) compliance required for any personal data processing, including Data Protection Impact Assessments (DPIAs) and breach notification rules\n- The strategy distinguishes foundational infrastructure (data platforms, compute, cloud), capability (skills, research centres), governance (policies, classification, sharing), and enabling mechanisms (investment vehicles, sandboxes, standards)\n\nNCAI's future ambition for healthcare data: gathering and using a range of data types to advance healthcare in the Kingdom, recognizing the future of healthcare will depend not only on clinical data but also on behavioral, lifestyle, and genomics data.\n\nRelevance to AI Readiness factor mapping:\n- Stakeholders' buy-in via Standards: NSDAI's compliance requirements (model description publication, audit logs, National Data Governance Platform registration) map directly to this factor\n- Access to Research: NCAI's mandate to co-create AI use cases with academic partners is directly relevant, especially given co-authors of NeuroAPS-Net/Sampling Matters are affiliated with the SDAIA-KFUPM Joint Research Center for AI -- an institutional link already in place between this project and Saudi Arabia's national AI authority\n\nHonest gap to acknowledge: NCAI's healthcare data ambitions (clinical, behavioral, lifestyle, genomics data) currently extend beyond what the NeuroAPS-Net/Sampling Matters projects use (ADNI, a non-Saudi cohort). Full alignment with NSDAI's health-data ambitions would require future retraining/validation on a Saudi-sourced neuroimaging cohort, which is not yet available -- this should be stated as future work, not omitted.\n\nPublic-source update validated 17 August 2026: the SDAIA strategy page and official NSDAI PDF are the primary policy sources. Saudipedia is retained only as public background for the strategy components, targets, initiatives, and priority sectors.",
+    "summary": "Title: National Strategy for Data & Artificial Intelligence (NSDAI), also known as \"ASPIRE\"\nIssuing Authority: Saudi Data & Artificial Intelligence Authority (SDAIA)\nCountry: Kingdom of Saudi Arabia\nStatus: Approved by royal decree of the Custodian of the Two Holy Mosques King Salman bin Abdulaziz Al Saud on 17 July 2020; announced publicly at the Global AI Summit in Riyadh on 21 October 2020. Publicly available, openly published national policy.\nReference link: https://sdaia.gov.sa/en/SDAIA/Sda",
+    "public_links": [
+      {
+        "label": "SDAIA NSDAI official page",
+        "url": "https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Pages/NationalStrategyForDataAndAI.aspx",
+        "category": "Official government"
+      },
+      {
+        "label": "NSDAI strategy PDF",
+        "url": "https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Documents/NSDAI.pdf",
+        "category": "Official government"
+      },
+      {
+        "label": "Saudipedia NSDAI overview",
+        "url": "https://saudipedia.com/en/national-strategy-for-data-and-ai-nsdai",
+        "category": "Public background"
+      },
+      {
+        "label": "Regulations.AI NSDAI index (secondary)",
+        "url": "https://regulations.ai/regulations/saudi-arabia-2020-10-national-strategy-data-ai",
+        "category": "Public background"
+      }
+    ]
+  },
+  {
+    "id": "sampling_matters",
+    "title": "Sampling Matters: An Empirical Study of Point Cloud Sampling Strategies for Brain MRI-Based Alzheimer's Disease Classification",
+    "type": "research_paper",
+    "status": "Published, IJCNN",
+    "domain": "Health / Neuroimaging",
+    "country_scope": "International (ADNI dataset) / KSA-affiliated authorship",
+    "factors": [
+      "Research",
+      "Data collection & model validation via Sandbox"
+    ],
+    "dimensions": [
+      "Impact of Humans in AI Integration",
+      "Collaboration with AI"
+    ],
+    "key_metrics": {
+      "best_strategy": "Reliability-Aware Threshold Sampling",
+      "accuracy": "84.85%",
+      "sensitivity": "96.60%",
+      "dataset": "ADNI (700 subjects: 350 AD / 350 CN)"
+    },
+    "images": [],
+    "reference_link": null,
+    "source_file": "sampling_matters.txt",
+    "full_text": "Title: Sampling Matters: An Empirical Study of Point Cloud Sampling Strategies for Brain MRI-Based Alzheimer's Disease Classification\nAuthors: Towhidul Islam, Jumana Alqudah, Hadeel Saad Alghamdi, David J. Brown, Mufti Mahmud\nAffiliation: Information and Computer Science Department, KFUPM, Dhahran, Saudi Arabia; SDAIA-KFUPM Joint Research Center for AI, KFUPM; Department of Computer Science, Nottingham Trent University, UK; IRC for Bio Systems and Machines, KFUPM\nStatus: Published, IJCNN. Publicly citable.\nDomain: Health / Neuroimaging / Alzheimer's Disease Classification / Point Cloud Sampling Methodology\nITU AI Readiness Factor relevance: Access to Research (methodology justification), Data collection & model validation via Sandbox\n\nAbstract:\nAlzheimer's disease (AD) is a leading cause of dementia, with structural MRI widely used to assess atrophy in the hippocampus, ventricles, and cortex. 3D CNNs achieve strong classification performance but rely on dense volumetric processing that limits deployment in resource-constrained settings. Point cloud representations offer a lightweight alternative, yet the sampling step is often overlooked: most pipelines apply uniform or random sampling without considering voxel reliability. In brain MRI, boundary voxels contain mixed-tissue signals caused by partial volume effects, whereas interior voxels are more geometrically stable. This paper presents a systematic study of five sampling strategies: uniform, random, confidence-aware, reliability-aware (proposed), and boundary-aware sampling. The proposed method applies a hard distance threshold to exclude boundary-adjacent voxels and retain stable interior points.\n\nKey Results (PointNet, N=8192 points, ADNI dataset):\n- Reliability-Aware (proposed): 84.85% accuracy, 96.60% sensitivity, 84.50% specificity, 86.06% F1\n- Confidence-Aware: 83.83% accuracy, 91.50% sensitivity, 82.41% specificity, 83.58% F1\n- Random: 81.82% accuracy, 78.12% sensitivity, 85.29% specificity, 83.64% F1\n- Uniform: 80.30% accuracy, 81.25% sensitivity, 79.41% specificity, 80.00% F1\n- Boundary-Aware: 78.79% accuracy, 75.00% sensitivity, 82.35% specificity, 77.42% F1 (consistently worst)\n\nWith PointNet++ backbone (generalization test), Reliability-Aware achieves 86.36% accuracy, 97.10% specificity at 8192 points -- confirming the sampling strategy's benefit generalizes across architectures, not just one model.\n\nKey finding: Point cloud QUALITY matters more than point COUNT. Reliability-aware sampling at only 2048 points (83.33% accuracy) already matches or exceeds uniform sampling at 8192 points (80.30% accuracy) -- demonstrating point-efficiency, which is directly relevant to reducing compute/latency/GPU cost for deployment.\n\nDataset: ADNI T1-weighted MRI, 700 subjects (350 AD, 350 CN), subject-level 80:20 stratified split.\n\nMethodology summary:\n- Reliability-Aware Threshold Sampling: applies hard distance threshold (tau=2 pixels) via Euclidean Distance Transform to exclude boundary-adjacent voxels, retaining only stable interior points. Uniform sampling is then applied over this filtered eligible region.\n- Confidence-Aware Sampling: soft weighting by squared distance from boundary (less effective than the hard threshold: 84.85% vs 83.83% accuracy, confirming hard exclusion outperforms downweighting)\n- Boundary-Aware Sampling: contrastive baseline restricting candidates exclusively to structural boundary/edge voxels -- consistently the worst performer, confirming boundary voxels (affected by partial volume effects / mixed-tissue signals) are structurally less reliable descriptors than interior voxels.\n\nComputational cost: Latency stays below ~8ms across all configurations and backbones; largest reliability-aware configuration (PointNet++, 8192 points) requires about 4.0 GB GPU memory, remaining feasible on a single consumer-grade GPU (RTX 3060).\n\nAblation study confirms two independent design choices both contribute to the improvement:\n1. Hard threshold vs soft weighting: improves accuracy from 83.83% to 84.85%, sensitivity from 91.50% to 96.60%\n2. Interior vs boundary selection: reversing to boundary-only sampling drops accuracy by 6.06 percentage points and F1 by 8.64 percentage points, confirming the improvement genuinely comes from interior region reliability, not incidental factors.\n\nRelation to NeuroAPS-Net: This paper is explicitly framed as a follow-up empirical study building on the authors' prior NeuroAPS-Net work (Anatomical Priority Sampling / ADNI-2DPC dataset), providing a systematic, controlled comparison of sampling strategies that justifies and validates the anatomically-guided sampling design choices used in the deployment-efficient NeuroAPS-Net architecture.\n\nLimitations acknowledged: single 2D axial slice per scan (some volumetric context lost); results from single-run experiments; future work includes larger cohorts, MCI progression tasks, and neuroimaging-specific point cloud architectures.\n",
+    "summary": "Title: Sampling Matters: An Empirical Study of Point Cloud Sampling Strategies for Brain MRI-Based Alzheimer's Disease Classification\nAuthors: Towhidul Islam, Jumana Alqudah, Hadeel Saad Alghamdi, David J. Brown, Mufti Mahmud\nAffiliation: Information and Computer Science Department, KFUPM, Dhahran, Saudi Arabia; SDAIA-KFUPM Joint Research Center for AI, KFUPM; Department of Computer Science, Nottingham Trent University, UK; IRC for Bio Systems and Machines, KFUPM\nStatus: Published, IJCNN. Public"
+  },
+  {
+    "id": "seha_digital_health",
+    "title": "Seha Virtual Hospital and Saudi Digital Health Programs",
+    "type": "digital_health_program",
+    "status": "Publicly operating government digital health infrastructure",
+    "domain": "Healthcare / Digital Infrastructure",
+    "country_scope": "Kingdom of Saudi Arabia",
+    "factors": [
+      "Deployment & Infrastructure",
+      "Sandbox",
+      "Standards"
+    ],
+    "dimensions": [
+      "Digital Infrastructure",
+      "Human Interface",
+      "Granular Priorities"
+    ],
+    "key_metrics": {
+      "connected_hospitals": ">242",
+      "specialties": "48 main / 68 sub-specialties",
+      "annual_operational_capacity": ">597,000 beneficiaries",
+      "research_support": "Innovation sandbox and clinical research center"
+    },
+    "images": [],
+    "reference_link": "https://www.moh.gov.sa/en/ministry/projects/pages/seha-virtual-hospital.aspx",
+    "source_file": "seha_digital_health.txt",
+    "full_text": "Title: Seha Virtual Hospital and Innovation Empowerment Center\nIssuing Authority: Saudi Ministry of Health (MOH)\nStatus: Officially operating Saudi digital-health infrastructure\nReference: https://www.moh.gov.sa/en/ministry/projects/pages/seha-virtual-hospital.aspx\nValidated: 15 August 2026\n\nThe official MOH page describes Seha Virtual Hospital as a Health Sector Transformation achievement providing remote specialist services. It supports more than 242 hospitals, covers 48 main specialties and 68 sub-specialties, and has annual operational capacity exceeding 597,000 beneficiaries. Relevant services include teleradiology and multidisciplinary specialist pathways. The associated Innovation Empowerment Center includes a sandbox for health innovations and a clinical research center for evaluating effectiveness and safety.\n\nApplication relevance: these capabilities provide a credible Saudi evaluation pathway for a lightweight neuroimaging decision-support workflow. This application does not claim an existing partnership, technical integration, regulatory approval, or clinical deployment with Seha Virtual Hospital.\n\nPublic-source update validated 17 August 2026: the official MOH page reports support for more than 242 hospitals, 48 main specialties, 68 sub-specialties, annual capacity above 597,000 beneficiaries, teleradiology, an innovation sandbox, and a clinical research center. The application does not claim partnership or completed integration.",
+    "summary": "Official Saudi MOH digital-health infrastructure supporting more than 242 hospitals, teleradiology, an innovation sandbox, and a clinical research center. It is used here as an evidence-based evaluation pathway, not as a claimed partnership or completed integration.",
+    "public_links": [
+      {
+        "label": "Seha Virtual Hospital official page",
+        "url": "https://www.moh.gov.sa/en/ministry/projects/pages/seha-virtual-hospital.aspx",
+        "category": "Official government"
+      },
+      {
+        "label": "Saudi MOH statistics",
+        "url": "https://www.moh.gov.sa/en/statistics/pages/dashboard.aspx",
+        "category": "Official government"
+      }
+    ]
+  }
+]
