@@ -1,0 +1,17 @@
+Title: Alzheimer’s Disease Neuroimaging Initiative (ADNI) data access
+Publisher: ADNI / Laboratory of Neuro Imaging (LONI)
+Validated: 29 August 2026
+
+Official portal:
+https://adni.loni.usc.edu/
+
+Data and Samples:
+https://adni.loni.usc.edu/data-samples/
+
+Validated support:
+- ADNI imaging, clinical, genomic, biomarker, and related participant data are shared for research through the LONI Image and Data Archive.
+- Researchers request access and accept the applicable ADNI data-use terms.
+- The NeuroAPS paper reports an ADNI-2DPC cohort of 1,000 subjects: 500 AD and 500 CN.
+
+Application boundary:
+The Readiness workspace describes ADNI as controlled research access, not unrestricted public-domain data. The 10 packaged examples support local visualization; they are not the complete ADNI cohort and do not provide independent clinical validation.

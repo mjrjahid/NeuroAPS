@@ -1,6 +1,6 @@
 Title: National Strategy for Data & Artificial Intelligence (NSDAI)
 Authority: Saudi Data & Artificial Intelligence Authority (SDAIA)
-Validated: 17 August 2026
+Validated: 29 August 2026
 
 Official strategy page:
 https://sdaia.gov.sa/en/SDAIA/SdaiaStrategies/Pages/NationalStrategyForDataAndAI.aspx
@@ -23,3 +23,17 @@ The SDAIA page and PDF are primary. Saudipedia is public background. Regulations
 
 Application relevance:
 The workspace maps research evidence, governance, human oversight, and future local validation to the national strategy. The current ADNI evidence is not a Saudi-population validation study.
+
+PDPL and AI-ethics cross-check:
+- PDPL Implementing Regulations Article 25 identifies circumstances requiring a written impact assessment, including sensitive data, linked datasets, new technologies or fully automated decisions, and processing likely to cause serious harm.
+- Article 26 requires organizational, administrative, and technical safeguards for health data and measures preventing incompatible use.
+- Article 33 requires records of processing activities.
+- A lawful basis must be documented. Consent applies where it is the relevant basis; it is not described as the only possible basis.
+- The SDAIA AI Ethics Self-Assessment supports structured ethical review but is not, by itself, legal, ethical, clinical, or regulatory certification.
+
+Official governance links:
+https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL2/
+https://dgp.sdaia.gov.sa/wps/portal/pdp/services/servicesdetails/AIEthicsAssessment/
+
+Governance boundary:
+Use de-identified, purpose-limited data; retain access and processing records; require clinician confirmation; and prohibit unconfirmed AI flags from advertising, unrelated profiling, insurance eligibility, autonomous diagnosis, or treatment decisions. Complete institutional privacy, legal, security, ethics, and clinical-governance review before any pilot.

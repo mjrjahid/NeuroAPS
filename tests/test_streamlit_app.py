@@ -17,9 +17,13 @@ class StreamlitApplicationTests(unittest.TestCase):
         app.run(timeout=120)
         self.assertEqual(list(app.exception), [])
 
-        app.selectbox(key="registered_subject").select("AD10")
-        app.run(timeout=120)
-        self.assertEqual(list(app.exception), [])
+        registered_subjects = [element for element in app.selectbox if element.key == "registered_subject"]
+        if registered_subjects:
+            registered_subjects[0].select("AD10")
+            app.run(timeout=120)
+            self.assertEqual(list(app.exception), [])
+        else:
+            self.assertTrue(any("public GitHub edition" in item.value for item in app.info))
 
         app.selectbox(key="context_story").select("Why it matters in Saudi Arabia")
         app.selectbox(key="saudi_source_tier").select("Public research")

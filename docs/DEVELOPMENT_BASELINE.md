@@ -3,12 +3,13 @@
 ## Source hierarchy
 
 1. The two published NeuroAPS-Net / Sampling Matters contributions and their supplied characterized records.
-2. 2.mentoring.session.pptx for application and demonstration requirements.
-3. ITU-T Y.3172 for ML-pipeline terminology.
-4. Papers_Only Dimension Mapping.docx for the papers-only 13-dimension assessment.
-5. Supplied clinical, Eastern Province, and Saudi public-domain policy notes.
-6. User-supplied AD1–AD10 raw MRI, mask, and PLY examples.
-7. Earlier Phase 1 interface, preserved in legacy_phase1.
+2. `ITU-Hac-Final.docx` for the final criteria, readiness, pipeline, governance, and link cross-check.
+3. 2.mentoring.session.pptx for application and demonstration requirements.
+4. ITU-T Y.3172 for ML-pipeline terminology.
+5. Papers_Only Dimension Mapping.docx for the papers-only 13-dimension assessment.
+6. Supplied clinical, Eastern Province, and Saudi public-domain policy notes.
+7. User-supplied AD1–AD10 raw MRI, mask, and PLY examples.
+8. Earlier Phase 1 interface, preserved in legacy_phase1.
 
 ## Preserved evidence
 
@@ -31,6 +32,10 @@
 - Removed mask-distribution, PLY-integrity, checksum/alignment, and synthetic-teaching panels.
 - Rebuilt the Saudi workspace around validated official public sources.
 - Added professional topic illustrations and concise navigation.
+- Added the official ADNI Data and Samples link and labelled access as controlled research access.
+- Cross-checked the Saudi MOH statistics dashboard and bounded its Alzheimer-specific use.
+- Added explicit PDPL impact-assessment, health-data, processing-record, purpose-limitation, human-oversight, and no-profiling controls.
+- Qualified “prevention and early intervention” as an application interpretation rather than a direct HSTP quotation.
 
 ## Public-source validation
 

@@ -1,8 +1,32 @@
 NeuroAPS Clinical Research Workspace
-Release: 6.0
-Date: 17 August 2026
+Release: 7.5 GitHub Edition
+Date: 30 August 2026
 
 Release focus:
+- published the complete inspectable application source at github.com/mjrjahid/NeuroAPS;
+- preserved the verified 10-subject local imaging workflow without redistributing controlled imaging files;
+- added a professional missing-data state and authorized local-data setup guidance;
+- aligned Open Source readiness evidence with the public repository;
+- replaced unsuitable static-site/package-publishing workflows with focused application CI;
+- expanded the Research Assistant from 7 to 10 characterized knowledge records;
+- rebuilt offline TF-IDF retrieval to 46 citation-visible chunks;
+- added direct references for Sampling Matters, the Saudi AD/genetics review, the NGHS prevalence study, and the HSTP 2024 report;
+- aligned the Saudi public-domain Policy register to 13 non-duplicative entries;
+- completed criterion-by-criterion cross-check against ITU-Hac-Final.docx;
+- inserted the official ADNI Data and Samples link and labelled access correctly as controlled research access;
+- revalidated the Saudi MOH statistics dashboard and bounded its Alzheimer-specific use;
+- strengthened the PDPL/AI-ethics controls, governance scenario, and source links;
+- qualified prevention and early-intervention wording against official HSTP evidence;
+- aligned readiness, Y.3172 runtime status, source tiers, and application claim boundaries;
+- horizontal workspace tabs are now the primary top navigation;
+- removed the separate floating website navigation and intermediate landing sections;
+- professional active underline, hover background, keyboard focus, and mobile scrolling;
+- compact application identity and evidence-ready status header;
+- synchronized workspace URLs and active menu state;
+- dedicated topic imagery for all eight workspace pages;
+- polished LLM-style NeuroAPS Evidence Copilot with visible retrieval citations;
+- complete clinical-intelligence website experience;
+- responsive workspace-specific hero and research-boundary footer;
 - supplied ITU Hackathon context visuals;
 - Saudi public-domain data and link register;
 - tiered official, public-background, and public-research sources;

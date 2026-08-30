@@ -1,5 +1,5 @@
 Title: Saudi Public-Domain Policy, Health-Data, and Research Source Register
-Validated: 17 August 2026
+Validated: 29 August 2026
 Purpose: Source register for the Policy Alignment and Evidence Library workspaces.
 
 OFFICIAL GOVERNMENT SOURCES
@@ -8,8 +8,8 @@ OFFICIAL GOVERNMENT SOURCES
 Authority: Saudi Vision 2030
 Official page: https://www.vision2030.gov.sa/en/explore/programs/health-sector-transformation-program
 Official report: https://www.vision2030.gov.sa/media/h0yb5d03/health-sector-transformation-report-2024.pdf
-Validated support: healthcare access, quality, service-model transformation, prevention, and digital transformation.
-Application translation: resource-efficient MRI decision support can be evaluated as a digital-health access and quality use case.
+Validated support: healthcare access, quality, service-model transformation, disease prevention, and digital transformation.
+Application translation: resource-efficient MRI decision support can be evaluated as a prevention-aligned digital-health access and quality use case. “Early intervention” is a qualified application interpretation, not a direct HSTP quotation or proof of an adopted screening program.
 
 2. National Strategy for Data & Artificial Intelligence (NSDAI)
 Authority: Saudi Data & Artificial Intelligence Authority (SDAIA)
@@ -27,53 +27,63 @@ Application translation: this is a relevant public evaluation pathway. It does n
 4. Sections of MOH Statistics
 Authority: Saudi Ministry of Health
 Official link: https://www.moh.gov.sa/en/statistics/pages/dashboard.aspx
-Validated support: an official gateway for health indicators, facilities, workforce, service, performance, and quality statistics.
-Scope note: the portal does not establish a single definitive public Alzheimer’s prevalence count for Dammam.
+Validated support: an official gateway for hospital visits and admissions, chronic and communicable disease indicators, performance and quality, workforce, facilities, and preventive/therapeutic services.
+Scope note: the dashboard overview does not establish a single definitive national or Dammam Alzheimer’s prevalence count.
 
-5. National Data Governance Platform and PDPL services
+5. National Data Governance Platform and PDPL Implementing Regulations
 Authority: SDAIA
-Official link: https://dgp.sdaia.gov.sa/wps/portal/pdp/home
-Validated support: personal-data protection, governance registries, impact-assessment services, breach notification, and regulatory sandbox access.
-Application translation: de-identification, controlled processing, access management, privacy review, and auditability.
+Platform: https://dgp.sdaia.gov.sa/wps/portal/pdp/home
+Implementing Regulations: https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/PDPL2/
+Validated support: Article 25 impact-assessment triggers, Article 26 health-data safeguards and compatible-purpose controls, and Article 33 processing records.
+Application translation: documented lawful basis, purpose limitation, data minimization, impact assessment where applicable, access control, and auditability.
 
 6. AI Ethics Self-Assessment
 Authority: SDAIA National Data Governance Platform
 Official link: https://dgp.sdaia.gov.sa/wps/portal/pdp/services/servicesdetails/AIEthicsAssessment/
 Validated support: structured analysis of alignment with Saudi AI ethics principles.
-Application translation: documented human oversight, transparency, reliability, and pre-deployment ethical review.
+Application translation: documented human oversight, transparency, reliability, and pre-deployment ethical review. Completing the self-assessment is not certification.
+
+OFFICIAL RESEARCH DATASET
+
+7. Alzheimer’s Disease Neuroimaging Initiative (ADNI)
+Publisher: ADNI / Laboratory of Neuro Imaging (LONI)
+Official portal: https://adni.loni.usc.edu/
+Data and Samples: https://adni.loni.usc.edu/data-samples/
+Validated support: approved researchers can request controlled access to ADNI imaging and related participant data through the secure IDA repository under ADNI data-use terms.
+Scope note: ADNI is not labelled as unrestricted public-domain data, and this package does not redistribute the full ADNI dataset.
 
 PUBLIC BACKGROUND
 
-7. Saudipedia NSDAI overview
+8. Saudipedia NSDAI overview
 Publisher: Saudipedia / Saudi Ministry of Media
 Public link: https://saudipedia.com/en/national-strategy-for-data-and-ai-nsdai
 Use: background for NSDAI components, targets, initiatives, and priority sectors. The official SDAIA page and PDF remain the primary policy sources.
 
-8. Regulations.AI NSDAI index
+9. Regulations.AI NSDAI index
 Publisher: Regulations.AI
 Public link: https://regulations.ai/regulations/saudi-arabia-2020-10-national-strategy-data-ai
 Use: secondary plain-language background only. The page states that it is not legal advice and should be verified against official text.
 
 PUBLIC RESEARCH
 
-9. Alharbi et al. (2025), Saudi Alzheimer’s perspectives and genetic insights
+10. Alharbi et al. (2025), Saudi Alzheimer’s perspectives and genetic insights
 Public record: https://pubmed.ncbi.nlm.nih.gov/39994993/
 
-10. Hajjar et al. (2025), dementia prevalence in the Saudi National Guard Health System
+11. Hajjar et al. (2025), dementia prevalence in the Saudi National Guard Health System
 Public record: https://pubmed.ncbi.nlm.nih.gov/39962762/
 
-11. AlHarkan et al. (2024), cognitive decline in the Eastern Province
+12. AlHarkan et al. (2024), cognitive decline in the Eastern Province
 Public full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC11114873/
 
-12. Olatunji et al. (2022), Alzheimer’s prediction using KFSH Dammam clinical data
+13. Olatunji et al. (2022), Alzheimer’s prediction using KFSH Dammam clinical data
 Public full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC9427223/
 
-13. Alradi et al. (2024), Eastern Province Alzheimer’s awareness survey
+14. Alradi et al. (2024), Eastern Province Alzheimer’s awareness survey
 Public record: https://pubmed.ncbi.nlm.nih.gov/39790785/
 
 SCOPE
 
-- Government sources, public background, and public research are labelled separately. Secondary indexes are not presented as law or regulation.
+- Government sources, controlled research data, public background, and public research are labelled separately. Secondary indexes are not presented as law or regulation.
 - This register supports policy and contextual alignment.
 - It is not evidence of regulatory approval, clinical validation, hospital integration, or partnership.
 - Public links should be rechecked before a formal submission or deployment review.

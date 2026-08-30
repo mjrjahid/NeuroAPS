@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">NeuroAPS evidence copilot</title>
+  <desc id="desc">An evidence-grounded LLM-style assistant with citations and offline retrieval.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061528"/><stop offset=".58" stop-color="#0A2C46"/><stop offset="1" stop-color="#0C7478"/></linearGradient>
+    <linearGradient id="bot" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#65E3D7"/><stop offset="1" stop-color="#16A7A2"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="620" rx="34" fill="url(#bg)"/>
+  <circle cx="1040" cy="90" r="190" fill="#65E3D7" opacity=".05"/><circle cx="100" cy="560" r="210" fill="#2E6C7C" opacity=".15"/>
+  <g opacity=".15" stroke="#65E3D7"><path d="M0 120h1200M0 505h1200"/><path d="M104 0v620M1098 0v620"/></g>
+  <text x="62" y="72" fill="#9BEDE5" font-family="Inter,Arial" font-size="18" font-weight="800" letter-spacing="3">GROUNDED RESEARCH CHAT</text>
+  <text x="62" y="114" fill="#FFFFFF" font-family="Inter,Arial" font-size="36" font-weight="800">NeuroAPS Evidence Copilot</text>
+  <g transform="translate(70 165)">
+    <rect width="300" height="350" rx="30" fill="#0A2035" stroke="#65E3D7" stroke-opacity=".35"/>
+    <circle cx="150" cy="112" r="77" fill="url(#bot)" filter="url(#glow)"/>
+    <rect x="94" y="75" width="112" height="82" rx="27" fill="#081D33"/>
+    <circle cx="128" cy="112" r="10" fill="#65E3D7"/><circle cx="172" cy="112" r="10" fill="#65E3D7"/>
+    <path d="M127 136c15 13 31 13 46 0" fill="none" stroke="#65E3D7" stroke-width="6" stroke-linecap="round"/>
+    <path d="M150 55V34m-12 0h24" stroke="#65E3D7" stroke-width="5" stroke-linecap="round"/>
+    <text x="63" y="224" fill="#FFFFFF" font-family="Inter,Arial" font-size="24" font-weight="800">Evidence Copilot</text>
+    <circle cx="83" cy="255" r="6" fill="#43D6A4"/><text x="98" y="261" fill="#A9C4CF" font-family="Inter,Arial" font-size="15">Offline retrieval active</text>
+    <rect x="35" y="286" width="230" height="43" rx="15" fill="#12344B"/>
+    <path d="m55 307 8 8 16-19" fill="none" stroke="#65E3D7" stroke-width="4" stroke-linecap="round"/><text x="91" y="313" fill="#D9E9EE" font-family="Inter,Arial" font-size="14" font-weight="700">Citation-visible answers</text>
+  </g>
+  <g transform="translate(420 165)" font-family="Inter,Arial">
+    <rect width="705" height="350" rx="30" fill="#F8FBFC"/>
+    <rect width="705" height="62" rx="30" fill="#EAF5F4"/><rect y="31" width="705" height="31" fill="#EAF5F4"/>
+    <circle cx="35" cy="31" r="8" fill="#43D6A4"/><text x="55" y="37" fill="#10243A" font-size="17" font-weight="800">Research conversation</text>
+    <rect x="536" y="17" width="142" height="29" rx="15" fill="#DDF8F4"/><text x="557" y="36" fill="#0B6E4F" font-size="12" font-weight="800">7 RECORDS ONLINE</text>
+    <rect x="34" y="89" width="390" height="62" rx="18" fill="#E7EEF2"/><text x="55" y="116" fill="#273F4F" font-size="15" font-weight="700">What evidence supports efficient</text><text x="55" y="137" fill="#273F4F" font-size="15" font-weight="700">deployment in constrained settings?</text>
+    <rect x="165" y="176" width="506" height="98" rx="20" fill="#0C7478"/>
+    <circle cx="194" cy="207" r="15" fill="#65E3D7"/><text x="189" y="213" fill="#081D33" font-size="16" font-weight="900">N</text>
+    <text x="220" y="207" fill="#FFFFFF" font-size="14" font-weight="800">NeuroAPS-Net reports 1.48 ms inference and</text>
+    <text x="220" y="231" fill="#FFFFFF" font-size="14" font-weight="800">234.6 MB peak GPU memory on one RTX 3060.</text>
+    <text x="220" y="255" fill="#A8F2EA" font-size="12">Review the retrieved paper chunk before use.</text>
+    <rect x="183" y="292" width="159" height="34" rx="17" fill="#E4F4F2"/><text x="204" y="314" fill="#0C7478" font-size="12" font-weight="800">[1] PAPER · CHUNK 12</text>
+    <rect x="352" y="292" width="177" height="34" rx="17" fill="#EEF2F7"/><text x="372" y="314" fill="#3F5665" font-size="12" font-weight="800">SIMILARITY · 0.81</text>
+    <rect x="34" y="292" width="127" height="34" rx="17" fill="#FFF4D9"/><path d="M54 302v15l7-4 7 4v-15Z" fill="none" stroke="#C3841D" stroke-width="2"/><text x="78" y="314" fill="#8B641F" font-size="12" font-weight="800">CITED</text>
+  </g>
+  <g transform="translate(422 540)" font-family="Inter,Arial" font-size="14" font-weight="700">
+    <rect width="218" height="38" rx="19" fill="#12344B"/><text x="25" y="25" fill="#C6D9E2">Ask about readiness</text>
+    <rect x="230" width="219" height="38" rx="19" fill="#12344B"/><text x="255" y="25" fill="#C6D9E2">Explore MRI evidence</text>
+    <rect x="461" width="244" height="38" rx="19" fill="#12344B"/><text x="485" y="25" fill="#C6D9E2">Check Saudi policy sources</text>
+  </g>
+</svg>

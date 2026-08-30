@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 from pathlib import Path
 
@@ -16,7 +17,9 @@ from src.llm import external_llm_available, synthesize_public_evidence
 from src.project_data import (
     BASELINE_COMPARISON,
     FACTORS,
+    GOVERNANCE_SCENARIO,
     PIPELINE,
+    PDPL_AI_ETHICS_CONTROLS,
     POINT_LABELS,
     POLICY_COVERAGE,
     POLICY_SOURCES,
@@ -40,6 +43,9 @@ PIPELINE_IMAGE_PATH = BASE / "assets" / "y3172_pipeline.svg"
 POLICY_IMAGE_PATH = BASE / "assets" / "policy_alignment.svg"
 KNOWLEDGE_IMAGE_PATH = BASE / "assets" / "knowledge_rag.svg"
 PLATFORM_VISION_IMAGE_PATH = BASE / "assets" / "neurocloud_platform_vision.png"
+MRI_POINTCLOUD_IMAGE_PATH = BASE / "assets" / "mri_pointcloud_workspace.svg"
+ASSISTANT_IMAGE_PATH = BASE / "assets" / "research_assistant_bot.svg"
+DEPLOYMENT_IMAGE_PATH = BASE / "assets" / "deployment_workbench.svg"
 HACKATHON_BOARD_IMAGE_PATH = BASE / "assets" / "hackathon_storyboard.png"
 CONTEXT_IMAGE_PATHS = {
     "The problem: fragmented data and delayed diagnosis": BASE / "assets" / "problem_inefficient_neuroimaging.png",
@@ -48,25 +54,103 @@ CONTEXT_IMAGE_PATHS = {
     "Why it matters in Saudi Arabia": BASE / "assets" / "saudi_neurological_impact.png",
 }
 SAMPLES_MANIFEST_PATH = BASE / "data" / "samples" / "sample_manifest.json"
+WORKSPACE_NAMES = [
+    "Context & Impact",
+    "Readiness",
+    "Y.3172 Workflow",
+    "MRI → Point Cloud",
+    "Policy Alignment",
+    "Evidence Library",
+    "Research Assistant",
+    "Deployment",
+]
+WORKSPACE_VISUALS = {
+    "Context & Impact": {
+        "image": PLATFORM_VISION_IMAGE_PATH,
+        "eyebrow": "Clinical context and platform vision",
+        "title": "Connect the neuroimaging problem to an actionable research workflow.",
+        "description": "Explore the supplied platform story, fragmented-data challenge, manual review burden, and Saudi neurological context.",
+        "alt": "NeuroCloud AI brain-imaging platform concept",
+    },
+    "Readiness": {
+        "image": READINESS_IMAGE_PATH,
+        "eyebrow": "Application readiness",
+        "title": "Move from published evidence to deployment-focused action.",
+        "description": "Review thirteen readiness dimensions, human oversight, and resource-conscious performance evidence without inventing unavailable CNN benchmarks.",
+        "alt": "NeuroAPS readiness and efficiency illustration",
+    },
+    "Y.3172 Workflow": {
+        "image": PIPELINE_IMAGE_PATH,
+        "eyebrow": "Standards-aligned workflow",
+        "title": "Trace each application function through ITU-T Y.3172 roles.",
+        "description": "Inspect how intent, preprocessing, model, policy, distribution, sink, orchestration, sandbox, and underlay functions align.",
+        "alt": "ITU-T Y.3172 aligned application pipeline",
+    },
+    "MRI → Point Cloud": {
+        "image": MRI_POINTCLOUD_IMAGE_PATH,
+        "eyebrow": "Interactive imaging workspace",
+        "title": "Move from brain-only MRI to an anatomical point cloud.",
+        "description": "Inspect registered MRI slices and an 8,192-point representation labelled as hippocampus, ventricles, cortical area, and other brain tissue.",
+        "alt": "Brain MRI transforming into an anatomical point cloud",
+    },
+    "Policy Alignment": {
+        "image": POLICY_IMAGE_PATH,
+        "eyebrow": "Saudi public-domain evidence",
+        "title": "Translate policy and digital-health sources into research actions.",
+        "description": "Review official government sources separately from public background and research evidence, with direct links and bounded claims.",
+        "alt": "Saudi policy alignment and evidence illustration",
+    },
+    "Evidence Library": {
+        "image": KNOWLEDGE_IMAGE_PATH,
+        "eyebrow": "Characterized evidence library",
+        "title": "Search the records that ground the NeuroAPS workspace.",
+        "description": "Explore papers, neuroanatomy context, Eastern Province studies, and Saudi policy evidence with source-visible records.",
+        "alt": "Evidence library and retrieval workflow illustration",
+    },
+    "Research Assistant": {
+        "image": ASSISTANT_IMAGE_PATH,
+        "eyebrow": "Grounded research conversation",
+        "title": "Ask the NeuroAPS Evidence Copilot.",
+        "description": "Use an LLM-style research chat while keeping every answer bounded to retrieved records and exposing its supporting chunks.",
+        "alt": "NeuroAPS evidence copilot interface",
+    },
+    "Deployment": {
+        "image": DEPLOYMENT_IMAGE_PATH,
+        "eyebrow": "Controlled integration workbench",
+        "title": "Prepare the model bundle for a governed next phase.",
+        "description": "Check model, preprocessing, class-map, sample, and result artifacts against the interface prepared for future runtime integration.",
+        "alt": "NeuroAPS deployment integration workbench",
+    },
+}
+
+
+def image_data_uri(path: Path) -> str:
+    """Return one packaged image as an embeddable data URI."""
+
+    media_type = "image/svg+xml" if path.suffix.lower() == ".svg" else "image/png"
+    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:{media_type};base64,{encoded}"
+
 
 st.set_page_config(
     page_title="NeuroAPS | AI-Ready Neuroimaging",
     page_icon="🧠",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 st.markdown(
     """
     <style>
-    :root { --navy:#10243A; --teal:#167C86; --green:#0B7A5C; --red:#C8405B; --gold:#D7952B; --line:#DDE6EC; }
+    :root { --navy:#081D33; --ink:#10243A; --teal:#16A7A2; --teal-dark:#0C7478; --aqua:#65E3D7;
+            --green:#0B7A5C; --red:#C8405B; --gold:#D7952B; --line:#DDE6EC; --paper:#F5F8FA; }
     html, body, [class*="css"] {font-family:Inter,Segoe UI,Arial,sans-serif;}
-    .block-container {padding-top: 1.35rem; padding-bottom: 3rem; max-width: 1480px;}
+    html {scroll-behavior:smooth;}
+    .stApp {background:var(--paper);}
+    .block-container {padding-top:.72rem;padding-bottom:0;max-width:1480px;}
+    header[data-testid="stHeader"] {background:transparent;}
+    [data-testid="stDecoration"] {display:none;}
     [data-testid="stSidebar"] {border-right:1px solid var(--line);background:#F7FAFC;}
-    .hero {padding:1.45rem 1.65rem;border:1px solid #D6E3E8;border-radius:20px;
-           background:linear-gradient(120deg,#FFFFFF 0%,#EAF6F5 54%,#EEF2FB 100%);margin-bottom:1rem;
-           box-shadow:0 10px 28px rgba(16,36,58,.06);}
-    .hero h1 {color:var(--navy);margin:.12rem 0 .35rem;font-size:2.15rem;line-height:1.12;letter-spacing:-.02em;}
     .eyebrow {color:var(--teal);font-weight:800;letter-spacing:.09em;font-size:.74rem;}
     .subtle {color:#536A78;font-size:.95rem;margin:.15rem 0 .65rem;}
     .guardrail {padding:.8rem 1rem;border-left:5px solid #C43B51;background:#FFF2F4;border-radius:8px;}
@@ -76,7 +160,33 @@ st.markdown(
     .smallcaps {font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#657788;font-weight:700;}
     div[data-testid="stMetric"] {background:#FFFFFF;border:1px solid var(--line);padding:.82rem 1rem;border-radius:14px;
                                   box-shadow:0 4px 14px rgba(16,36,58,.035);}
-    div[data-testid="stTabs"] button {font-weight:700;padding-left:.8rem;padding-right:.8rem;}
+    div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+        position:sticky;top:.45rem;z-index:998;gap:.16rem;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;
+        margin:0 0 .8rem;padding:.52rem .62rem;border:1px solid #DCE6EB;border-radius:16px;
+        background:rgba(255,255,255,.96);box-shadow:0 12px 28px rgba(8,29,51,.09);
+        backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    }
+    div[data-testid="stTabs"] button[data-baseweb="tab"] {
+        position:relative;height:auto;min-height:42px;padding:.58rem .78rem;border:0;border-radius:10px;
+        background:transparent;color:#19384B;font-size:.79rem;font-weight:750;white-space:nowrap;
+        transition:background-color .18s ease,color .18s ease,border-color .18s ease,
+                   box-shadow .18s ease,transform .18s ease;
+    }
+    div[data-testid="stTabs"] button[data-baseweb="tab"] p {color:inherit!important;}
+    div[data-testid="stTabs"] button[data-baseweb="tab"]:hover {
+        background:#E7F4F2;color:#087167;box-shadow:none;transform:translateY(-1px);
+    }
+    div[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"] {
+        background:#F2FAF9;color:#087167;box-shadow:inset 0 -3px 0 var(--teal);
+    }
+    div[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"]:hover {
+        background:#E7F4F2;color:#075E55;
+    }
+    div[data-testid="stTabs"] button[data-baseweb="tab"]:focus-visible {
+        outline:3px solid rgba(22,124,134,.25);outline-offset:2px;
+    }
+    div[data-testid="stTabs"] [data-baseweb="tab-highlight"] {display:none;}
+    div[data-testid="stTabs"] [data-baseweb="tab-border"] {display:none;}
     .section-banner {border:1px solid var(--line);border-radius:16px;padding:1rem 1.1rem;background:#FFFFFF;
                      box-shadow:0 5px 18px rgba(16,36,58,.04);margin:.25rem 0 .85rem;}
     .section-banner h3 {color:var(--navy);margin:0 0 .25rem;font-size:1.15rem;}
@@ -105,6 +215,114 @@ st.markdown(
                    box-shadow:0 5px 18px rgba(16,36,58,.04);}
     .context-card h3 {margin:0 0 .45rem;color:var(--navy);font-size:1.2rem;}
     .context-card p {margin:.25rem 0;color:#536A78;font-size:.91rem;line-height:1.5;}
+
+    /* Evidence Copilot workspace. */
+    .assistant-shell {padding:1rem;border:1px solid #DCE7EB;border-radius:22px;background:linear-gradient(145deg,#FFFFFF,#F2F8F8);
+                      box-shadow:0 14px 32px rgba(8,29,51,.07);}
+    .bot-profile {overflow:hidden;border:1px solid rgba(101,227,215,.22);border-radius:22px;background:
+                  radial-gradient(circle at 85% 5%,rgba(101,227,215,.18),transparent 31%),linear-gradient(145deg,#071A2E,#0A3C50);
+                  color:#FFF;padding:1.25rem;box-shadow:0 14px 32px rgba(8,29,51,.14);}
+    .bot-identity {display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+    .bot-avatar {position:relative;display:grid;place-items:center;width:58px;height:58px;border-radius:19px;
+                 background:linear-gradient(145deg,var(--aqua),var(--teal));color:var(--navy);font-size:1.24rem;font-weight:950;
+                 box-shadow:0 10px 24px rgba(22,167,162,.28);}
+    .bot-avatar::after {content:"";position:absolute;right:-2px;bottom:-2px;width:13px;height:13px;border:3px solid #0A2F43;
+                       border-radius:50%;background:#43D6A4;}
+    .bot-identity h3 {margin:0;color:#FFF;font-size:1.03rem;}
+    .bot-identity p {margin:.22rem 0 0;color:#A9C4CF;font-size:.72rem;}
+    .bot-mode {display:flex;align-items:center;gap:.45rem;padding:.62rem .72rem;border:1px solid rgba(101,227,215,.19);
+               border-radius:13px;background:rgba(101,227,215,.08);color:#BFF6F0;font-size:.73rem;font-weight:800;}
+    .bot-mode-dot {width:8px;height:8px;border-radius:50%;background:#43D6A4;box-shadow:0 0 0 5px rgba(67,214,164,.10);}
+    .bot-stats {display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin:.85rem 0;}
+    .bot-stat {padding:.72rem;border-radius:13px;background:rgba(255,255,255,.07);}
+    .bot-stat strong {display:block;color:#FFF;font-size:1.08rem;}
+    .bot-stat span {display:block;margin-top:.16rem;color:#9DB6C2;font-size:.66rem;}
+    .bot-boundary {margin:0;color:#A9C4CF;font-size:.7rem;line-height:1.5;}
+    .assistant-chat-head {display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.7rem;padding:.85rem 1rem;
+                         border:1px solid #DCE7EB;border-radius:16px;background:#FFF;}
+    .assistant-chat-title {display:flex;align-items:center;gap:.65rem;}
+    .assistant-mini-avatar {display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:#DDF8F4;
+                            color:var(--teal-dark);font-size:.86rem;font-weight:950;}
+    .assistant-chat-title strong {display:block;color:var(--ink);font-size:.9rem;}
+    .assistant-chat-title span {display:block;margin-top:.16rem;color:#71848F;font-size:.67rem;}
+    .assistant-secure {padding:.35rem .55rem;border-radius:999px;background:#E7F4F1;color:#09644D;font-size:.64rem;font-weight:850;white-space:nowrap;}
+    .assistant-prompt-label {margin:.2rem 0 .5rem;color:#536A78;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;}
+    div.st-key-assistant_chat [data-testid="stChatMessage"] {margin:.55rem 0;padding:.82rem .9rem;border:1px solid #DCE7EB;
+                                                               border-radius:17px;background:#FFF;box-shadow:0 5px 14px rgba(8,29,51,.035);}
+    div.st-key-assistant_chat [data-testid="stChatInput"] {border:1px solid #BBDDD7;border-radius:18px;background:#FFF;
+                                                             box-shadow:0 8px 22px rgba(8,29,51,.07);}
+    div.st-key-assistant_chat [data-testid="stButton"] button {min-height:58px;text-align:left;border-color:#D5E5E8;background:#F7FAFB;}
+    div.st-key-assistant_chat [data-testid="stButton"] button:hover {border-color:#9FD4CA;background:#E9F7F4;color:#075E55;}
+
+    /* Compact application identity and workspace header. */
+    .application-head {display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:0 0 .65rem;padding:.25rem .25rem .45rem;}
+    .application-brand {display:flex;align-items:center;gap:.72rem;}
+    .application-brand-copy {display:flex;flex-direction:column;line-height:1.08;}
+    .application-brand-copy strong {color:var(--navy);font-size:1.02rem;letter-spacing:.01em;}
+    .application-brand-copy span {margin-top:.2rem;color:#708692;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;}
+    .application-state {display:flex;align-items:center;gap:.45rem;padding:.5rem .7rem;border:1px solid #CDE6E1;border-radius:999px;
+                        background:#EFF9F7;color:#0A6A54;font-size:.69rem;font-weight:800;white-space:nowrap;}
+    .application-state-dot {width:8px;height:8px;border-radius:50%;background:#25B786;box-shadow:0 0 0 5px rgba(37,183,134,.10);}
+
+    /* Website shell inspired by modern clinical-intelligence product sites. */
+    .brand-mark {display:grid;place-items:center;width:42px;height:42px;border-radius:13px;
+                 background:linear-gradient(145deg,var(--aqua),var(--teal));color:var(--navy);font-size:1.12rem;font-weight:900;
+                 box-shadow:0 7px 18px rgba(22,167,162,.32);}
+
+    .hero-web {position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:2rem;
+               min-height:430px;margin:.15rem 0 1rem;padding:2.75rem 3rem;border-radius:24px;background:
+               radial-gradient(circle at 78% 24%,rgba(101,227,215,.23),transparent 26%),
+               radial-gradient(circle at 18% 92%,rgba(25,111,151,.31),transparent 30%),
+               linear-gradient(135deg,#061528 0%,#0B3450 50%,#0C7478 100%);
+               box-shadow:0 24px 55px rgba(8,29,51,.20);isolation:isolate;}
+    .hero-web::before,.hero-web::after {content:"";position:absolute;border-radius:50%;border:1px solid rgba(101,227,215,.15);z-index:-1;}
+    .hero-web::before {width:520px;height:520px;right:-180px;top:-210px;box-shadow:0 0 0 85px rgba(101,227,215,.035);}
+    .hero-web::after {width:360px;height:360px;left:-200px;bottom:-210px;box-shadow:0 0 0 70px rgba(101,227,215,.03);}
+    .hero-kicker {display:inline-flex;align-items:center;gap:.48rem;margin-bottom:1.05rem;padding:.42rem .66rem;border-radius:999px;
+                  border:1px solid rgba(101,227,215,.28);background:rgba(101,227,215,.09);color:#A8F2EA;
+                  font-size:.69rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;}
+    .pulse-dot {width:7px;height:7px;border-radius:50%;background:var(--aqua);box-shadow:0 0 0 5px rgba(101,227,215,.12);}
+    .hero-web h1 {max-width:720px;margin:0;color:#FFF;font-size:clamp(2.25rem,4.3vw,3.85rem);line-height:1.01;letter-spacing:-.05em;font-weight:850;}
+    .hero-web h1 span {color:var(--aqua);}
+    .hero-lead {max-width:660px;margin:1.25rem 0 1.55rem;color:#C6D9E2;font-size:1.04rem;line-height:1.65;}
+    .hero-trust {display:flex;gap:.95rem;flex-wrap:wrap;color:#9DB6C2;font-size:.72rem;}
+    .hero-trust span::before {content:"✓";color:var(--aqua);font-weight:900;margin-right:.35rem;}
+    .hero-visual {position:relative;min-width:0;}
+    .visual-frame {position:relative;overflow:hidden;padding:.62rem;border:1px solid rgba(255,255,255,.19);border-radius:24px;
+                   background:rgba(255,255,255,.09);box-shadow:0 24px 54px rgba(1,13,25,.36);transform:rotate(1.2deg);}
+    .visual-frame img {display:block;width:100%;aspect-ratio:16/9;object-fit:contain;border-radius:18px;background:#071B2E;}
+    .visual-badge {position:absolute;display:flex;align-items:center;gap:.55rem;padding:.68rem .82rem;border-radius:14px;
+                   background:rgba(255,255,255,.94);box-shadow:0 14px 30px rgba(3,19,33,.25);color:var(--ink);font-size:.72rem;font-weight:750;}
+    .visual-badge strong {display:block;font-size:.94rem;line-height:1.05;color:var(--teal-dark);}
+    .badge-one {left:-1.2rem;top:1.5rem;}
+    .badge-two {right:-.9rem;bottom:1.5rem;}
+    .badge-icon {display:grid;place-items:center;width:33px;height:33px;border-radius:10px;background:#DDF8F4;color:var(--teal-dark);font-size:1rem;}
+
+    .site-footer {margin:2rem -1rem 0;padding:2rem 2.2rem;border-radius:24px 24px 0 0;background:#081D33;color:#B8CDD5;}
+    .footer-grid {display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+    .footer-brand {display:flex;align-items:center;gap:.7rem;}
+    .footer-brand strong {color:#FFF;font-size:.92rem;}
+    .footer-brand span {font-size:.68rem;}
+    .footer-note {max-width:640px;text-align:right;font-size:.68rem;line-height:1.5;}
+
+    @media (max-width:1100px) {
+      .hero-web {grid-template-columns:1fr;padding:3.2rem;}
+      .hero-visual {max-width:760px;}
+      .bot-stats {grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width:700px) {
+      .block-container {padding-left:.65rem;padding-right:.65rem;}
+      .application-head {align-items:flex-start;}
+      .application-state {display:none;}
+      div[data-testid="stTabs"] [data-baseweb="tab-list"] {top:.2rem;border-radius:13px;padding:.4rem;}
+      .hero-web {min-height:auto;padding:2.2rem 1.35rem;border-radius:21px;}
+      .hero-web h1 {font-size:2.65rem;}
+      .hero-visual {margin-top:.25rem;}
+      .visual-badge {display:none;}
+      .assistant-chat-head {align-items:flex-start;}
+      .assistant-secure {display:none;}
+      .footer-note {text-align:left;}
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -234,6 +452,48 @@ except (OSError, ValueError, json.JSONDecodeError) as error:
     sample_manifest, paired_subjects = None, {}
     sample_registry_error = str(error)
 
+requested_workspace = st.query_params.get("workspace")
+if requested_workspace not in WORKSPACE_NAMES:
+    requested_workspace = "Context & Impact"
+if st.session_state.get("_workspace_query") != requested_workspace:
+    st.session_state.workspace_tabs = requested_workspace
+    st.session_state._workspace_query = requested_workspace
+def sync_workspace_query() -> None:
+    """Keep the active workspace menu and URL synchronized."""
+
+    selected = st.session_state.workspace_tabs
+    st.query_params["workspace"] = selected
+    st.session_state._workspace_query = selected
+
+
+def render_workspace_hero(workspace_name: str) -> None:
+    """Render the distinct professional header for one workspace."""
+
+    visual = WORKSPACE_VISUALS[workspace_name]
+    visual_uri = image_data_uri(visual["image"])
+    st.markdown(
+        f"""
+        <section class="hero-web" aria-label="{workspace_name} workspace introduction">
+          <div class="hero-copy">
+            <div class="hero-kicker"><span class="pulse-dot"></span>{visual['eyebrow']}</div>
+            <h1>{visual['title']}</h1>
+            <p class="hero-lead">{visual['description']}</p>
+            <div class="hero-trust">
+              <span>Offline evidence retrieval</span>
+              <span>Human review retained</span>
+              <span>Research use only</span>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="visual-frame"><img src="{visual_uri}" alt="{visual['alt']}"></div>
+            <div class="visual-badge badge-one"><span class="badge-icon">⌁</span><span><strong>Focused module</strong>{workspace_name}</span></div>
+            <div class="visual-badge badge-two"><span class="badge-icon">◎</span><span><strong>{len(records)} records</strong>grounded evidence</span></div>
+          </div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 with st.sidebar:
     st.markdown("## 🧠 NeuroAPS Workspace")
@@ -264,60 +524,41 @@ with st.sidebar:
 
 st.markdown(
     """
-    <div class="hero">
-      <div class="eyebrow">AI READINESS · NEUROIMAGING · SAUDI ARABIA</div>
-      <h1>NeuroAPS Clinical Research Workspace</h1>
-      <p class="subtle">From brain MRI to an anatomically labelled point cloud, with deployment evidence, standards mapping, and policy-grounded research support.</p>
-      <span class="status-chip">7 characterized records</span>
-      <span class="status-chip">10 real subject examples</span>
-      <span class="status-chip">Offline evidence assistant</span>
-      <span class="status-chip">Y.3172 mapped</span>
-    </div>
+    <header class="application-head" aria-label="NeuroAPS application identity">
+      <div class="application-brand">
+        <span class="brand-mark">N</span>
+        <span class="application-brand-copy">
+          <strong>NeuroAPS Clinical Research Workspace</strong>
+          <span>AI-ready neuroimaging research demonstrator</span>
+        </span>
+      </div>
+      <span class="application-state"><span class="application-state-dot"></span>Evidence workspace ready</span>
+    </header>
     """,
     unsafe_allow_html=True,
 )
 
-metric_columns = st.columns(5)
-metric_columns[0].metric("Reported accuracy", "84.85%", help="Published experiment evidence supplied in the knowledge records")
-metric_columns[1].metric("Inference latency", "1.48 ms", help="Reported on one NVIDIA RTX 3060")
-metric_columns[2].metric("Peak GPU memory", "234.6 MB", help="Reported deployment evidence")
-metric_columns[3].metric("ADNI-2DPC cohort", "1,000", help="500 AD and 500 CN subjects in the supplied project record")
-metric_columns[4].metric(
-    "Local subject triples",
-    "10",
-    help="AD1–AD10 raw intensity MRI, aligned NIfTI label mask, and matching 8,192-point PLY",
+tabs = st.tabs(
+    WORKSPACE_NAMES,
+    default=requested_workspace,
+    key="workspace_tabs",
+    on_change=sync_workspace_query,
 )
-
-tabs = st.tabs([
-    "Context & Impact",
-    "Readiness",
-    "Y.3172 Workflow",
-    "MRI → Point Cloud",
-    "Policy Alignment",
-    "Evidence Library",
-    "Research Assistant",
-    "Deployment",
-])
 
 
 with tabs[0]:
-    vision_column, message_column = st.columns([1.25, 0.75], gap="large", vertical_alignment="center")
-    with vision_column:
-        if PLATFORM_VISION_IMAGE_PATH.exists():
-            st.image(str(PLATFORM_VISION_IMAGE_PATH), width="stretch")
-        st.caption("NeuroCloud AI is the hackathon platform concept; NeuroAPS is the research workflow demonstrated in this build.")
-    with message_column:
-        st.markdown(
-            """
-            <div class="context-card">
-              <div class="smallcaps">Application story</div>
-              <h3>From fragmented imaging to a research-ready workflow</h3>
-              <p>The workspace connects brain-only MRI viewing, an anatomical point cloud, readiness evidence, Saudi public sources, and human review in one interface.</p>
-              <p>The current release is a research demonstrator. It does not claim clinical deployment, regulatory approval, or a hospital partnership.</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+    render_workspace_hero("Context & Impact")
+    st.markdown(
+        """
+        <div class="context-card">
+          <div class="smallcaps">Application story</div>
+          <h3>From fragmented imaging to a research-ready workflow</h3>
+          <p>The workspace connects brain-only MRI viewing, an anatomical point cloud, readiness evidence, Saudi public sources, and human review in one interface.</p>
+          <p>NeuroCloud AI is the supplied hackathon platform concept; NeuroAPS is the research workflow demonstrated in this build. It does not claim clinical deployment, regulatory approval, or a hospital partnership.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.markdown("#### Explore the problem context")
     selected_context = st.selectbox(
@@ -336,6 +577,7 @@ with tabs[0]:
 
 
 with tabs[1]:
+    render_workspace_hero("Readiness")
     st.subheader("Application readiness")
     st.caption("Coverage combines the two published studies with functions implemented in this demonstrator.")
     chart_left, chart_column, chart_right = st.columns([0.18, 0.64, 0.18])
@@ -346,41 +588,38 @@ with tabs[1]:
         with st.expander(f"{factor['name']} — {SCORE_LABEL[factor['score']]}"):
             st.markdown(f"**Coverage:** {factor['coverage']}")
             st.markdown(f"**Evidence:** {factor['evidence']}")
+            if factor.get("source_url"):
+                st.link_button(factor["source_label"], factor["source_url"], width="stretch")
 
     st.divider()
     st.subheader("Why the proposed representation fits constrained clinical settings")
-    image_column, comparison_column = st.columns([0.9, 1.35], gap="large", vertical_alignment="center")
-    with image_column:
-        if READINESS_IMAGE_PATH.exists():
-            st.image(str(READINESS_IMAGE_PATH), width="stretch")
-    with comparison_column:
-        cnn_column, ours_column = st.columns(2, gap="medium")
-        cnn_column.markdown(
-            """
-            <div class="comparison-card cnn">
-              <h4>Dense 3D CNN constraint</h4>
-              <ul>
-                <li>Processes the full voxel grid rather than a compact anatomical representation.</li>
-                <li>Higher memory and compute demand can limit smaller-clinic deployment.</li>
-                <li>The supplied records describe this limitation qualitatively; no harmonized 3D-CNN benchmark is claimed here.</li>
-              </ul>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        ours_column.markdown(
-            """
-            <div class="comparison-card ours">
-              <h4>NeuroAPS-Net finding</h4>
-              <ul>
-                <li><b>84.85%</b> reported accuracy using 8,192 anatomically selected points.</li>
-                <li><b>1.48 ms</b> inference and <b>234.6 MB</b> peak GPU memory.</li>
-                <li>Measured on a single consumer NVIDIA RTX 3060, supporting resource-conscious deployment planning.</li>
-              </ul>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+    cnn_column, ours_column = st.columns(2, gap="medium")
+    cnn_column.markdown(
+        """
+        <div class="comparison-card cnn">
+          <h4>Dense 3D CNN constraint</h4>
+          <ul>
+            <li>Processes the full voxel grid rather than a compact anatomical representation.</li>
+            <li>Higher memory and compute demand can limit smaller-clinic deployment.</li>
+            <li>The supplied records describe this limitation qualitatively; no harmonized 3D-CNN benchmark is claimed here.</li>
+          </ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    ours_column.markdown(
+        """
+        <div class="comparison-card ours">
+          <h4>NeuroAPS-Net finding</h4>
+          <ul>
+            <li><b>84.85%</b> reported accuracy using 8,192 anatomically selected points.</li>
+            <li><b>1.48 ms</b> inference and <b>234.6 MB</b> peak GPU memory.</li>
+            <li>Measured on a single consumer NVIDIA RTX 3060, supporting resource-conscious deployment planning.</li>
+          </ul>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.markdown("#### Published comparison at 8,192 points")
     accuracy_column, latency_column, memory_column = st.columns(3, gap="medium")
@@ -417,13 +656,9 @@ with tabs[1]:
 
 
 with tabs[2]:
-    intro_column, image_column = st.columns([1.25, 0.75], gap="large", vertical_alignment="center")
-    with intro_column:
-        st.subheader("ITU-T Y.3172-aligned workflow")
-        st.caption("Every node is mapped to a concrete function, current evidence, and application state.")
-    with image_column:
-        if PIPELINE_IMAGE_PATH.exists():
-            st.image(str(PIPELINE_IMAGE_PATH), width="stretch")
+    render_workspace_hero("Y.3172 Workflow")
+    st.subheader("ITU-T Y.3172-aligned workflow")
+    st.caption("Every node is mapped to a concrete function, current evidence, and application state.")
     status_options = sorted({row[2] for row in PIPELINE})
     selected_status = st.multiselect("Status", status_options, default=status_options)
     pipeline_frame = pd.DataFrame(PIPELINE, columns=["Y.3172 node", "Application function", "Status", "Evidence in this build"])
@@ -443,11 +678,31 @@ with tabs[2]:
 
 
 with tabs[3]:
+    render_workspace_hero("MRI → Point Cloud")
     st.subheader("Brain MRI → anatomically labelled point cloud")
     st.caption("Select a subject, inspect the brain-only MRI, and explore the corresponding lightweight point-cloud representation.")
 
     if sample_registry_error:
-        st.error(f"The imaging workspace could not be loaded: {sample_registry_error}")
+        st.info(
+            "The public GitHub edition does not distribute the controlled MRI, mask, or point-cloud files. "
+            "The complete imaging workspace activates automatically when the authorized files are placed in "
+            "their registered local folders."
+        )
+        preview_path = BASE / "docs" / "reference" / "mri_viewer.png"
+        if preview_path.is_file():
+            st.image(preview_path, caption="Reference view from the verified local research release", width="stretch")
+        st.markdown(
+            """
+            **Authorized local-data setup**
+
+            1. Obtain the data through the applicable ADNI/data-use process.
+            2. Place raw MRI files in `data/samples/raw_mri/`, masks in `data/samples/nifti/`, and PLY files in `data/samples/point_clouds/`.
+            3. Preserve the filenames and metadata registered in `data/samples/sample_manifest.json`.
+            4. Restart the application; file size and checksum validation will run before viewing.
+
+            [Open the official ADNI Data and Samples page](https://adni.loni.usc.edu/data-samples/)
+            """
+        )
     else:
         subject_ids = sorted(paired_subjects, key=lambda value: int(value.removeprefix("AD")))
         selector_column, color_column, size_column, opacity_column = st.columns([1.1, 1.15, 0.75, 0.75])
@@ -563,13 +818,9 @@ with tabs[3]:
 
 
 with tabs[4]:
-    intro_column, image_column = st.columns([1.25, 0.75], gap="large", vertical_alignment="center")
-    with intro_column:
-        st.subheader("Saudi policy and digital-health alignment")
-        st.caption("Claims are limited to supplied public-domain notes and sources revalidated on 17 August 2026.")
-    with image_column:
-        if POLICY_IMAGE_PATH.exists():
-            st.image(str(POLICY_IMAGE_PATH), width="stretch")
+    render_workspace_hero("Policy Alignment")
+    st.subheader("Saudi policy and digital-health alignment")
+    st.caption("Claims are bounded to the linked sources. ADNI, HSTP, MOH statistics, Seha Virtual Hospital, PDPL, and AI-ethics statements were cross-checked on 29 August 2026.")
 
     st.plotly_chart(policy_heatmap(), width="stretch", config={"displayModeBar": False})
 
@@ -577,18 +828,46 @@ with tabs[4]:
     for row_start in (0, 2):
         source_columns = st.columns(2, gap="medium")
         for column, source in zip(source_columns, POLICY_SOURCES[row_start:row_start + 2]):
+            source_links = " · ".join(
+                f'<a href="{link["url"]}" target="_blank">{link["label"]} ↗</a>'
+                for link in source["links"]
+            )
             column.markdown(
                 f"""
                 <div class="policy-card">
-                  <div class="verified">Official source verified</div>
+                  <div class="verified">Official source checked · {source['checked']}</div>
                   <h4>{source['source']}</h4>
                   <p><b>{source['authority']}</b> · {source['supports']}</p>
                   <p><b>Application translation:</b> {source['application']}</p>
-                  <p><a href="{source['url']}" target="_blank">Open official source ↗</a></p>
+                  <p><b>Boundary:</b> {source['boundary']}</p>
+                  <p>{source_links}</p>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
+
+    st.info(
+        "**Prevention claim:** HSTP explicitly prioritizes disease prevention. NeuroAPS may be described as "
+        "a prevention-aligned early-screening research concept, but the phrase ‘from treatment-based care "
+        "towards prevention and early intervention’ is not presented as a direct HSTP quotation or as proof "
+        "of an adopted Alzheimer screening program."
+    )
+
+    st.markdown("#### PDPL and AI-ethics control cross-check")
+    pdpl_frame = pd.DataFrame(
+        PDPL_AI_ETHICS_CONTROLS,
+        columns=["Control", "What this application requires", "Current state"],
+    )
+    st.dataframe(pdpl_frame, hide_index=True, width="stretch", height=310)
+    st.caption(
+        "The controls translate the PDPL implementing regulations and SDAIA AI Ethics Self-Assessment into "
+        "design requirements. They are not a certification or legal opinion."
+    )
+
+    with st.expander("Governance stress-test: disclosure, profiling, and escalation"):
+        st.caption("Synthetic evaluation scenario — not a report of an actual incident.")
+        for number, title, description in GOVERNANCE_SCENARIO:
+            st.markdown(f"**{number}. {title}** — {description}")
 
     st.markdown("#### Saudi public-domain data and links")
     source_tiers = ["All sources"] + sorted({source["tier"] for source in PUBLIC_DOMAIN_SOURCES})
@@ -613,29 +892,25 @@ with tabs[4]:
         },
     )
     st.caption(
-        "Government pages and reports are marked as official. Saudipedia and peer-reviewed records are "
-        "shown separately as public background or public research."
+        "Government pages and reports are marked as official. ADNI is identified separately as an official "
+        "research dataset with controlled access. Background and peer-reviewed research are not presented as law."
     )
 
     st.markdown("#### Application actions")
     action_frame = pd.DataFrame([
-        ("HSTP", "Access and digital transformation", "Resource-efficient MRI decision support for specialist workflows", "Mapped"),
+        ("HSTP", "Access, disease prevention, quality, and digital transformation", "Prevention-aligned research screening and specialist decision support; not an adopted national AD screening service", "Mapped with boundary"),
         ("NSDAI", "Data and AI for healthcare access and preventive care", "Traceable evidence, governed model context, and research collaboration", "Mapped"),
         ("Seha Virtual Hospital", "Remote specialist care, teleradiology, sandbox, clinical research", "Candidate pathway for controlled evaluation", "Evidence-based pathway"),
-        ("PDPL / AI Ethics", "Privacy, governance, compliance, and human oversight", "De-identification, local processing, auditability, and clinician review", "Designed"),
+        ("PDPL / AI Ethics", "Sensitive health-data safeguards, DPIA triggers, purpose limitation, ethical assessment", "Lawful basis, minimum data, access control, auditability, human confirmation, and no unrelated profiling", "Designed; formal review pending"),
     ], columns=["Source", "Public-policy support", "Application action", "Coverage"])
     st.dataframe(action_frame, hide_index=True, width="stretch")
-    st.caption("Alignment does not imply regulatory approval, hospital integration, or partnership.")
+    st.caption("Alignment does not imply regulatory approval, legal compliance certification, hospital integration, or partnership.")
 
 
 with tabs[5]:
-    intro_column, image_column = st.columns([1.35, 0.65], gap="large", vertical_alignment="center")
-    with intro_column:
-        st.subheader("Evidence library")
-        st.caption("Search the papers, neuroanatomy background, Eastern Province studies, and Saudi policy sources.")
-    with image_column:
-        if KNOWLEDGE_IMAGE_PATH.exists():
-            st.image(str(KNOWLEDGE_IMAGE_PATH), width="stretch")
+    render_workspace_hero("Evidence Library")
+    st.subheader("Evidence library")
+    st.caption("Search the papers, neuroanatomy background, Eastern Province studies, and Saudi policy sources.")
     manifest = build_manifest(records)
     manifest_columns = st.columns(4)
     manifest_columns[0].metric("Records", manifest["record_count"])
@@ -700,74 +975,164 @@ with tabs[5]:
 
 
 with tabs[6]:
-    st.subheader("Research evidence assistant")
+    render_workspace_hero("Research Assistant")
     mode = "External synthesis over public excerpts" if use_external_llm else "Offline retrieval evidence"
-    st.caption(f"Active mode: {mode}. Answers are bounded to the seven records and expose the retrieved chunks.")
+    st.subheader("Research Assistant")
+    st.caption(
+        "A focused LLM-style interface over structured evidence records—not raw text. "
+        "Every answer remains bounded to the packaged knowledge base and exposes its retrieved evidence."
+    )
+
+    with st.expander("Knowledge base scope and reference links"):
+        st.write(
+            f"The assistant searches {len(records)} characterized records across {len(kb.chunks)} offline "
+            f"TF-IDF chunks. A separate {len(PUBLIC_DOMAIN_SOURCES)}-entry Saudi source register supports "
+            "the Policy Alignment workspace."
+        )
+        assistant_reference_frame = pd.DataFrame([
+            {
+                "Record": record["title"],
+                "Type": record["type"].replace("_", " ").title(),
+                "Status": record["status"],
+                "Reference": record.get("reference_link"),
+            }
+            for record in records
+        ])
+        st.dataframe(
+            assistant_reference_frame,
+            hide_index=True,
+            width="stretch",
+            column_config={
+                "Reference": st.column_config.LinkColumn("Reference", display_text="Open source ↗"),
+            },
+        )
 
     if "chat_messages" not in st.session_state:
         st.session_state.chat_messages = []
     if "pending_question" not in st.session_state:
         st.session_state.pending_question = None
 
-    suggestions = [
-        "What evidence supports deployment efficiency?",
-        "What changes in the hippocampus, ventricles, and cortex in AD?",
-        "What is the strongest Dammam-specific precedent?",
-        "How does the application align with Saudi health and AI policy?",
-    ]
-    suggestion_columns = st.columns(4)
-    for index, (column, suggestion) in enumerate(zip(suggestion_columns, suggestions)):
-        if column.button(suggestion, width="stretch", key=f"suggestion_{index}"):
-            st.session_state.pending_question = suggestion
+    assistant_control_column, assistant_chat_column = st.columns([0.30, 0.70], gap="large")
+    with assistant_control_column:
+        st.markdown(
+            f"""
+            <div class="bot-profile">
+              <div class="bot-identity">
+                <span class="bot-avatar">N</span>
+                <span><h3>Evidence Copilot</h3><p>NeuroAPS research assistant</p></span>
+              </div>
+              <div class="bot-mode"><span class="bot-mode-dot"></span>{mode}</div>
+              <div class="bot-stats">
+                <div class="bot-stat"><strong>{len(records)}</strong><span>characterized records</span></div>
+                <div class="bot-stat"><strong>{len(kb.chunks)}</strong><span>retrieval chunks</span></div>
+                <div class="bot-stat"><strong>{len(PUBLIC_DOMAIN_SOURCES)}</strong><span>Saudi source entries</span></div>
+                <div class="bot-stat"><strong>TF-IDF</strong><span>offline retrieval</span></div>
+              </div>
+              <p class="bot-boundary">Each record carries type, status, domain, country scope, mapped readiness fields, metrics, and public links where available. The copilot exposes supporting titles, chunk IDs, similarity scores, and citations. It does not diagnose or replace clinician review.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown("#### Active evidence")
+        selected_chat_types = st.multiselect(
+            "Limit retrieval by source type",
+            kb.record_types,
+            default=[],
+            key="chat_types",
+            placeholder="All record types",
+        )
+        st.caption("Leave empty to search every characterized record.")
+        if st.button("Clear conversation", width="stretch", key="clear_assistant_chat"):
+            st.session_state.chat_messages = []
+            st.session_state.pending_question = None
+            st.rerun()
+        with st.expander("How the copilot answers"):
+            st.markdown(
+                "1. Retrieves the most relevant evidence chunks.\n"
+                "2. Builds an answer from those chunks.\n"
+                "3. Shows titles, chunk IDs, similarity scores, and public links."
+            )
 
-    control_left, control_right = st.columns([1, 4])
-    if control_left.button("Clear conversation", width="stretch"):
-        st.session_state.chat_messages = []
-        st.session_state.pending_question = None
-        st.rerun()
-    selected_chat_types = control_right.multiselect(
-        "Limit retrieval to record types (optional)",
-        kb.record_types,
-        default=[],
-        key="chat_types",
-    )
+    with assistant_chat_column:
+        with st.container(key="assistant_chat"):
+            st.markdown(
+                f"""
+                <div class="assistant-chat-head">
+                  <div class="assistant-chat-title">
+                    <span class="assistant-mini-avatar">N</span>
+                    <span><strong>NeuroAPS Evidence Copilot</strong><span>{mode} · ready for a research question</span></span>
+                  </div>
+                  <span class="assistant-secure">● GROUNDED MODE</span>
+                </div>
+                <div class="assistant-prompt-label">Suggested questions</div>
+                """,
+                unsafe_allow_html=True,
+            )
 
-    for message in st.session_state.chat_messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-            if message.get("hits"):
-                with st.expander("Retrieved evidence"):
-                    for number, hit in enumerate(message["hits"], start=1):
-                        link = f" · [public link]({hit['reference_link']})" if hit.get("reference_link") else ""
-                        st.markdown(
-                            f"**[{number}] {hit['title']}** · chunk {hit['chunk_id']} · similarity {hit['score']:.3f}{link}"
-                        )
-                        st.caption(hit["text"][:500] + ("..." if len(hit["text"]) > 500 else ""))
+            suggestions = [
+                "What evidence supports deployment efficiency?",
+                "What changes in the hippocampus, ventricles, and cortex in AD?",
+                "What is the strongest Dammam-specific precedent?",
+                "How does the application align with Saudi health and AI policy?",
+            ]
+            for row_start in (0, 2):
+                suggestion_columns = st.columns(2, gap="small")
+                for index, (column, suggestion) in enumerate(
+                    zip(suggestion_columns, suggestions[row_start:row_start + 2]),
+                    start=row_start,
+                ):
+                    if column.button(suggestion, width="stretch", key=f"suggestion_{index}"):
+                        st.session_state.pending_question = suggestion
 
-    typed_question = st.chat_input("Ask about the papers, anatomy, Dammam context, policy, or Y.3172 readiness")
-    question = typed_question or st.session_state.pending_question
-    if question:
-        st.session_state.pending_question = None
-        hits = kb.retrieve(question, top_k=4, record_types=selected_chat_types)
-        if use_external_llm:
-            try:
-                answer = synthesize_public_evidence(question, hits)
-            except Exception as error:
-                answer = build_extractive_answer(hits) + f"\n\n_External synthesis failed; offline evidence shown ({error})._"
-        else:
-            answer = build_extractive_answer(hits)
-        st.session_state.chat_messages.extend([
-            {"role": "user", "content": question},
-            {"role": "assistant", "content": answer, "hits": [hit.to_dict() for hit in hits]},
-        ])
-        st.rerun()
+            if not st.session_state.chat_messages:
+                with st.chat_message("assistant"):
+                    st.markdown(
+                        "Hello — I’m the **NeuroAPS Evidence Copilot**. Ask me about readiness, MRI anatomy, "
+                        "Eastern Province evidence, Saudi policy alignment, or the Y.3172 workflow. "
+                        "I’ll show the retrieved sources with every answer."
+                    )
+
+            for message in st.session_state.chat_messages:
+                with st.chat_message(message["role"]):
+                    st.markdown(message["content"])
+                    if message.get("hits"):
+                        with st.expander("Retrieved evidence and citations"):
+                            for number, hit in enumerate(message["hits"], start=1):
+                                link = f" · [public link]({hit['reference_link']})" if hit.get("reference_link") else ""
+                                st.markdown(
+                                    f"**[{number}] {hit['title']}** · chunk {hit['chunk_id']} · "
+                                    f"similarity {hit['score']:.3f}{link}"
+                                )
+                                st.caption(hit["text"][:500] + ("..." if len(hit["text"]) > 500 else ""))
+
+            typed_question = st.chat_input(
+                "Ask NeuroAPS about evidence, anatomy, readiness, policy, or deployment...",
+                key="neuroaps_research_question",
+            )
+            question = typed_question or st.session_state.pending_question
+            if question:
+                st.session_state.pending_question = None
+                hits = kb.retrieve(question, top_k=4, record_types=selected_chat_types)
+                if use_external_llm:
+                    try:
+                        answer = synthesize_public_evidence(question, hits)
+                    except Exception as error:
+                        answer = build_extractive_answer(hits) + f"\n\n_External synthesis failed; offline evidence shown ({error})._"
+                else:
+                    answer = build_extractive_answer(hits)
+                st.session_state.chat_messages.extend([
+                    {"role": "user", "content": question},
+                    {"role": "assistant", "content": answer, "hits": [hit.to_dict() for hit in hits]},
+                ])
+                st.rerun()
 
 
 with tabs[7]:
+    render_workspace_hero("Deployment")
     st.subheader("Deployment workbench")
     status_frame = pd.DataFrame([
         ("Phase 1", "Interactive synthetic web prototype", "Preserved in legacy_phase1", "Complete"),
-        ("Phase 2A", "Characterized evidence library and offline retrieval", "Seven curated records", "Complete"),
+        ("Phase 2A", "Characterized evidence library and offline retrieval", "10 curated records / 46 chunks", "Complete"),
         ("Phase 2B", "MRI-derived anatomical point-cloud workspace", "10 paired examples", "Complete"),
         ("Phase 2C", "Brain-only MRI and named anatomical regions", "Hippocampus, ventricles, cortical area, other tissue", "Complete"),
         ("Phase 3", "Versioned NeuroAPS-Net runtime integration", "Model, preprocessing, and class map", "Interface ready"),
@@ -795,6 +1160,10 @@ with tabs[7]:
         st.dataframe(pd.DataFrame(checks.items(), columns=["Required category", "Detected"]), hide_index=True, width="stretch")
 
     st.info("The deployment adapter is prepared for the versioned NeuroAPS-Net model, preprocessing configuration, and class mapping.")
+    st.warning(
+        "Research demonstrator boundary: live model weights are not integrated, the 10 registered examples are "
+        "not a Saudi validation cohort, and no clinical, legal, security, privacy, or institutional approval is claimed."
+    )
 
     with st.expander("Hackathon application storyboard"):
         if HACKATHON_BOARD_IMAGE_PATH.exists():
@@ -802,5 +1171,17 @@ with tabs[7]:
         st.caption("Concept storyboard supplied for the project; implementation status is defined by the table above.")
 
 
-st.divider()
-st.caption("NeuroAPS Clinical Research Workspace · AI-readiness demonstrator · For research use only · Not a clinical diagnosis")
+st.markdown(
+    """
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand-mark">N</span>
+          <span><strong>NeuroAPS Clinical Research Workspace</strong><br>AI-ready neuroimaging research demonstrator</span>
+        </div>
+        <div class="footer-note">For research use only · Not a clinical diagnosis · Performance and policy statements are bounded to the evidence presented inside this application.</div>
+      </div>
+    </footer>
+    """,
+    unsafe_allow_html=True,
+)

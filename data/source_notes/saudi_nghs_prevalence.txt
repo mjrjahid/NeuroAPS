@@ -1,0 +1,7 @@
+Dementia prevalence within the Kingdom of Saudi Arabia National Guard Health System (2015–2023)
+
+Peer-reviewed reference: https://pubmed.ncbi.nlm.nih.gov/39962762/
+
+The study examined NGHS participants aged 50 or older who sought medical care during 2015–2023. Dementia was identified in 3.37% of that defined population. This is not a Saudi general-population prevalence estimate and is not Dammam-specific.
+
+Application use: Saudi regional context and motivation for locally representative evaluation. It is not evidence of NeuroAPS validation, deployment, or adoption.

@@ -174,7 +174,7 @@ def build_extractive_answer(hits: Sequence[RetrievalHit]) -> str:
 
     if not hits:
         return (
-            "No sufficiently relevant evidence was found in the current seven-record "
+            "No sufficiently relevant evidence was found in the current ten-record "
             "knowledge base. Refine the question or inspect the records directly."
         )
     lines = ["The most relevant evidence currently available is:"]
@@ -198,4 +198,3 @@ def build_manifest(records: Sequence[dict]) -> dict:
         "record_types": sorted({record["type"] for record in records}),
         "sha256": hashlib.sha256(canonical).hexdigest(),
     }
-
